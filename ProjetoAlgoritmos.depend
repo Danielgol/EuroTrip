@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1574016763 source:c:\users\joaov\documents\github\projeto-algoritmos\main.c
+	<stdio.h>
+	<stdlib.h>
+
