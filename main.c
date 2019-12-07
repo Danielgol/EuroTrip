@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <allegro5/allegro.h>
+#include "allegro5/allegro_image.h"
+#include <allegro5/allegro_native_dialog.h>
 
 typedef struct{
     //No
@@ -177,8 +180,8 @@ Node* encontrarCaminho(Node* grafo, int indexInicio, int indexFim){
 
 
 
-int main(){
-
+int main(int argc, char **argv){
+    /*
     Node* grafo = NULL;
 
     grafo = inserir(grafo, 0);
@@ -201,7 +204,8 @@ int main(){
     ligarNodes(grafo, 5, 6, 3);
     ligarNodes(grafo, 3, 6, 5);
 
-    /*
+    ------------------------------------------------------------------------
+
     grafo = inserir(grafo, 0);
     grafo = inserir(grafo, 1);
     grafo = inserir(grafo, 2);
@@ -218,8 +222,9 @@ int main(){
     ligarNodes(grafo, 3, 0, 7);
     ligarNodes(grafo, 3, 4, 6);
     ligarNodes(grafo, 4, 3, 4);
-    */
 
+
+    ------------------------------------------------------------------------------
     imprimir(grafo);
     printf("\n\n");
 
@@ -228,7 +233,93 @@ int main(){
     printf("\n\n");
 
     imprimirCaminho(caminho);
+    */
 
-    //teste1 cavalca
+    //COMANDOS DO ALLEGRO-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //Não sei por fullscreen :V..........
+    //VARIAVEIS
+    const int SCREEN_W = 1920;
+    const int SCREEN_H = 1080;
+
+    //VARIAVEIS ALLEGRO
+    ALLEGRO_DISPLAY *display = NULL;
+    ALLEGRO_EVENT_QUEUE *event_queue = NULL;
+
+    //ADDONS
+    al_init();
+    al_init_image_addon();
+    al_install_mouse();
+
+    //CRIACAO ALLEGRO
+    display = al_create_display(SCREEN_W, SCREEN_H);
+    event_queue = al_create_event_queue();
+    al_register_event_source(event_queue, al_get_mouse_event_source());
+
+    //Variaveis do programa
+    int pos_x = 0, pos_y = 0;
+
+    //IMPORTAR IMAGENS
+    ALLEGRO_BITMAP *image = al_load_bitmap("image/t1.png");
+    ALLEGRO_BITMAP *botaoSobreNos = al_load_bitmap("image/Botao05.png");
+    ALLEGRO_BITMAP *botaoSobreNos2 = al_load_bitmap("image/Botao06.png");
+    ALLEGRO_BITMAP *botaoViajeAgora = al_load_bitmap("image/Botao01.png");
+    ALLEGRO_BITMAP *botaoViajeAgora2 = al_load_bitmap("image/Botao02.png");
+    ALLEGRO_BITMAP *botaoPacotesTour = al_load_bitmap("image/Botao03.png");
+    ALLEGRO_BITMAP *botaoPacotesTour2= al_load_bitmap("image/Botao04.png");
+
+    //Programa------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    while(1){
+        ALLEGRO_EVENT ev;
+        al_wait_for_event(event_queue, &ev);
+
+        if(ev.type == ALLEGRO_EVENT_MOUSE_AXES){
+                pos_x = ev.mouse.x;
+                pos_y = ev.mouse.y;
+        }
+
+        if(al_is_event_queue_empty(event_queue)){
+            al_draw_scaled_bitmap(image, 0, 0,  al_get_bitmap_width(image), al_get_bitmap_height(image), 0, 0, al_get_bitmap_width(image), al_get_bitmap_height(image), 0);
+
+            if(pos_x>=1700 && pos_x<= 1900 && pos_y>=30 && pos_y<=63){
+                al_draw_scaled_bitmap(botaoSobreNos2, 0, 0, al_get_bitmap_width(botaoSobreNos2), al_get_bitmap_height(botaoSobreNos2), 1700, 30, al_get_bitmap_width(botaoSobreNos2), al_get_bitmap_height(botaoSobreNos2), 0);
+
+            }else{
+                al_draw_scaled_bitmap(botaoSobreNos, 0, 0, al_get_bitmap_width(botaoSobreNos), al_get_bitmap_height(botaoSobreNos), 1700, 30, al_get_bitmap_width(botaoSobreNos), al_get_bitmap_height(botaoSobreNos), 0);
+
+            }
+
+            if(pos_x>=495 && pos_x<= 914 && pos_y>=530 && pos_y<= 630){
+                al_draw_scaled_bitmap(botaoViajeAgora2, 0, 0,  al_get_bitmap_width(botaoViajeAgora2), al_get_bitmap_height(botaoViajeAgora2), 495, 530, al_get_bitmap_width(botaoViajeAgora2), al_get_bitmap_height(botaoViajeAgora2), 0);
+
+            }else{
+                al_draw_scaled_bitmap(botaoViajeAgora, 0, 0,  al_get_bitmap_width(botaoViajeAgora), al_get_bitmap_height(botaoViajeAgora), 495, 530, al_get_bitmap_width(botaoViajeAgora), al_get_bitmap_height(botaoViajeAgora), 0);
+
+            }
+
+            if(pos_x>=1000 && pos_x<=1419 && pos_y>=530 && pos_y<= 630){
+                al_draw_scaled_bitmap(botaoPacotesTour2, 0, 0,  al_get_bitmap_width(botaoPacotesTour2), al_get_bitmap_height(botaoPacotesTour2), 1000, 530, al_get_bitmap_width(botaoPacotesTour2), al_get_bitmap_height(botaoPacotesTour2), 0);
+
+            }else{
+                al_draw_scaled_bitmap(botaoPacotesTour, 0, 0,  al_get_bitmap_width(botaoPacotesTour), al_get_bitmap_height(botaoPacotesTour), 1000, 530, al_get_bitmap_width(botaoPacotesTour), al_get_bitmap_height(botaoPacotesTour), 0);
+
+            }
+        }
+
+        al_flip_display();
+
+    }
+    //Fim do programa-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //DESTRUIR
+    al_destroy_bitmap(image);
+    al_destroy_bitmap(botaoViajeAgora);
+    al_destroy_bitmap(botaoViajeAgora2);
+    al_destroy_bitmap(botaoSobreNos);
+    al_destroy_bitmap(botaoSobreNos2);
+    al_destroy_bitmap(botaoPacotesTour);
+    al_destroy_bitmap(botaoPacotesTour2);
+    al_destroy_display(display);
+    al_destroy_event_queue(event_queue);
     return 0;
 }
