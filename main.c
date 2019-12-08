@@ -236,15 +236,10 @@ int main(int argc, char **argv){
     */
 
     //COMANDOS DO ALLEGRO-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    //Não sei por fullscreen :V..........
-    //VARIAVEIS
-    const int SCREEN_W = 1920;
-    const int SCREEN_H = 1080;
-
     //VARIAVEIS ALLEGRO
     ALLEGRO_DISPLAY *display = NULL;
     ALLEGRO_EVENT_QUEUE *event_queue = NULL;
+    ALLEGRO_DISPLAY_MODE disp_data;
 
     //ADDONS
     al_init();
@@ -252,12 +247,16 @@ int main(int argc, char **argv){
     al_install_mouse();
 
     //CRIACAO ALLEGRO
-    display = al_create_display(SCREEN_W, SCREEN_H);
-    event_queue = al_create_event_queue();
-    al_register_event_source(event_queue, al_get_mouse_event_source());
+    al_get_display_mode(al_get_num_display_modes() - 1, &disp_data);
+    al_set_new_display_flags(ALLEGRO_FULLSCREEN);
+    display = al_create_display(disp_data.width, disp_data.height);
+    int SCREEN_W = al_get_display_width(display);
+    int SCREEN_H = al_get_display_height(display);
 
-    //Variaveis do programa
-    int pos_x = 0, pos_y = 0;
+    event_queue = al_create_event_queue();
+    al_register_event_source(event_queue, al_get_display_event_source(display));
+    al_register_event_source(event_queue, al_get_mouse_event_source());
+    al_flip_display();
 
     //IMPORTAR IMAGENS
     ALLEGRO_BITMAP *image = al_load_bitmap("image/t1.png");
@@ -267,47 +266,150 @@ int main(int argc, char **argv){
     ALLEGRO_BITMAP *botaoViajeAgora2 = al_load_bitmap("image/Botao02.png");
     ALLEGRO_BITMAP *botaoPacotesTour = al_load_bitmap("image/Botao03.png");
     ALLEGRO_BITMAP *botaoPacotesTour2= al_load_bitmap("image/Botao04.png");
+    ALLEGRO_BITMAP *botaoSair= al_load_bitmap("image/Botao07.png");
+    ALLEGRO_BITMAP *botaoSair2= al_load_bitmap("image/Botao08.png");
+
+    //Variaveis do programa
+    int pos_x = 0, pos_y = 0;
+    int fechar=0;//fechar programa
+    int viajar=0;//Menu do short path
+    int pacote=0;//Menu do click
+
 
     //Programa------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     while(1){
-        ALLEGRO_EVENT ev;
-        al_wait_for_event(event_queue, &ev);
+        while(fechar == 0){
+            ALLEGRO_EVENT ev;
+            al_wait_for_event(event_queue, &ev);
 
-        if(ev.type == ALLEGRO_EVENT_MOUSE_AXES){
-                pos_x = ev.mouse.x;
-                pos_y = ev.mouse.y;
+            if(ev.type == ALLEGRO_EVENT_MOUSE_AXES){
+                    pos_x = ev.mouse.x;
+                    pos_y = ev.mouse.y;
+            }else if(ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+                fechar = 1;
+                break;
+            }else if(ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
+                if(pos_x>=SCREEN_W/2+800 && pos_x<= SCREEN_W-66 && pos_y>=SCREEN_H/2+400 && pos_y<=SCREEN_H/2+495){
+                    fechar = 1;
+                    break;
+                }else if(pos_x>=SCREEN_W/2-465 && pos_x<= SCREEN_W/2-46 && pos_y>=SCREEN_H/2-10 && pos_y<= SCREEN_H-450){
+                    viajar=1;
+                    break;
+                }else if(pos_x>=SCREEN_W/2+40 && pos_x<=SCREEN_W-501 && pos_y>=SCREEN_H/2-10 && pos_y<= SCREEN_H-450){
+                    pacote=1;
+                    break;
+                }
+            }
+
+            if(!viajar && al_is_event_queue_empty(event_queue)){
+                al_draw_scaled_bitmap(image, 0, 0,  al_get_bitmap_width(image), al_get_bitmap_height(image), 0, 0, al_get_bitmap_width(image), al_get_bitmap_height(image), 0);
+
+                if(pos_x>=SCREEN_W/2+740 && pos_x<= SCREEN_W-20 && pos_y>=SCREEN_H/2-510 && pos_y<=SCREEN_H/2-477){
+                    al_draw_scaled_bitmap(botaoSobreNos2, 0, 0, al_get_bitmap_width(botaoSobreNos2), al_get_bitmap_height(botaoSobreNos2), SCREEN_W/2+740, SCREEN_H/2-510, al_get_bitmap_width(botaoSobreNos2), al_get_bitmap_height(botaoSobreNos2), 0);
+                }else{
+                    al_draw_scaled_bitmap(botaoSobreNos, 0, 0, al_get_bitmap_width(botaoSobreNos), al_get_bitmap_height(botaoSobreNos), SCREEN_W/2+740, SCREEN_H/2-510, al_get_bitmap_width(botaoSobreNos), al_get_bitmap_height(botaoSobreNos), 0);
+                }
+
+                if(pos_x>=SCREEN_W/2-465 && pos_x<= SCREEN_W/2-46 && pos_y>=SCREEN_H/2-10 && pos_y<= SCREEN_H-450){
+                    al_draw_scaled_bitmap(botaoViajeAgora2, 0, 0,  al_get_bitmap_width(botaoViajeAgora2), al_get_bitmap_height(botaoViajeAgora2), SCREEN_W/2-465, SCREEN_H/2-10, al_get_bitmap_width(botaoViajeAgora2), al_get_bitmap_height(botaoViajeAgora2), 0);
+                }else{
+                    al_draw_scaled_bitmap(botaoViajeAgora, 0, 0,  al_get_bitmap_width(botaoViajeAgora), al_get_bitmap_height(botaoViajeAgora), SCREEN_W/2-465, SCREEN_H/2-10, al_get_bitmap_width(botaoViajeAgora), al_get_bitmap_height(botaoViajeAgora), 0);
+                }
+
+                if(pos_x>=SCREEN_W/2+40 && pos_x<=SCREEN_W-501 && pos_y>=SCREEN_H/2-10 && pos_y<= SCREEN_H-450){
+                    al_draw_scaled_bitmap(botaoPacotesTour2, 0, 0,  al_get_bitmap_width(botaoPacotesTour2), al_get_bitmap_height(botaoPacotesTour2), SCREEN_W/2+40, SCREEN_H/2-10, al_get_bitmap_width(botaoPacotesTour2), al_get_bitmap_height(botaoPacotesTour2), 0);
+                }else{
+                    al_draw_scaled_bitmap(botaoPacotesTour, 0, 0,  al_get_bitmap_width(botaoPacotesTour), al_get_bitmap_height(botaoPacotesTour), SCREEN_W/2+40, SCREEN_H/2-10, al_get_bitmap_width(botaoPacotesTour), al_get_bitmap_height(botaoPacotesTour), 0);
+                }
+
+                if(pos_x>=SCREEN_W/2+800 && pos_x<= SCREEN_W-66 && pos_y>=SCREEN_H/2+400 && pos_y<=SCREEN_H/2+495){
+                    al_draw_scaled_bitmap(botaoSair2, 0, 0, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), SCREEN_W/2+800, SCREEN_H/2+400, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), 0);
+                }else{
+                    al_draw_scaled_bitmap(botaoSair, 0, 0, al_get_bitmap_width(botaoSair), al_get_bitmap_height(botaoSair), SCREEN_W/2+800, SCREEN_H/2+400, al_get_bitmap_width(botaoSair), al_get_bitmap_height(botaoSair), 0);
+                }
+            }
+
+            al_flip_display();
         }
 
-        if(al_is_event_queue_empty(event_queue)){
-            al_draw_scaled_bitmap(image, 0, 0,  al_get_bitmap_width(image), al_get_bitmap_height(image), 0, 0, al_get_bitmap_width(image), al_get_bitmap_height(image), 0);
-
-            if(pos_x>=1700 && pos_x<= 1900 && pos_y>=30 && pos_y<=63){
-                al_draw_scaled_bitmap(botaoSobreNos2, 0, 0, al_get_bitmap_width(botaoSobreNos2), al_get_bitmap_height(botaoSobreNos2), 1700, 30, al_get_bitmap_width(botaoSobreNos2), al_get_bitmap_height(botaoSobreNos2), 0);
-
-            }else{
-                al_draw_scaled_bitmap(botaoSobreNos, 0, 0, al_get_bitmap_width(botaoSobreNos), al_get_bitmap_height(botaoSobreNos), 1700, 30, al_get_bitmap_width(botaoSobreNos), al_get_bitmap_height(botaoSobreNos), 0);
-
-            }
-
-            if(pos_x>=495 && pos_x<= 914 && pos_y>=530 && pos_y<= 630){
-                al_draw_scaled_bitmap(botaoViajeAgora2, 0, 0,  al_get_bitmap_width(botaoViajeAgora2), al_get_bitmap_height(botaoViajeAgora2), 495, 530, al_get_bitmap_width(botaoViajeAgora2), al_get_bitmap_height(botaoViajeAgora2), 0);
-
-            }else{
-                al_draw_scaled_bitmap(botaoViajeAgora, 0, 0,  al_get_bitmap_width(botaoViajeAgora), al_get_bitmap_height(botaoViajeAgora), 495, 530, al_get_bitmap_width(botaoViajeAgora), al_get_bitmap_height(botaoViajeAgora), 0);
-
-            }
-
-            if(pos_x>=1000 && pos_x<=1419 && pos_y>=530 && pos_y<= 630){
-                al_draw_scaled_bitmap(botaoPacotesTour2, 0, 0,  al_get_bitmap_width(botaoPacotesTour2), al_get_bitmap_height(botaoPacotesTour2), 1000, 530, al_get_bitmap_width(botaoPacotesTour2), al_get_bitmap_height(botaoPacotesTour2), 0);
-
-            }else{
-                al_draw_scaled_bitmap(botaoPacotesTour, 0, 0,  al_get_bitmap_width(botaoPacotesTour), al_get_bitmap_height(botaoPacotesTour), 1000, 530, al_get_bitmap_width(botaoPacotesTour), al_get_bitmap_height(botaoPacotesTour), 0);
-
-            }
+        if(fechar){
+            break;
         }
 
-        al_flip_display();
+        while(viajar){
+            //Short path
+            //Colocoar depois mais condições, botões tipo (voltar) e wallpaper
+            //COLOQUEI PRA ABRIR O MESMO WALLPAPER DE PROPOSITO, AINDA N PREPAREI O NOVO PARA POR AQUI..... PARA N FICAR IGUAL SÓ TIREI OS BOTÕES PRA SABER SE TA PEGANDO OU N.
 
+            ALLEGRO_EVENT ev2;
+            al_wait_for_event(event_queue, &ev2);
+
+            if(ev2.type == ALLEGRO_EVENT_MOUSE_AXES){
+                    pos_x = ev2.mouse.x;
+                    pos_y = ev2.mouse.y;
+            }else if(ev2.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+                fechar = 1;
+                break;
+            }else if(ev2.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
+                if(pos_x>=SCREEN_W/2+800 && pos_x<= SCREEN_W-66 && pos_y>=SCREEN_H/2+400 && pos_y<=SCREEN_H/2+495){
+                    fechar = 1;
+                    break;
+                }
+            }
+
+            if(al_is_event_queue_empty(event_queue)){
+                al_draw_scaled_bitmap(image, 0, 0,  al_get_bitmap_width(image), al_get_bitmap_height(image), 0, 0, al_get_bitmap_width(image), al_get_bitmap_height(image), 0);
+
+                if(pos_x>=SCREEN_W/2+800 && pos_x<= SCREEN_W-66 && pos_y>=SCREEN_H/2+400 && pos_y<=SCREEN_H/2+495){
+                    al_draw_scaled_bitmap(botaoSair2, 0, 0, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), SCREEN_W/2+800, SCREEN_H/2+400, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), 0);
+                }else{
+                    al_draw_scaled_bitmap(botaoSair, 0, 0, al_get_bitmap_width(botaoSair), al_get_bitmap_height(botaoSair), SCREEN_W/2+800, SCREEN_H/2+400, al_get_bitmap_width(botaoSair), al_get_bitmap_height(botaoSair), 0);
+                }
+            }
+
+            al_flip_display();
+        }
+
+        if(fechar){
+            break;
+        }
+
+        while(pacote){
+            //Clique
+            //Colocoar depois mais condições, botões tipo (voltar) e wallpaper
+            //COLOQUEI PRA ABRIR O MESMO WALLPAPER DE PROPOSITO, AINDA N PREPAREI O NOVO PARA POR AQUI..... PARA N FICAR IGUAL SÓ TIREI OS BOTÕES PRA SABER SE TA PEGANDO OU N.
+
+            ALLEGRO_EVENT ev3;
+            al_wait_for_event(event_queue, &ev3);
+
+            if(ev3.type == ALLEGRO_EVENT_MOUSE_AXES){
+                    pos_x = ev3.mouse.x;
+                    pos_y = ev3.mouse.y;
+            }else if(ev3.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+                fechar = 1;
+                break;
+            }else if(ev3.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
+                if(pos_x>=SCREEN_W/2+800 && pos_x<= SCREEN_W-66 && pos_y>=SCREEN_H/2+400 && pos_y<=SCREEN_H/2+495){
+                    fechar = 1;
+                    break;
+                }
+            }
+
+            if(al_is_event_queue_empty(event_queue)){
+                al_draw_scaled_bitmap(image, 0, 0,  al_get_bitmap_width(image), al_get_bitmap_height(image), 0, 0, al_get_bitmap_width(image), al_get_bitmap_height(image), 0);
+
+                if(pos_x>=SCREEN_W/2+800 && pos_x<= SCREEN_W-66 && pos_y>=SCREEN_H/2+400 && pos_y<=SCREEN_H/2+495){
+                    al_draw_scaled_bitmap(botaoSair2, 0, 0, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), SCREEN_W/2+800, SCREEN_H/2+400, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), 0);
+                }else{
+                    al_draw_scaled_bitmap(botaoSair, 0, 0, al_get_bitmap_width(botaoSair), al_get_bitmap_height(botaoSair), SCREEN_W/2+800, SCREEN_H/2+400, al_get_bitmap_width(botaoSair), al_get_bitmap_height(botaoSair), 0);
+                }
+            }
+
+            al_flip_display();
+        }
+        if(fechar){
+            break;
+        }
     }
     //Fim do programa-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -319,6 +421,10 @@ int main(int argc, char **argv){
     al_destroy_bitmap(botaoSobreNos2);
     al_destroy_bitmap(botaoPacotesTour);
     al_destroy_bitmap(botaoPacotesTour2);
+    al_destroy_bitmap(botaoSair);
+    al_destroy_bitmap(botaoSair2);
+
+
     al_destroy_display(display);
     al_destroy_event_queue(event_queue);
     return 0;
