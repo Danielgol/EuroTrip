@@ -241,12 +241,12 @@ int main(int argc, char **argv){
     ALLEGRO_EVENT_QUEUE *event_queue = NULL;
     ALLEGRO_DISPLAY_MODE disp_data;
 
-    //ADDONS
+    //ADDONS--------------------------------------------------
     al_init();
     al_init_image_addon();
     al_install_mouse();
 
-    //CRIACAO ALLEGRO
+    //CRIACAO ALLEGRO-------------------------------------------------------
     al_get_display_mode(al_get_num_display_modes() - 1, &disp_data);
     al_set_new_display_flags(ALLEGRO_FULLSCREEN);
     display = al_create_display(disp_data.width, disp_data.height);
@@ -258,18 +258,19 @@ int main(int argc, char **argv){
     al_register_event_source(event_queue, al_get_mouse_event_source());
     al_flip_display();
 
-    //IMPORTAR IMAGENS
-    ALLEGRO_BITMAP *image = al_load_bitmap("image/t1.png");
-    ALLEGRO_BITMAP *botaoSobreNos = al_load_bitmap("image/Botao05.png");
-    ALLEGRO_BITMAP *botaoSobreNos2 = al_load_bitmap("image/Botao06.png");
-    ALLEGRO_BITMAP *botaoViajeAgora = al_load_bitmap("image/Botao01.png");
-    ALLEGRO_BITMAP *botaoViajeAgora2 = al_load_bitmap("image/Botao02.png");
-    ALLEGRO_BITMAP *botaoPacotesTour = al_load_bitmap("image/Botao03.png");
-    ALLEGRO_BITMAP *botaoPacotesTour2= al_load_bitmap("image/Botao04.png");
-    ALLEGRO_BITMAP *botaoSair= al_load_bitmap("image/Botao07.png");
-    ALLEGRO_BITMAP *botaoSair2= al_load_bitmap("image/Botao08.png");
+    //IMPORTAR IMAGENS---------------------------------------------------------
+    //Menu inicial
+    ALLEGRO_BITMAP *image = al_load_bitmap("image/MenuInicial/t1.png");
+    ALLEGRO_BITMAP *botaoSobreNos = al_load_bitmap("image/MenuInicial/Botao05.png");
+    ALLEGRO_BITMAP *botaoSobreNos2 = al_load_bitmap("image/MenuInicial/Botao06.png");
+    ALLEGRO_BITMAP *botaoViajeAgora = al_load_bitmap("image/MenuInicial/Botao01.png");
+    ALLEGRO_BITMAP *botaoViajeAgora2 = al_load_bitmap("image/MenuInicial/Botao02.png");
+    ALLEGRO_BITMAP *botaoPacotesTour = al_load_bitmap("image/MenuInicial/Botao03.png");
+    ALLEGRO_BITMAP *botaoPacotesTour2= al_load_bitmap("image/MenuInicial/Botao04.png");
+    ALLEGRO_BITMAP *botaoSair= al_load_bitmap("image/MenuInicial/Botao07.png");
+    ALLEGRO_BITMAP *botaoSair2= al_load_bitmap("image/MenuInicial/Botao08.png");
 
-    //Variaveis do programa
+    //Variaveis do programa-----------------------------------------------------
     int pos_x = 0, pos_y = 0;
     int fechar=0;//fechar programa
     int viajar=0;//Menu do short path
@@ -302,7 +303,7 @@ int main(int argc, char **argv){
             }
 
             if(!viajar && al_is_event_queue_empty(event_queue)){
-                al_draw_scaled_bitmap(image, 0, 0,  al_get_bitmap_width(image), al_get_bitmap_height(image), 0, 0, al_get_bitmap_width(image), al_get_bitmap_height(image), 0);
+                al_draw_scaled_bitmap(image, 0, 0,  al_get_bitmap_width(image), al_get_bitmap_height(image), 0, 0, SCREEN_W, SCREEN_H, 0);
 
                 if(pos_x>=SCREEN_W/2+740 && pos_x<= SCREEN_W-20 && pos_y>=SCREEN_H/2-510 && pos_y<=SCREEN_H/2-477){
                     al_draw_scaled_bitmap(botaoSobreNos2, 0, 0, al_get_bitmap_width(botaoSobreNos2), al_get_bitmap_height(botaoSobreNos2), SCREEN_W/2+740, SCREEN_H/2-510, al_get_bitmap_width(botaoSobreNos2), al_get_bitmap_height(botaoSobreNos2), 0);
@@ -336,8 +337,8 @@ int main(int argc, char **argv){
             break;
         }
 
+        //Short path--------------------------------------------------------------------------------------------------------------------------------------------------------------------
         while(viajar){
-            //Short path
             //Colocoar depois mais condições, botões tipo (voltar) e wallpaper
             //COLOQUEI PRA ABRIR O MESMO WALLPAPER DE PROPOSITO, AINDA N PREPAREI O NOVO PARA POR AQUI..... PARA N FICAR IGUAL SÓ TIREI OS BOTÕES PRA SABER SE TA PEGANDO OU N.
 
@@ -358,7 +359,7 @@ int main(int argc, char **argv){
             }
 
             if(al_is_event_queue_empty(event_queue)){
-                al_draw_scaled_bitmap(image, 0, 0,  al_get_bitmap_width(image), al_get_bitmap_height(image), 0, 0, al_get_bitmap_width(image), al_get_bitmap_height(image), 0);
+                al_draw_scaled_bitmap(image, 0, 0,  al_get_bitmap_width(image), al_get_bitmap_height(image), 0, 0, SCREEN_W, SCREEN_H, 0);
 
                 if(pos_x>=SCREEN_W/2+800 && pos_x<= SCREEN_W-66 && pos_y>=SCREEN_H/2+400 && pos_y<=SCREEN_H/2+495){
                     al_draw_scaled_bitmap(botaoSair2, 0, 0, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), SCREEN_W/2+800, SCREEN_H/2+400, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), 0);
@@ -374,8 +375,9 @@ int main(int argc, char **argv){
             break;
         }
 
+        //Clique-------------------------------------------------------------------------------------------------------------------------------------------------------------------
         while(pacote){
-            //Clique
+
             //Colocoar depois mais condições, botões tipo (voltar) e wallpaper
             //COLOQUEI PRA ABRIR O MESMO WALLPAPER DE PROPOSITO, AINDA N PREPAREI O NOVO PARA POR AQUI..... PARA N FICAR IGUAL SÓ TIREI OS BOTÕES PRA SABER SE TA PEGANDO OU N.
 
@@ -396,7 +398,7 @@ int main(int argc, char **argv){
             }
 
             if(al_is_event_queue_empty(event_queue)){
-                al_draw_scaled_bitmap(image, 0, 0,  al_get_bitmap_width(image), al_get_bitmap_height(image), 0, 0, al_get_bitmap_width(image), al_get_bitmap_height(image), 0);
+                al_draw_scaled_bitmap(image, 0, 0,  al_get_bitmap_width(image), al_get_bitmap_height(image), 0, 0, SCREEN_W, SCREEN_H, 0);
 
                 if(pos_x>=SCREEN_W/2+800 && pos_x<= SCREEN_W-66 && pos_y>=SCREEN_H/2+400 && pos_y<=SCREEN_H/2+495){
                     al_draw_scaled_bitmap(botaoSair2, 0, 0, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), SCREEN_W/2+800, SCREEN_H/2+400, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), 0);
