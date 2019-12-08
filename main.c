@@ -290,13 +290,13 @@ int main(int argc, char **argv){
                 fechar = 1;
                 break;
             }else if(ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
-                if(pos_x>=SCREEN_W/2+800 && pos_x<= SCREEN_W-66 && pos_y>=SCREEN_H/2+400 && pos_y<=SCREEN_H/2+495){
+                if(pos_x>=SCREEN_W-(al_get_bitmap_width(botaoSair))-60 && pos_x<= SCREEN_W-(al_get_bitmap_width(botaoSair))-60+al_get_bitmap_width(botaoSair) && pos_y>=SCREEN_H-(al_get_bitmap_height(botaoSair))-40 && pos_y<=SCREEN_H-(al_get_bitmap_height(botaoSair))-40+al_get_bitmap_height(botaoSair)){
                     fechar = 1;
                     break;
-                }else if(pos_x>=SCREEN_W/2-465 && pos_x<= SCREEN_W/2-46 && pos_y>=SCREEN_H/2-10 && pos_y<= SCREEN_H-450){
+                }else if(pos_x>=SCREEN_W/2-(al_get_bitmap_width(botaoViajeAgora))-43 && pos_x<= SCREEN_W/2-(al_get_bitmap_width(botaoViajeAgora))-43+al_get_bitmap_width(botaoViajeAgora) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(botaoViajeAgora)*0,9)-1 && pos_y <= (SCREEN_H/2-(al_get_bitmap_height(botaoViajeAgora)*0,9)-1)+al_get_bitmap_height(botaoViajeAgora)){
                     viajar=1;
                     break;
-                }else if(pos_x>=SCREEN_W/2+40 && pos_x<=SCREEN_W-501 && pos_y>=SCREEN_H/2-10 && pos_y<= SCREEN_H-450){
+                }else if(pos_x>=SCREEN_W/2+(al_get_bitmap_width(botaoPacotesTour)*0,9)+31 && pos_x<=SCREEN_W/2+(al_get_bitmap_width(botaoPacotesTour)*0,9)+31+al_get_bitmap_width(botaoPacotesTour) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(botaoPacotesTour)*0,9)-1 && pos_y<= SCREEN_H/2-(al_get_bitmap_height(botaoPacotesTour)*0,9)-1+al_get_bitmap_height(botaoPacotesTour)){
                     pacote=1;
                     break;
                 }
@@ -305,28 +305,28 @@ int main(int argc, char **argv){
             if(!viajar && al_is_event_queue_empty(event_queue)){
                 al_draw_scaled_bitmap(image, 0, 0,  al_get_bitmap_width(image), al_get_bitmap_height(image), 0, 0, SCREEN_W, SCREEN_H, 0);
 
-                if(pos_x>=SCREEN_W/2+740 && pos_x<= SCREEN_W-20 && pos_y>=SCREEN_H/2-510 && pos_y<=SCREEN_H/2-477){
-                    al_draw_scaled_bitmap(botaoSobreNos2, 0, 0, al_get_bitmap_width(botaoSobreNos2), al_get_bitmap_height(botaoSobreNos2), SCREEN_W/2+740, SCREEN_H/2-510, al_get_bitmap_width(botaoSobreNos2), al_get_bitmap_height(botaoSobreNos2), 0);
+                if(pos_x>=SCREEN_W-(al_get_bitmap_width(botaoSobreNos))-25 && pos_x<= SCREEN_W-(al_get_bitmap_width(botaoSobreNos))-25+al_get_bitmap_width(botaoSobreNos) && pos_y>=SCREEN_H/15+(al_get_bitmap_height(botaoSobreNos)-80) && pos_y<=SCREEN_H/15+(al_get_bitmap_height(botaoSobreNos)-80)+al_get_bitmap_height(botaoSobreNos)){
+                    al_draw_scaled_bitmap(botaoSobreNos2, 0, 0, al_get_bitmap_width(botaoSobreNos2), al_get_bitmap_height(botaoSobreNos2), SCREEN_W-(al_get_bitmap_width(botaoSobreNos2))-25, SCREEN_H/15+(al_get_bitmap_height(botaoSobreNos2))-80, al_get_bitmap_width(botaoSobreNos2), al_get_bitmap_height(botaoSobreNos2), 0);
                 }else{
-                    al_draw_scaled_bitmap(botaoSobreNos, 0, 0, al_get_bitmap_width(botaoSobreNos), al_get_bitmap_height(botaoSobreNos), SCREEN_W/2+740, SCREEN_H/2-510, al_get_bitmap_width(botaoSobreNos), al_get_bitmap_height(botaoSobreNos), 0);
+                    al_draw_scaled_bitmap(botaoSobreNos, 0, 0, al_get_bitmap_width(botaoSobreNos), al_get_bitmap_height(botaoSobreNos), SCREEN_W-(al_get_bitmap_width(botaoSobreNos))-25, SCREEN_H/15+(al_get_bitmap_height(botaoSobreNos))-80, al_get_bitmap_width(botaoSobreNos), al_get_bitmap_height(botaoSobreNos), 0);
                 }
 
-                if(pos_x>=SCREEN_W/2-465 && pos_x<= SCREEN_W/2-46 && pos_y>=SCREEN_H/2-10 && pos_y<= SCREEN_H-450){
-                    al_draw_scaled_bitmap(botaoViajeAgora2, 0, 0,  al_get_bitmap_width(botaoViajeAgora2), al_get_bitmap_height(botaoViajeAgora2), SCREEN_W/2-465, SCREEN_H/2-10, al_get_bitmap_width(botaoViajeAgora2), al_get_bitmap_height(botaoViajeAgora2), 0);
+                if(pos_x>=SCREEN_W/2-(al_get_bitmap_width(botaoViajeAgora))-43 && pos_x<= SCREEN_W/2-(al_get_bitmap_width(botaoViajeAgora))-43+al_get_bitmap_width(botaoViajeAgora) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(botaoViajeAgora)*0,9)-1 && pos_y <= (SCREEN_H/2-(al_get_bitmap_height(botaoViajeAgora)*0,9)-1)+al_get_bitmap_height(botaoViajeAgora)){
+                    al_draw_scaled_bitmap(botaoViajeAgora2, 0, 0,  al_get_bitmap_width(botaoViajeAgora2), al_get_bitmap_height(botaoViajeAgora2), SCREEN_W/2-(al_get_bitmap_width(botaoViajeAgora2))-43, SCREEN_H/2-(al_get_bitmap_height(botaoViajeAgora2)*0,9)-1, al_get_bitmap_width(botaoViajeAgora2), al_get_bitmap_height(botaoViajeAgora2), 0);
                 }else{
-                    al_draw_scaled_bitmap(botaoViajeAgora, 0, 0,  al_get_bitmap_width(botaoViajeAgora), al_get_bitmap_height(botaoViajeAgora), SCREEN_W/2-465, SCREEN_H/2-10, al_get_bitmap_width(botaoViajeAgora), al_get_bitmap_height(botaoViajeAgora), 0);
+                    al_draw_scaled_bitmap(botaoViajeAgora, 0, 0,  al_get_bitmap_width(botaoViajeAgora), al_get_bitmap_height(botaoViajeAgora), SCREEN_W/2-(al_get_bitmap_width(botaoViajeAgora))-43, SCREEN_H/2-(al_get_bitmap_height(botaoViajeAgora)*0,9)-1, al_get_bitmap_width(botaoViajeAgora), al_get_bitmap_height(botaoViajeAgora), 0);
                 }
 
-                if(pos_x>=SCREEN_W/2+40 && pos_x<=SCREEN_W-501 && pos_y>=SCREEN_H/2-10 && pos_y<= SCREEN_H-450){
-                    al_draw_scaled_bitmap(botaoPacotesTour2, 0, 0,  al_get_bitmap_width(botaoPacotesTour2), al_get_bitmap_height(botaoPacotesTour2), SCREEN_W/2+40, SCREEN_H/2-10, al_get_bitmap_width(botaoPacotesTour2), al_get_bitmap_height(botaoPacotesTour2), 0);
+                if(pos_x>=SCREEN_W/2+(al_get_bitmap_width(botaoPacotesTour)*0,9)+31 && pos_x<=SCREEN_W/2+(al_get_bitmap_width(botaoPacotesTour)*0,9)+31+al_get_bitmap_width(botaoPacotesTour) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(botaoPacotesTour)*0,9)-1 && pos_y<= SCREEN_H/2-(al_get_bitmap_height(botaoPacotesTour)*0,9)-1+al_get_bitmap_height(botaoPacotesTour)){
+                    al_draw_scaled_bitmap(botaoPacotesTour2, 0, 0,  al_get_bitmap_width(botaoPacotesTour2), al_get_bitmap_height(botaoPacotesTour2), SCREEN_W/2+(al_get_bitmap_width(botaoPacotesTour)*0,9)+31, SCREEN_H/2-(al_get_bitmap_height(botaoPacotesTour)*0,9)-1, al_get_bitmap_width(botaoPacotesTour2), al_get_bitmap_height(botaoPacotesTour2), 0);
                 }else{
-                    al_draw_scaled_bitmap(botaoPacotesTour, 0, 0,  al_get_bitmap_width(botaoPacotesTour), al_get_bitmap_height(botaoPacotesTour), SCREEN_W/2+40, SCREEN_H/2-10, al_get_bitmap_width(botaoPacotesTour), al_get_bitmap_height(botaoPacotesTour), 0);
+                    al_draw_scaled_bitmap(botaoPacotesTour, 0, 0,  al_get_bitmap_width(botaoPacotesTour), al_get_bitmap_height(botaoPacotesTour), SCREEN_W/2+(al_get_bitmap_width(botaoPacotesTour)*0,9)+31, SCREEN_H/2-(al_get_bitmap_height(botaoPacotesTour)*0,9)-1, al_get_bitmap_width(botaoPacotesTour), al_get_bitmap_height(botaoPacotesTour), 0);
                 }
 
-                if(pos_x>=SCREEN_W/2+800 && pos_x<= SCREEN_W-66 && pos_y>=SCREEN_H/2+400 && pos_y<=SCREEN_H/2+495){
-                    al_draw_scaled_bitmap(botaoSair2, 0, 0, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), SCREEN_W/2+800, SCREEN_H/2+400, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), 0);
+                if(pos_x>=SCREEN_W-(al_get_bitmap_width(botaoSair))-60 && pos_x<= SCREEN_W-(al_get_bitmap_width(botaoSair))-60+al_get_bitmap_width(botaoSair) && pos_y>=SCREEN_H-(al_get_bitmap_height(botaoSair))-40 && pos_y<=SCREEN_H-(al_get_bitmap_height(botaoSair))-40+al_get_bitmap_height(botaoSair)){
+                    al_draw_scaled_bitmap(botaoSair2, 0, 0, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), SCREEN_W-(al_get_bitmap_width(botaoSair2)+60), SCREEN_H-(al_get_bitmap_height(botaoSair2))-40, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), 0);
                 }else{
-                    al_draw_scaled_bitmap(botaoSair, 0, 0, al_get_bitmap_width(botaoSair), al_get_bitmap_height(botaoSair), SCREEN_W/2+800, SCREEN_H/2+400, al_get_bitmap_width(botaoSair), al_get_bitmap_height(botaoSair), 0);
+                    al_draw_scaled_bitmap(botaoSair, 0, 0, al_get_bitmap_width(botaoSair), al_get_bitmap_height(botaoSair), SCREEN_W-(al_get_bitmap_width(botaoSair)+60), SCREEN_H-(al_get_bitmap_height(botaoSair))-40, al_get_bitmap_width(botaoSair), al_get_bitmap_height(botaoSair), 0);
                 }
             }
 
@@ -352,7 +352,7 @@ int main(int argc, char **argv){
                 fechar = 1;
                 break;
             }else if(ev2.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
-                if(pos_x>=SCREEN_W/2+800 && pos_x<= SCREEN_W-66 && pos_y>=SCREEN_H/2+400 && pos_y<=SCREEN_H/2+495){
+                if(pos_x>=SCREEN_W-(al_get_bitmap_width(botaoSair))-60 && pos_x<= SCREEN_W-(al_get_bitmap_width(botaoSair))-60+al_get_bitmap_width(botaoSair) && pos_y>=SCREEN_H-(al_get_bitmap_height(botaoSair))-40 && pos_y<=SCREEN_H-(al_get_bitmap_height(botaoSair))-40+al_get_bitmap_height(botaoSair)){
                     fechar = 1;
                     break;
                 }
@@ -361,10 +361,10 @@ int main(int argc, char **argv){
             if(al_is_event_queue_empty(event_queue)){
                 al_draw_scaled_bitmap(image, 0, 0,  al_get_bitmap_width(image), al_get_bitmap_height(image), 0, 0, SCREEN_W, SCREEN_H, 0);
 
-                if(pos_x>=SCREEN_W/2+800 && pos_x<= SCREEN_W-66 && pos_y>=SCREEN_H/2+400 && pos_y<=SCREEN_H/2+495){
-                    al_draw_scaled_bitmap(botaoSair2, 0, 0, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), SCREEN_W/2+800, SCREEN_H/2+400, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), 0);
+                if(pos_x>=SCREEN_W-(al_get_bitmap_width(botaoSair))-60 && pos_x<= SCREEN_W-(al_get_bitmap_width(botaoSair))-60+al_get_bitmap_width(botaoSair) && pos_y>=SCREEN_H-(al_get_bitmap_height(botaoSair))-40 && pos_y<=SCREEN_H-(al_get_bitmap_height(botaoSair))-40+al_get_bitmap_height(botaoSair)){
+                    al_draw_scaled_bitmap(botaoSair2, 0, 0, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), SCREEN_W-(al_get_bitmap_width(botaoSair2)+60), SCREEN_H-(al_get_bitmap_height(botaoSair2))-40, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), 0);
                 }else{
-                    al_draw_scaled_bitmap(botaoSair, 0, 0, al_get_bitmap_width(botaoSair), al_get_bitmap_height(botaoSair), SCREEN_W/2+800, SCREEN_H/2+400, al_get_bitmap_width(botaoSair), al_get_bitmap_height(botaoSair), 0);
+                    al_draw_scaled_bitmap(botaoSair, 0, 0, al_get_bitmap_width(botaoSair), al_get_bitmap_height(botaoSair), SCREEN_W-(al_get_bitmap_width(botaoSair)+60), SCREEN_H-(al_get_bitmap_height(botaoSair))-40, al_get_bitmap_width(botaoSair), al_get_bitmap_height(botaoSair), 0);
                 }
             }
 
@@ -391,7 +391,7 @@ int main(int argc, char **argv){
                 fechar = 1;
                 break;
             }else if(ev3.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
-                if(pos_x>=SCREEN_W/2+800 && pos_x<= SCREEN_W-66 && pos_y>=SCREEN_H/2+400 && pos_y<=SCREEN_H/2+495){
+                if(pos_x>=SCREEN_W-(al_get_bitmap_width(botaoSair))-60 && pos_x<= SCREEN_W-(al_get_bitmap_width(botaoSair))-60+al_get_bitmap_width(botaoSair) && pos_y>=SCREEN_H-(al_get_bitmap_height(botaoSair))-40 && pos_y<=SCREEN_H-(al_get_bitmap_height(botaoSair))-40+al_get_bitmap_height(botaoSair)){
                     fechar = 1;
                     break;
                 }
@@ -400,10 +400,10 @@ int main(int argc, char **argv){
             if(al_is_event_queue_empty(event_queue)){
                 al_draw_scaled_bitmap(image, 0, 0,  al_get_bitmap_width(image), al_get_bitmap_height(image), 0, 0, SCREEN_W, SCREEN_H, 0);
 
-                if(pos_x>=SCREEN_W/2+800 && pos_x<= SCREEN_W-66 && pos_y>=SCREEN_H/2+400 && pos_y<=SCREEN_H/2+495){
-                    al_draw_scaled_bitmap(botaoSair2, 0, 0, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), SCREEN_W/2+800, SCREEN_H/2+400, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), 0);
+                if(pos_x>=SCREEN_W-(al_get_bitmap_width(botaoSair))-60 && pos_x<= SCREEN_W-(al_get_bitmap_width(botaoSair))-60+al_get_bitmap_width(botaoSair) && pos_y>=SCREEN_H-(al_get_bitmap_height(botaoSair))-40 && pos_y<=SCREEN_H-(al_get_bitmap_height(botaoSair))-40+al_get_bitmap_height(botaoSair)){
+                    al_draw_scaled_bitmap(botaoSair2, 0, 0, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), SCREEN_W-(al_get_bitmap_width(botaoSair2)+60), SCREEN_H-(al_get_bitmap_height(botaoSair2))-40, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), 0);
                 }else{
-                    al_draw_scaled_bitmap(botaoSair, 0, 0, al_get_bitmap_width(botaoSair), al_get_bitmap_height(botaoSair), SCREEN_W/2+800, SCREEN_H/2+400, al_get_bitmap_width(botaoSair), al_get_bitmap_height(botaoSair), 0);
+                    al_draw_scaled_bitmap(botaoSair, 0, 0, al_get_bitmap_width(botaoSair), al_get_bitmap_height(botaoSair), SCREEN_W-(al_get_bitmap_width(botaoSair)+60), SCREEN_H-(al_get_bitmap_height(botaoSair))-40, al_get_bitmap_width(botaoSair), al_get_bitmap_height(botaoSair), 0);
                 }
             }
 
