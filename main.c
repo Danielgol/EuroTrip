@@ -270,8 +270,40 @@ int main(int argc, char **argv){
     ALLEGRO_BITMAP *botaoSair= al_load_bitmap("image/MenuInicial/Botao07.png");
     ALLEGRO_BITMAP *botaoSair2= al_load_bitmap("image/MenuInicial/Botao08.png");
 
+    //MenuViajeAgora
+    ALLEGRO_BITMAP *background = al_load_bitmap("image/MenuViaje/wallpaper.png");
+    ALLEGRO_BITMAP *btvoltar = al_load_bitmap("image/MenuViaje/voltar.png");
+    ALLEGRO_BITMAP *btvoltar2 = al_load_bitmap("image/MenuViaje/voltar2.png");
+    ALLEGRO_BITMAP *btviagem01 = al_load_bitmap("image/MenuViaje/viagem01.png");
+    ALLEGRO_BITMAP *btviagem02= al_load_bitmap("image/MenuViaje/viagem02.png");
+    ALLEGRO_BITMAP *btviagem03 = al_load_bitmap("image/MenuViaje/viagem03.png");
+    ALLEGRO_BITMAP *btviagem04= al_load_bitmap("image/MenuViaje/viagem04.png");
+    ALLEGRO_BITMAP *btviagem05 = al_load_bitmap("image/MenuViaje/viagem05.png");
+    ALLEGRO_BITMAP *btviagem06= al_load_bitmap("image/MenuViaje/viagem06.png");
+    ALLEGRO_BITMAP *btviagem07 = al_load_bitmap("image/MenuViaje/viagem07.png");
+    ALLEGRO_BITMAP *btviagem08= al_load_bitmap("image/MenuViaje/viagem08.png");
+    ALLEGRO_BITMAP *btviagem09 = al_load_bitmap("image/MenuViaje/viagem09.png");
+    ALLEGRO_BITMAP *btviagem10= al_load_bitmap("image/MenuViaje/viagem10.png");
+    ALLEGRO_BITMAP *btviagem11= al_load_bitmap("image/MenuViaje/viagem11.png");
+    ALLEGRO_BITMAP *btviagem12= al_load_bitmap("image/MenuViaje/viagem12.png");
+    ALLEGRO_BITMAP *btviagem13= al_load_bitmap("image/MenuViaje/viagem13.png");
+    ALLEGRO_BITMAP *btviagem14= al_load_bitmap("image/MenuViaje/viagem14.png");
+    ALLEGRO_BITMAP *btviagem15= al_load_bitmap("image/MenuViaje/viagem15.png");
+    ALLEGRO_BITMAP *btviagem16= al_load_bitmap("image/MenuViaje/viagem16.png");
+    ALLEGRO_BITMAP *btviagem17= al_load_bitmap("image/MenuViaje/viagem17.png");
+    ALLEGRO_BITMAP *btviagem18= al_load_bitmap("image/MenuViaje/viagem18.png");
+    ALLEGRO_BITMAP *btviagem19= al_load_bitmap("image/MenuViaje/viagem19.png");
+    ALLEGRO_BITMAP *btviagem20= al_load_bitmap("image/MenuViaje/viagem20.png");
+    ALLEGRO_BITMAP *btviagem21= al_load_bitmap("image/MenuViaje/viagem21.png");
+    ALLEGRO_BITMAP *btviagem22= al_load_bitmap("image/MenuViaje/viagem22.png");
+    ALLEGRO_BITMAP *btviagem23= al_load_bitmap("image/MenuViaje/viagem23.png");
+    ALLEGRO_BITMAP *btviagem24= al_load_bitmap("image/MenuViaje/viagem24.png");
+
+    //MenuPacotesTour
+
+
     //Variaveis do programa-----------------------------------------------------
-    int pos_x = 0, pos_y = 0;
+    int pos_x = 0, pos_y = 0;//Coordenada do mouse
     int fechar=0;//fechar programa
     int viajar=0;//Menu do short path
     int pacote=0;//Menu do click
@@ -302,7 +334,7 @@ int main(int argc, char **argv){
                 }
             }
 
-            if(!viajar && al_is_event_queue_empty(event_queue)){
+            if(!pacote && !viajar && al_is_event_queue_empty(event_queue)){
                 al_draw_scaled_bitmap(image, 0, 0,  al_get_bitmap_width(image), al_get_bitmap_height(image), 0, 0, SCREEN_W, SCREEN_H, 0);
 
                 if(pos_x>=SCREEN_W-(al_get_bitmap_width(botaoSobreNos))-25 && pos_x<= SCREEN_W-(al_get_bitmap_width(botaoSobreNos))-25+al_get_bitmap_width(botaoSobreNos) && pos_y>=SCREEN_H/15+(al_get_bitmap_height(botaoSobreNos)-80) && pos_y<=SCREEN_H/15+(al_get_bitmap_height(botaoSobreNos)-80)+al_get_bitmap_height(botaoSobreNos)){
@@ -348,31 +380,109 @@ int main(int argc, char **argv){
             if(ev2.type == ALLEGRO_EVENT_MOUSE_AXES){
                     pos_x = ev2.mouse.x;
                     pos_y = ev2.mouse.y;
-            }else if(ev2.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
-                fechar = 1;
-                break;
             }else if(ev2.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
-                if(pos_x>=SCREEN_W-(al_get_bitmap_width(botaoSair))-60 && pos_x<= SCREEN_W-(al_get_bitmap_width(botaoSair))-60+al_get_bitmap_width(botaoSair) && pos_y>=SCREEN_H-(al_get_bitmap_height(botaoSair))-40 && pos_y<=SCREEN_H-(al_get_bitmap_height(botaoSair))-40+al_get_bitmap_height(botaoSair)){
-                    fechar = 1;
+                if(pos_x>=SCREEN_W-(al_get_bitmap_width(btvoltar)+60) && pos_x<= SCREEN_W-(al_get_bitmap_width(btvoltar)+60)+al_get_bitmap_width(btvoltar) && pos_y>=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90 && pos_y<=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90+al_get_bitmap_height(btvoltar)){
+                    viajar=0;
                     break;
                 }
             }
 
             if(al_is_event_queue_empty(event_queue)){
-                al_draw_scaled_bitmap(image, 0, 0,  al_get_bitmap_width(image), al_get_bitmap_height(image), 0, 0, SCREEN_W, SCREEN_H, 0);
+                al_draw_scaled_bitmap(background, 0, 0,  al_get_bitmap_width(background), al_get_bitmap_height(background), 0, 0, SCREEN_W, SCREEN_H, 0);
 
-                if(pos_x>=SCREEN_W-(al_get_bitmap_width(botaoSair))-60 && pos_x<= SCREEN_W-(al_get_bitmap_width(botaoSair))-60+al_get_bitmap_width(botaoSair) && pos_y>=SCREEN_H-(al_get_bitmap_height(botaoSair))-40 && pos_y<=SCREEN_H-(al_get_bitmap_height(botaoSair))-40+al_get_bitmap_height(botaoSair)){
-                    al_draw_scaled_bitmap(botaoSair2, 0, 0, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), SCREEN_W-(al_get_bitmap_width(botaoSair2)+60), SCREEN_H-(al_get_bitmap_height(botaoSair2))-40, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), 0);
+                if(pos_x>=SCREEN_W-(al_get_bitmap_width(btvoltar2)+60) && pos_x<= SCREEN_W-(al_get_bitmap_width(btvoltar2)+60)+al_get_bitmap_width(btvoltar2) && pos_y>=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90 && pos_y<=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90+al_get_bitmap_height(btvoltar2)){
+                    al_draw_scaled_bitmap(btvoltar, 0, 0, al_get_bitmap_width(btvoltar), al_get_bitmap_height(btvoltar), SCREEN_W-(al_get_bitmap_width(btvoltar)+60), SCREEN_H/30+(al_get_bitmap_height(btvoltar))-90, al_get_bitmap_width(btvoltar), al_get_bitmap_height(btvoltar), 0);
                 }else{
-                    al_draw_scaled_bitmap(botaoSair, 0, 0, al_get_bitmap_width(botaoSair), al_get_bitmap_height(botaoSair), SCREEN_W-(al_get_bitmap_width(botaoSair)+60), SCREEN_H-(al_get_bitmap_height(botaoSair))-40, al_get_bitmap_width(botaoSair), al_get_bitmap_height(botaoSair), 0);
+                    al_draw_scaled_bitmap(btvoltar2, 0, 0, al_get_bitmap_width(btvoltar2), al_get_bitmap_height(btvoltar2), SCREEN_W-(al_get_bitmap_width(btvoltar2)+60), SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90, al_get_bitmap_width(btvoltar2), al_get_bitmap_height(btvoltar2), 0);
                 }
+
+                //ALEMANHA------------------
+                if(pos_x>=SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10) && pos_x<= SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10)+al_get_bitmap_width(btviagem01) && pos_y>=SCREEN_H/5+(al_get_bitmap_height(btviagem01)*0,9)-90 && pos_y<=SCREEN_H/5+(al_get_bitmap_height(btviagem01)*0,9)-90+al_get_bitmap_height(btviagem01)){
+                    al_draw_scaled_bitmap(btviagem02, 0, 0, al_get_bitmap_width(btviagem02), al_get_bitmap_height(btviagem02), SCREEN_W/3-(al_get_bitmap_width(btviagem02)+10), SCREEN_H/5+(al_get_bitmap_height(btviagem02)*0,9)-90, al_get_bitmap_width(btviagem02), al_get_bitmap_height(btviagem02), 0);
+                }else{
+                    al_draw_scaled_bitmap(btviagem01, 0, 0, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10), SCREEN_H/5+(al_get_bitmap_height(btviagem01)*0,9)-90, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), 0);
+                }
+
+                //INGLATERRA-------------------
+                if(pos_x>=SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60 && pos_x<= SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60+al_get_bitmap_width(btviagem03) && pos_y>=SCREEN_H/5+(al_get_bitmap_height(btviagem03)*0,9)-90 && pos_y<=SCREEN_H/5+(al_get_bitmap_height(btviagem03)*0,9)-90+al_get_bitmap_height(btviagem03)){
+                    al_draw_scaled_bitmap(btviagem04, 0, 0, al_get_bitmap_width(btviagem04), al_get_bitmap_height(btviagem04), SCREEN_W/2-(al_get_bitmap_width(btviagem04))+60, SCREEN_H/5+(al_get_bitmap_height(btviagem04)*0,9)-90, al_get_bitmap_width(btviagem04), al_get_bitmap_height(btviagem04), 0);
+                }else{
+                    al_draw_scaled_bitmap(btviagem03, 0, 0, al_get_bitmap_width(btviagem03), al_get_bitmap_height(btviagem03), SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60, SCREEN_H/5+(al_get_bitmap_height(btviagem03)*0,9)-90, al_get_bitmap_width(btviagem03), al_get_bitmap_height(btviagem03), 0);
+                }
+
+                //FRANÇA-------------------
+                if(pos_x>=SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-65 && pos_x<= SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-60+al_get_bitmap_width(btviagem03) && pos_y>=SCREEN_H/5+(al_get_bitmap_height(btviagem03)*0,9)-90 && pos_y<=SCREEN_H/5+(al_get_bitmap_height(btviagem03)*0,9)-90+al_get_bitmap_height(btviagem03)){
+                    al_draw_scaled_bitmap(btviagem06, 0, 0, al_get_bitmap_width(btviagem06), al_get_bitmap_height(btviagem06), SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-65, SCREEN_H/5+(al_get_bitmap_height(btviagem06)*0,9)-90, al_get_bitmap_width(btviagem06), al_get_bitmap_height(btviagem06), 0);
+                }else{
+                    al_draw_scaled_bitmap(btviagem05, 0, 0, al_get_bitmap_width(btviagem05), al_get_bitmap_height(btviagem05), SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-65, SCREEN_H/5+(al_get_bitmap_height(btviagem05)*0,9)-90, al_get_bitmap_width(btviagem05), al_get_bitmap_height(btviagem05), 0);
+                }
+
+                //SUIÇA-------------------
+                if(pos_x>=SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3) && pos_x<= SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3)+al_get_bitmap_width(btviagem07) && pos_y>=SCREEN_H/5+(al_get_bitmap_height(btviagem07)*0,9)-90 && pos_y<=SCREEN_H/5+(al_get_bitmap_height(btviagem07)*0,9)-90+al_get_bitmap_height(btviagem07)){
+                    al_draw_scaled_bitmap(btviagem08, 0, 0, al_get_bitmap_width(btviagem08), al_get_bitmap_height(btviagem08), SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3), SCREEN_H/5+(al_get_bitmap_height(btviagem08)*0,9)-90, al_get_bitmap_width(btviagem08), al_get_bitmap_height(btviagem08), 0);
+                }else{
+                    al_draw_scaled_bitmap(btviagem07, 0, 0, al_get_bitmap_width(btviagem07), al_get_bitmap_height(btviagem07), SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3), SCREEN_H/5+(al_get_bitmap_height(btviagem07)*0,9)-90, al_get_bitmap_width(btviagem07), al_get_bitmap_height(btviagem07), 0);
+                }
+
+                //REPUBLICA CHECA
+                if(pos_x>=SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10) && pos_x<= SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10)+al_get_bitmap_width(btviagem01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90+al_get_bitmap_height(btviagem01)){
+                    al_draw_scaled_bitmap(btviagem10, 0, 0, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), SCREEN_W/3-(al_get_bitmap_width(btviagem10)+10), SCREEN_H/2+(al_get_bitmap_height(btviagem10)*0,9)-90, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), 0);
+                }else{
+                    al_draw_scaled_bitmap(btviagem09, 0, 0, al_get_bitmap_width(btviagem09), al_get_bitmap_height(btviagem09), SCREEN_W/3-(al_get_bitmap_width(btviagem09)+10), SCREEN_H/2+(al_get_bitmap_height(btviagem09)*0,9)-90, al_get_bitmap_width(btviagem09), al_get_bitmap_height(btviagem09), 0);
+                }
+
+                //ITALIA-------------------
+                if(pos_x>=SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60 && pos_x<= SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60+al_get_bitmap_width(btviagem03) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90+al_get_bitmap_height(btviagem01)){
+                    al_draw_scaled_bitmap(btviagem12, 0, 0, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), SCREEN_W/2-(al_get_bitmap_width(btviagem04))+60, SCREEN_H/2+(al_get_bitmap_height(btviagem10)*0,9)-90, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), 0);
+                }else{
+                    al_draw_scaled_bitmap(btviagem11, 0, 0, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), SCREEN_W/2-(al_get_bitmap_width(btviagem04))+60, SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), 0);
+                }
+
+                //Monaco-------------------
+                if(pos_x>=SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-65 && pos_x<= SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-60+al_get_bitmap_width(btviagem03) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90+al_get_bitmap_height(btviagem01)){
+                    al_draw_scaled_bitmap(btviagem14, 0, 0, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-65, SCREEN_H/2+(al_get_bitmap_height(btviagem10)*0,9)-90, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), 0);
+                }else{
+                    al_draw_scaled_bitmap(btviagem13, 0, 0, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-65, SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), 0);
+                }
+
+                //AUSTRIA-------------------
+                if(pos_x>=SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3) && pos_x<= SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3)+al_get_bitmap_width(btviagem07) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90+al_get_bitmap_height(btviagem01)){
+                    al_draw_scaled_bitmap(btviagem16, 0, 0, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3), SCREEN_H/2+(al_get_bitmap_height(btviagem10)*0,9)-90, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), 0);
+                }else{
+                    al_draw_scaled_bitmap(btviagem15, 0, 0, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3), SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), 0);
+                }
+
+                //BELGICA-------------------
+                if(pos_x>=SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10) && pos_x<= SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10)+al_get_bitmap_width(btviagem01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90+al_get_bitmap_height(btviagem01)){
+                    al_draw_scaled_bitmap(btviagem18, 0, 0, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10), SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), 0);
+                }else{
+                    al_draw_scaled_bitmap(btviagem17, 0, 0, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10), SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), 0);
+                }
+
+                //CROACIA-------------------
+                if(pos_x>=SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60 && pos_x<= SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60+al_get_bitmap_width(btviagem03) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90+al_get_bitmap_height(btviagem01)){
+                    al_draw_scaled_bitmap(btviagem20, 0, 0, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60, SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), 0);
+                }else{
+                    al_draw_scaled_bitmap(btviagem19, 0, 0, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60, SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), 0);
+                }
+
+                //gRECIA-------------------
+                if(pos_x>=SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-65 && pos_x<= SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-60+al_get_bitmap_width(btviagem03) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90+al_get_bitmap_height(btviagem01)){
+                    al_draw_scaled_bitmap(btviagem22, 0, 0, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-65, SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), 0);
+                }else{
+                    al_draw_scaled_bitmap(btviagem21, 0, 0, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-65, SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), 0);
+                }
+
+                //HOLANDA-------------------
+                if(pos_x>=SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3) && pos_x<= SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3)+al_get_bitmap_width(btviagem07) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90+al_get_bitmap_height(btviagem01)){
+                    al_draw_scaled_bitmap(btviagem24, 0, 0, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3), SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), 0);
+                }else{
+                    al_draw_scaled_bitmap(btviagem23, 0, 0, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3), SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), 0);
+                }
+
             }
 
             al_flip_display();
-        }
-
-        if(fechar){
-            break;
         }
 
         //Clique-------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -387,30 +497,25 @@ int main(int argc, char **argv){
             if(ev3.type == ALLEGRO_EVENT_MOUSE_AXES){
                     pos_x = ev3.mouse.x;
                     pos_y = ev3.mouse.y;
-            }else if(ev3.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
-                fechar = 1;
-                break;
             }else if(ev3.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
-                if(pos_x>=SCREEN_W-(al_get_bitmap_width(botaoSair))-60 && pos_x<= SCREEN_W-(al_get_bitmap_width(botaoSair))-60+al_get_bitmap_width(botaoSair) && pos_y>=SCREEN_H-(al_get_bitmap_height(botaoSair))-40 && pos_y<=SCREEN_H-(al_get_bitmap_height(botaoSair))-40+al_get_bitmap_height(botaoSair)){
-                    fechar = 1;
+                if(pos_x>=SCREEN_W-(al_get_bitmap_width(btvoltar)+60) && pos_x<= SCREEN_W-(al_get_bitmap_width(btvoltar)+60)+al_get_bitmap_width(btvoltar) && pos_y>=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90 && pos_y<=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90+al_get_bitmap_height(btvoltar)){
+                    pacote=0;
                     break;
                 }
+
             }
 
             if(al_is_event_queue_empty(event_queue)){
                 al_draw_scaled_bitmap(image, 0, 0,  al_get_bitmap_width(image), al_get_bitmap_height(image), 0, 0, SCREEN_W, SCREEN_H, 0);
 
-                if(pos_x>=SCREEN_W-(al_get_bitmap_width(botaoSair))-60 && pos_x<= SCREEN_W-(al_get_bitmap_width(botaoSair))-60+al_get_bitmap_width(botaoSair) && pos_y>=SCREEN_H-(al_get_bitmap_height(botaoSair))-40 && pos_y<=SCREEN_H-(al_get_bitmap_height(botaoSair))-40+al_get_bitmap_height(botaoSair)){
-                    al_draw_scaled_bitmap(botaoSair2, 0, 0, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), SCREEN_W-(al_get_bitmap_width(botaoSair2)+60), SCREEN_H-(al_get_bitmap_height(botaoSair2))-40, al_get_bitmap_width(botaoSair2), al_get_bitmap_height(botaoSair2), 0);
+                if(pos_x>=SCREEN_W-(al_get_bitmap_width(btvoltar2)+60) && pos_x<= SCREEN_W-(al_get_bitmap_width(btvoltar2)+60)+al_get_bitmap_width(btvoltar2) && pos_y>=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90 && pos_y<=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90+al_get_bitmap_height(btvoltar2)){
+                    al_draw_scaled_bitmap(btvoltar, 0, 0, al_get_bitmap_width(btvoltar), al_get_bitmap_height(btvoltar), SCREEN_W-(al_get_bitmap_width(btvoltar)+60), SCREEN_H/30+(al_get_bitmap_height(btvoltar))-90, al_get_bitmap_width(btvoltar), al_get_bitmap_height(btvoltar), 0);
                 }else{
-                    al_draw_scaled_bitmap(botaoSair, 0, 0, al_get_bitmap_width(botaoSair), al_get_bitmap_height(botaoSair), SCREEN_W-(al_get_bitmap_width(botaoSair)+60), SCREEN_H-(al_get_bitmap_height(botaoSair))-40, al_get_bitmap_width(botaoSair), al_get_bitmap_height(botaoSair), 0);
+                    al_draw_scaled_bitmap(btvoltar2, 0, 0, al_get_bitmap_width(btvoltar2), al_get_bitmap_height(btvoltar2), SCREEN_W-(al_get_bitmap_width(btvoltar2)+60), SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90, al_get_bitmap_width(btvoltar2), al_get_bitmap_height(btvoltar2), 0);
                 }
             }
 
             al_flip_display();
-        }
-        if(fechar){
-            break;
         }
     }
     //Fim do programa-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
