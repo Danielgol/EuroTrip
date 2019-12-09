@@ -6,6 +6,7 @@
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 
+
 typedef struct{
     //No
     int index;//Id do no
@@ -23,17 +24,18 @@ typedef struct{
     struct Out* prox;
 }Out;
 
-typedef struct{
-    struct Node* node;
-    struct Out* prox;
-}List;
 
-
-//COLOCAR UM METODO Q ZERE AS ESTIMATIVAS (PARA OUTRAS CONSULTAS)
+void zerarNodes(Node* grafo){
+    if(grafo != NULL){
+        grafo->estimativa = 1000;
+        grafo->precedente = NULL;
+        grafo->status = 0;
+        zerarNodes(grafo->prox);
+    }
+}
 
 void imprimirSaidas(Out* atual){
-    if(atual == NULL){
-    }else{
+    if(atual != NULL){
         Node* node = atual->node;
         printf("(%i)", node->index);
         imprimirSaidas(atual->prox);
@@ -50,7 +52,6 @@ void imprimir(Node* atual){
         }
         printf(" => ");
         imprimir(atual->prox);
-
     }
 }
 
@@ -67,7 +68,6 @@ Node* buscarNode(Node* atual, int index){
     if(atual == NULL){
         return NULL;
     }
-
     if(atual->index == index){
         return atual;
     }else{
@@ -76,7 +76,6 @@ Node* buscarNode(Node* atual, int index){
 }
 
 Node* inserir(Node* atual, int index){
-
     if(atual == NULL){
         Node* novo = malloc(sizeof(Node));
         novo->estimativa = 1000;
@@ -95,11 +94,9 @@ Node* inserir(Node* atual, int index){
 
     atual->prox = inserir(atual->prox, index);
     return atual;
-
 }
 
 Out* inserirNasSaidas(Out* atual, Node* node, int distancia){
-
     if(atual == NULL){
         Out* novo = malloc(sizeof(Out));
         novo->node = node;
@@ -118,7 +115,6 @@ Out* inserirNasSaidas(Out* atual, Node* node, int distancia){
         atual->prox = inserirNasSaidas(atual->prox, node, distancia);
         return atual;
     }
-
 }
 
 void ligarNodes(Node* grafo, int index1, int index2, int distancia){
@@ -126,6 +122,7 @@ void ligarNodes(Node* grafo, int index1, int index2, int distancia){
     Node* node2 = buscarNode(grafo, index2);
     if(node1 != NULL && node2 != NULL){
         node1->saidas = inserirNasSaidas(node1->saidas, node2, distancia);
+        node2->saidas = inserirNasSaidas(node2->saidas, node1, distancia);//MAO DUPLA
     }
 }
 
@@ -158,7 +155,7 @@ void dijkstra(Node* grafo){
 }
 
 void estimarNode(Node* node, Node* anterior, int distancia){
-    if(anterior->estimativa + distancia < node->estimativa){ //estimativa atual + distancia do proximo < estimativa proximo
+    if(anterior->estimativa + distancia < node->estimativa){
         node->estimativa = anterior->estimativa + distancia;
         node->precedente = anterior;
     }
@@ -186,55 +183,72 @@ int main(int argc, char **argv){
     /*
     Node* grafo = NULL;
 
-    grafo = inserir(grafo, 0);
     grafo = inserir(grafo, 1);
     grafo = inserir(grafo, 2);
     grafo = inserir(grafo, 3);
     grafo = inserir(grafo, 4);
     grafo = inserir(grafo, 5);
     grafo = inserir(grafo, 6);
-
-    ligarNodes(grafo, 0, 1, 4);
-    ligarNodes(grafo, 0, 2, 6);
-    ligarNodes(grafo, 0, 3, 9);
-    ligarNodes(grafo, 1, 5, 3);
-    ligarNodes(grafo, 1, 4, 2);
-    ligarNodes(grafo, 4, 5, 2);
-    ligarNodes(grafo, 2, 5, 2);
-    ligarNodes(grafo, 2, 3, 4);
-    ligarNodes(grafo, 4, 6, 7);
-    ligarNodes(grafo, 5, 6, 3);
-    ligarNodes(grafo, 3, 6, 5);
-
-    ------------------------------------------------------------------------
-
-    grafo = inserir(grafo, 0);
-    grafo = inserir(grafo, 1);
-    grafo = inserir(grafo, 2);
-    grafo = inserir(grafo, 3);
-    grafo = inserir(grafo, 4);
-
-    ligarNodes(grafo, 0, 1, 5);
-    ligarNodes(grafo, 0, 2, 10);
-    ligarNodes(grafo, 1, 2, 3);
-    ligarNodes(grafo, 1, 3, 2);
-    ligarNodes(grafo, 1, 4, 9);
-    ligarNodes(grafo, 2, 1, 3);
-    ligarNodes(grafo, 2, 4, 1);
-    ligarNodes(grafo, 3, 0, 7);
-    ligarNodes(grafo, 3, 4, 6);
-    ligarNodes(grafo, 4, 3, 4);
+    grafo = inserir(grafo, 7);
+    grafo = inserir(grafo, 8);
+    grafo = inserir(grafo, 9);
+    grafo = inserir(grafo, 10);
+    grafo = inserir(grafo, 11);
+    grafo = inserir(grafo, 12);
+    grafo = inserir(grafo, 13);
+    grafo = inserir(grafo, 14);
+    grafo = inserir(grafo, 15);
+    grafo = inserir(grafo, 16);
+    grafo = inserir(grafo, 17);
+    grafo = inserir(grafo, 18);
+    grafo = inserir(grafo, 19);
+    grafo = inserir(grafo, 20);
+    grafo = inserir(grafo, 21);
 
 
-    ------------------------------------------------------------------------------
-    imprimir(grafo);
-    printf("\n\n");
+    ligarNodes(grafo, 1, 2, 8);
+    ligarNodes(grafo, 1, 3, 10);
+    ligarNodes(grafo, 2, 3, 8);
+    ligarNodes(grafo, 2, 4, 14);
+    ligarNodes(grafo, 3, 4, 10);
+    ligarNodes(grafo, 4, 5, 12);
+    ligarNodes(grafo, 4, 6, 16);
+    ligarNodes(grafo, 5, 6, 10);
+    ligarNodes(grafo, 5, 10, 6);
+    ligarNodes(grafo, 5, 11, 6);
+    ligarNodes(grafo, 6, 7, 8);
+    ligarNodes(grafo, 6, 9, 6);
+    ligarNodes(grafo, 7, 8, 6);
+    ligarNodes(grafo, 9, 14, 6);
+    ligarNodes(grafo, 9, 15, 4);
+    ligarNodes(grafo, 10, 12, 6);
+    ligarNodes(grafo, 10, 14, 6);
+    ligarNodes(grafo, 10, 16, 4);
+    ligarNodes(grafo, 11, 12, 6);
+    ligarNodes(grafo, 12, 13, 8);
+    ligarNodes(grafo, 12, 16, 6);
+    ligarNodes(grafo, 14, 16, 6);
+    ligarNodes(grafo, 14, 18, 8);
+    ligarNodes(grafo, 15, 18, 10);
+    ligarNodes(grafo, 16, 17, 6);
+    ligarNodes(grafo, 16, 18, 10);
+    ligarNodes(grafo, 16, 19, 8);
+    ligarNodes(grafo, 16, 20, 8);
+    ligarNodes(grafo, 17, 18, 6);
+    ligarNodes(grafo, 17, 19, 6);
+    ligarNodes(grafo, 18, 19, 10);
+    ligarNodes(grafo, 19, 20, 8);
+    ligarNodes(grafo, 20, 21, 22);
 
-    Node* caminho = encontrarCaminho(grafo, 0, 6);
-    imprimir(grafo);
-    printf("\n\n");
-
+    Node* caminho = encontrarCaminho(grafo, 18, 8);
     imprimirCaminho(caminho);
+    zerarNodes(grafo);
+
+    printf("\n\n");
+
+    caminho = encontrarCaminho(grafo, 21, 1);
+    imprimirCaminho(caminho);
+    zerarNodes(grafo);
     */
 
     //COMANDOS DO ALLEGRO-----------------------------------------------------------------------------------------------------------------------------------------------------------
