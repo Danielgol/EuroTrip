@@ -3,6 +3,8 @@
 #include <allegro5/allegro.h>
 #include "allegro5/allegro_image.h"
 #include <allegro5/allegro_native_dialog.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 
 typedef struct{
     //No
@@ -245,6 +247,9 @@ int main(int argc, char **argv){
     al_init();
     al_init_image_addon();
     al_install_mouse();
+    al_install_audio();
+    al_init_acodec_addon();
+    al_reserve_samples(20);
 
     //CRIACAO ALLEGRO-------------------------------------------------------
     al_get_display_mode(al_get_num_display_modes() - 1, &disp_data);
@@ -308,6 +313,27 @@ int main(int argc, char **argv){
     int viajar=0;//Menu do short path
     int pacote=0;//Menu do click
 
+    //SONS
+    ALLEGRO_SAMPLE *button;
+    ALLEGRO_SAMPLE_INSTANCE *inst_button;
+    button = al_load_sample("sounds/button.ogg");
+    inst_button = al_create_sample_instance(button);
+    al_attach_sample_instance_to_mixer(inst_button,al_get_default_mixer());
+    al_set_sample_instance_gain(inst_button,1.0);
+
+    ALLEGRO_SAMPLE *pass_button;
+    ALLEGRO_SAMPLE_INSTANCE *inst_pass_button;
+    pass_button = al_load_sample("sounds/pass_button.ogg");
+    inst_pass_button = al_create_sample_instance(pass_button);
+    al_attach_sample_instance_to_mixer(inst_pass_button,al_get_default_mixer());
+    al_set_sample_instance_gain(inst_pass_button,1.0);
+
+    ALLEGRO_SAMPLE *exit_button;
+    ALLEGRO_SAMPLE_INSTANCE *inst_exit_button;
+    exit_button = al_load_sample("sounds/close_door_1.ogg");
+    inst_exit_button = al_create_sample_instance(exit_button);
+    al_attach_sample_instance_to_mixer(inst_exit_button,al_get_default_mixer());
+    al_set_sample_instance_gain(inst_exit_button, 1.0);
 
     //Programa------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     while(1){
@@ -323,12 +349,15 @@ int main(int argc, char **argv){
                 break;
             }else if(ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
                 if(pos_x>=SCREEN_W-(al_get_bitmap_width(botaoSair))-60 && pos_x<= SCREEN_W-(al_get_bitmap_width(botaoSair))-60+al_get_bitmap_width(botaoSair) && pos_y>=SCREEN_H-(al_get_bitmap_height(botaoSair))-40 && pos_y<=SCREEN_H-(al_get_bitmap_height(botaoSair))-40+al_get_bitmap_height(botaoSair)){
+                    al_play_sample_instance(inst_exit_button);
                     fechar = 1;
                     break;
                 }else if(pos_x>=SCREEN_W/2-(al_get_bitmap_width(botaoViajeAgora))-43 && pos_x<= SCREEN_W/2-(al_get_bitmap_width(botaoViajeAgora))-43+al_get_bitmap_width(botaoViajeAgora) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(botaoViajeAgora)*0,9)-1 && pos_y <= (SCREEN_H/2-(al_get_bitmap_height(botaoViajeAgora)*0,9)-1)+al_get_bitmap_height(botaoViajeAgora)){
+                    al_play_sample_instance(inst_button);
                     viajar=1;
                     break;
                 }else if(pos_x>=SCREEN_W/2+(al_get_bitmap_width(botaoPacotesTour)*0,9)+31 && pos_x<=SCREEN_W/2+(al_get_bitmap_width(botaoPacotesTour)*0,9)+31+al_get_bitmap_width(botaoPacotesTour) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(botaoPacotesTour)*0,9)-1 && pos_y<= SCREEN_H/2-(al_get_bitmap_height(botaoPacotesTour)*0,9)-1+al_get_bitmap_height(botaoPacotesTour)){
+                    al_play_sample_instance(inst_button);
                     pacote=1;
                     break;
                 }
@@ -382,6 +411,7 @@ int main(int argc, char **argv){
                     pos_y = ev2.mouse.y;
             }else if(ev2.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
                 if(pos_x>=SCREEN_W-(al_get_bitmap_width(btvoltar)+60) && pos_x<= SCREEN_W-(al_get_bitmap_width(btvoltar)+60)+al_get_bitmap_width(btvoltar) && pos_y>=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90 && pos_y<=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90+al_get_bitmap_height(btvoltar)){
+                    al_play_sample_instance(inst_button);
                     viajar=0;
                     break;
                 }
@@ -499,6 +529,7 @@ int main(int argc, char **argv){
                     pos_y = ev3.mouse.y;
             }else if(ev3.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
                 if(pos_x>=SCREEN_W-(al_get_bitmap_width(btvoltar)+60) && pos_x<= SCREEN_W-(al_get_bitmap_width(btvoltar)+60)+al_get_bitmap_width(btvoltar) && pos_y>=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90 && pos_y<=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90+al_get_bitmap_height(btvoltar)){
+                    al_play_sample_instance(inst_button);
                     pacote=0;
                     break;
                 }
@@ -531,6 +562,9 @@ int main(int argc, char **argv){
     al_destroy_bitmap(botaoSair);
     al_destroy_bitmap(botaoSair2);
 
+    al_destroy_sample_instance(inst_button);
+    al_destroy_sample_instance(inst_pass_button);
+    al_destroy_sample_instance(exit_button);
 
     al_destroy_display(display);
     al_destroy_event_queue(event_queue);
