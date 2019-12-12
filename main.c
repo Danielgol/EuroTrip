@@ -365,12 +365,13 @@ int main(int argc, char **argv){
     al_attach_sample_instance_to_mixer(inst_button,al_get_default_mixer());
     al_set_sample_instance_gain(inst_button,1.0);
 
-    ALLEGRO_SAMPLE *pass_button;
-    ALLEGRO_SAMPLE_INSTANCE *inst_pass_button;
-    pass_button = al_load_sample("sounds/pass_button.ogg");
-    inst_pass_button = al_create_sample_instance(pass_button);
-    al_attach_sample_instance_to_mixer(inst_pass_button,al_get_default_mixer());
-    al_set_sample_instance_gain(inst_pass_button,1.0);
+    ALLEGRO_SAMPLE *menu_sound1;
+    ALLEGRO_SAMPLE_INSTANCE *inst_menu_sound1;
+    menu_sound1 = al_load_sample("sounds/menu.ogg");
+    inst_menu_sound1 = al_create_sample_instance(menu_sound1);
+    al_set_sample_instance_gain(inst_menu_sound1, 0.3);
+    al_set_sample_instance_playmode(inst_menu_sound1, ALLEGRO_PLAYMODE_LOOP);
+    al_attach_sample_instance_to_mixer(inst_menu_sound1, al_get_default_mixer());
 
     ALLEGRO_SAMPLE *exit_button;
     ALLEGRO_SAMPLE_INSTANCE *inst_exit_button;
@@ -379,11 +380,23 @@ int main(int argc, char **argv){
     al_attach_sample_instance_to_mixer(inst_exit_button,al_get_default_mixer());
     al_set_sample_instance_gain(inst_exit_button, 1.0);
 
+    ALLEGRO_SAMPLE *bus_sound;
+    ALLEGRO_SAMPLE_INSTANCE *inst_bus_sound;
+    bus_sound = al_load_sample("sounds/porta_abrindo_onibus.ogg");
+    inst_bus_sound = al_create_sample_instance(bus_sound);
+    al_attach_sample_instance_to_mixer(inst_bus_sound,al_get_default_mixer());
+    al_set_sample_instance_gain(inst_bus_sound, 1.0);
+
+
+
+
     //Programa------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     while(1){
         while(fechar == 0){
             ALLEGRO_EVENT ev;
             al_wait_for_event(event_queue, &ev);
+
+            al_play_sample_instance(inst_menu_sound1);
 
             if(ev.type == ALLEGRO_EVENT_MOUSE_AXES){
                     pos_x = ev.mouse.x;
@@ -461,6 +474,7 @@ int main(int argc, char **argv){
                     //clicar na alemanha
                     if(pos_x>=SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10) && pos_x<= SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10)+al_get_bitmap_width(btviagem01) && pos_y>=SCREEN_H/5+(al_get_bitmap_height(btviagem01)*0,9)-90 && pos_y<=SCREEN_H/5+(al_get_bitmap_height(btviagem01)*0,9)-90+al_get_bitmap_height(btviagem01)){
                         cidade = 0;
+                        al_play_sample_instance(inst_button);
                         if(estagio == 0){
                             estagio = 1;
                         }else if(estagio == 2){
@@ -471,6 +485,7 @@ int main(int argc, char **argv){
                     //clicar na inglaterra
                     if(pos_x>=SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60 && pos_x<= SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60+al_get_bitmap_width(btviagem03) && pos_y>=SCREEN_H/5+(al_get_bitmap_height(btviagem03)*0,9)-90 && pos_y<=SCREEN_H/5+(al_get_bitmap_height(btviagem03)*0,9)-90+al_get_bitmap_height(btviagem03)){
                         cidade = 9;
+                        al_play_sample_instance(inst_button);
                         if(estagio == 0){
                             estagio = 1;
                         }else if(estagio == 2){
@@ -489,6 +504,7 @@ int main(int argc, char **argv){
                     //clicar na suica
                     if(pos_x>=SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3) && pos_x<= SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3)+al_get_bitmap_width(btviagem07) && pos_y>=SCREEN_H/5+(al_get_bitmap_height(btviagem07)*0,9)-90 && pos_y<=SCREEN_H/5+(al_get_bitmap_height(btviagem07)*0,9)-90+al_get_bitmap_height(btviagem07)){
                         cidade = 13;
+                        al_play_sample_instance(inst_button);
                         if(estagio == 0){
                             estagio = 1;
                         }else if(estagio == 2){
@@ -498,6 +514,7 @@ int main(int argc, char **argv){
                     //clicar na checa
                     if(pos_x>=SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10) && pos_x<= SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10)+al_get_bitmap_width(btviagem01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90+al_get_bitmap_height(btviagem01)){
                         cidade = 3;
+                        al_play_sample_instance(inst_button);
                         if(estagio == 0){
                             estagio = 1;
                         }else if(estagio == 2){
@@ -507,6 +524,7 @@ int main(int argc, char **argv){
                     //clicar italia
                     if(pos_x>=SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60 && pos_x<= SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60+al_get_bitmap_width(btviagem03) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90+al_get_bitmap_height(btviagem01)){
                         cidade = 10;
+                        al_play_sample_instance(inst_button);
                         if(estagio == 0){
                             estagio = 1;
                         }else if(estagio == 2){
@@ -516,6 +534,7 @@ int main(int argc, char **argv){
                     //clicar monaco
                     if(pos_x>=SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-65 && pos_x<= SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-60+al_get_bitmap_width(btviagem03) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90+al_get_bitmap_height(btviagem01)){
                         cidade = 11;
+                        al_play_sample_instance(inst_button);
                         if(estagio == 0){
                             estagio = 1;
                         }else if(estagio == 2){
@@ -525,6 +544,7 @@ int main(int argc, char **argv){
                     //clicar
                     if(pos_x>=SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3) && pos_x<= SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3)+al_get_bitmap_width(btviagem07) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90+al_get_bitmap_height(btviagem01)){
                         cidade = 1;
+                        al_play_sample_instance(inst_button);
                         if(estagio == 0){
                             estagio = 1;
                         }else if(estagio == 2){
@@ -534,6 +554,7 @@ int main(int argc, char **argv){
                     //clicar belgica
                     if(pos_x>=SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10) && pos_x<= SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10)+al_get_bitmap_width(btviagem01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90+al_get_bitmap_height(btviagem01)){
                         cidade = 2;
+                        al_play_sample_instance(inst_button);
                         if(estagio == 0){
                             estagio = 1;
                         }else if(estagio == 2){
@@ -543,6 +564,7 @@ int main(int argc, char **argv){
                     //clicar croacia
                     if(pos_x>=SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60 && pos_x<= SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60+al_get_bitmap_width(btviagem03) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90+al_get_bitmap_height(btviagem01)){
                         cidade = 4;
+                        al_play_sample_instance(inst_button);
                         if(estagio == 0){
                             estagio = 1;
                         }else if(estagio == 2){
@@ -552,6 +574,7 @@ int main(int argc, char **argv){
                     //clicar grecia
                     if(pos_x>=SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-65 && pos_x<= SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-60+al_get_bitmap_width(btviagem03) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90+al_get_bitmap_height(btviagem01)){
                         cidade = 7;
+                        al_play_sample_instance(inst_button);
                         if(estagio == 0){
                             estagio = 1;
                         }else if(estagio == 2){
@@ -561,6 +584,7 @@ int main(int argc, char **argv){
                     //clicar holanda
                     if(pos_x>=SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3) && pos_x<= SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3)+al_get_bitmap_width(btviagem07) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90+al_get_bitmap_height(btviagem01)){
                         cidade = 8;
+                        al_play_sample_instance(inst_button);
                         if(estagio == 0){
                             estagio = 1;
                         }else if(estagio == 2){
@@ -570,6 +594,7 @@ int main(int argc, char **argv){
                     //clicar espanha
                     if(pos_x>=SCREEN_W/2-(al_get_bitmap_width(btviagem07)*3.2) && pos_x<= SCREEN_W/2-(al_get_bitmap_width(btviagem07)*3.2)+al_get_bitmap_width(btviagem10)*0.8 && pos_y>= SCREEN_H/2+(al_get_bitmap_height(btviagem01)) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01))+al_get_bitmap_height(btviagem10)*0.8){
                         cidade = 5;
+                        al_play_sample_instance(inst_button);
                         if(estagio == 0){
                             estagio = 1;
                         }else if(estagio == 2){
@@ -579,6 +604,7 @@ int main(int argc, char **argv){
                     //clicar portugal
                     if(pos_x>=SCREEN_W/2-(al_get_bitmap_width(btviagem07)*3.2) && pos_x<= SCREEN_W/2-(al_get_bitmap_width(btviagem07)*3.2)+al_get_bitmap_width(btviagem10)*0.8 && pos_y>= SCREEN_H/2-(al_get_bitmap_height(btviagem01)*1.5) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btviagem01)*1.5)+al_get_bitmap_height(btviagem10)*0.8){
                         cidade = 12;
+                        al_play_sample_instance(inst_button);
                         if(estagio == 0){
                             estagio = 1;
                         }else if(estagio == 2){
@@ -821,6 +847,7 @@ int main(int argc, char **argv){
 
                     if(pos_x>=SCREEN_W-(al_get_bitmap_width(btvoltar2)+60) && pos_x<= SCREEN_W-(al_get_bitmap_width(btvoltar2)+60)+al_get_bitmap_width(btvoltar2) && pos_y>=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90 && pos_y<=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90+al_get_bitmap_height(btvoltar2)){
                         al_draw_scaled_bitmap(btvoltar, 0, 0, al_get_bitmap_width(btvoltar), al_get_bitmap_height(btvoltar), SCREEN_W-(al_get_bitmap_width(btvoltar)+60), SCREEN_H/30+(al_get_bitmap_height(btvoltar))-90, al_get_bitmap_width(btvoltar), al_get_bitmap_height(btvoltar), 0);
+
                     }else{
                         al_draw_scaled_bitmap(btvoltar2, 0, 0, al_get_bitmap_width(btvoltar2), al_get_bitmap_height(btvoltar2), SCREEN_W-(al_get_bitmap_width(btvoltar2)+60), SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90, al_get_bitmap_width(btvoltar2), al_get_bitmap_height(btvoltar2), 0);
                     }
@@ -1152,9 +1179,14 @@ int main(int argc, char **argv){
     al_destroy_bitmap(botaoSair);
     al_destroy_bitmap(botaoSair2);
 
+    al_destroy_sample(button);
+    al_destroy_sample(menu_sound1);
+    al_destroy_sample(exit_button);
+    al_destroy_sample(bus_sound);
     al_destroy_sample_instance(inst_button);
-    al_destroy_sample_instance(inst_pass_button);
-    al_destroy_sample_instance(exit_button);
+    al_destroy_sample_instance(inst_menu_sound1);
+    al_destroy_sample_instance(inst_exit_button);
+    al_destroy_sample_instance(inst_bus_sound);
 
     al_destroy_display(display);
     al_destroy_event_queue(event_queue);
