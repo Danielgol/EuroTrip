@@ -176,8 +176,102 @@ Node* encontrarCaminho(Node* grafo, int indexInicio, int indexFim){
     return buscarNode(grafo, indexFim);
 }
 
+//FUNÇÃO PARA DESENHAR AS CORES
+/*void imprimir_pontos(Node* caminho)
+{
+    if(caminho == NULL){}
+    else
+    {
+        int index = caminho->index;
+        if(index == 1)
+        {
+            al_draw_scaled_bitmap();
+        }
+        if(index == 2)
+        {
+            al_draw_scaled_bitmap();
+        }
+        if(index == 3)
+        {
+            al_draw_scaled_bitmap();
+        }
+        if(index == 4)
+        {
+            al_draw_scaled_bitmap();
+        }
+        if(index == 5)
+        {
+            al_draw_scaled_bitmap();
+        }
+        if(index == 6)
+        {
+            al_draw_scaled_bitmap();
+        }
+        if(index == 7)
+        {
+            al_draw_scaled_bitmap();
+        }
+        if(index == 8)
+        {
+            al_draw_scaled_bitmap();
+        }
+        if(index == 9)
+        {
+            al_draw_scaled_bitmap();
+        }
+        if(index == 10)
+        {
+            al_draw_scaled_bitmap();
+        }
+        if(index == 11)
+        {
+            al_draw_scaled_bitmap();
+        }
+        if(index == 12)
+        {
+            al_draw_scaled_bitmap();
+        }
+        if(index == 13)
+        {
+            al_draw_scaled_bitmap();
+        }
+        if(index == 14)
+        {
+            al_draw_scaled_bitmap();
+        }
+        if(index == 15)
+        {
+            al_draw_scaled_bitmap();
+        }
+        if(index == 16)
+        {
+            al_draw_scaled_bitmap();
+        }
+        if(index == 17)
+        {
+            al_draw_scaled_bitmap();
+        }
+        if(index == 18)
+        {
+            al_draw_scaled_bitmap();
+        }
+        if(index == 19)
+        {
+            al_draw_scaled_bitmap();
+        }
+        if(index == 20)
+        {
+            al_draw_scaled_bitmap();
+        }
+        if(index == 21)
+        {
+            al_draw_scaled_bitmap();
+        }
 
-
+        imprimir_pontos(caminho->prox);
+    }
+}
+*/
 
 int main(int argc, char **argv){
     /*
@@ -616,23 +710,29 @@ int main(int argc, char **argv){
                         if(estagio == 1){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR BERLIM COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
                                 estagio = 2;
                             }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*0.3) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*0.3)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR FRANKFURT COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
                                 estagio = 2;
                             }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.9) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.9)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR MUNIQUE COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
                                 estagio = 2;
                             }
                         }else if(estagio == 3){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR BERLIM COMO PONTO DE CHEGADA
+                                al_play_sample_instance(inst_button);
                                 viajar = 0;
                             }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*0.3) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*0.3)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR FRANKFURT COMO PONTO DE CHEGADA
+                                al_play_sample_instance(inst_button);
                                 viajar = 0;
                             }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.9) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.9)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR MUNIQUE COMO PONTO DE CHEGADA
+                                al_play_sample_instance(inst_button);
                                 viajar = 0;
                             }
                         }
@@ -641,11 +741,13 @@ int main(int argc, char **argv){
                         if(estagio == 1){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
                                 //ADICIONAR VIENA COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
                                 estagio = 2;
                             }
                         }else if(estagio == 3){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
                                 //ADICIONAR VIENA COMO PONTO DE CHEGADA
+                                al_play_sample_instance(inst_button);
                                 viajar = 0;
                             }
                         }
@@ -654,11 +756,13 @@ int main(int argc, char **argv){
                         if(estagio == 1){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
                                 //ADICIONAR BRUXELAS COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
                                 estagio = 2;
                             }
                         }else if(estagio == 3){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
                                 //ADICIONAR BRUXELAS COMO PONTO DE CHEGADA
+                                al_play_sample_instance(inst_button);
                                 viajar = 0;
                             }
                         }
@@ -667,11 +771,13 @@ int main(int argc, char **argv){
                         if(estagio == 1){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
                                 //ADICIONAR PRAGA COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
                                 estagio = 2;
                             }
                         }else if(estagio == 3){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
                                 //ADICIONAR PRAGA COMO PONTO DE CHEGADA
+                                al_play_sample_instance(inst_button);
                                 viajar = 0;
                             }
                         }
@@ -680,11 +786,13 @@ int main(int argc, char **argv){
                         if(estagio == 1){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
                                 //ADICIONAR ZAGREBE COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
                                 estagio = 2;
                             }
                         }else if(estagio == 3){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
                                 //ADICIONAR ZAGREBE COMO PONTO DE CHEGADA
+                                al_play_sample_instance(inst_button);
                                 viajar = 0;
                             }
                         }
@@ -693,23 +801,29 @@ int main(int argc, char **argv){
                         if(estagio == 1){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR SEVILLA COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
                                 estagio = 2;
                             }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*0.3) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*0.3)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR MADRI COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
                                 estagio = 2;
                             }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.9) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.9)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR BARCELONA COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
                                 estagio = 2;
                             }
                         }else if(estagio == 3){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR SEVILLA COMO PONTO DE CHEGADA
+                                al_play_sample_instance(inst_button);
                                 viajar = 0;
                             }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*0.3) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*0.3)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR MADRI COMO PONTO DE CHEGADA
+                                al_play_sample_instance(inst_button);
                                 viajar = 0;
                             }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.9) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.9)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR BARCELONA COMO PONTO DE CHEGADA
+                                al_play_sample_instance(inst_button);
                                 viajar = 0;
                             }
                         }
@@ -718,17 +832,21 @@ int main(int argc, char **argv){
                         if(estagio == 1){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
                                 //ADICIONAR PARIS COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
                                 estagio = 2;
                             }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.2) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.5)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR LYON COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
                                 estagio = 2;
                             }
                         }else if(estagio == 3){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
                                 //ADICIONAR PARIS COMO PONTO DE CHEGADA
+                                al_play_sample_instance(inst_button);
                                 viajar = 0;
                             }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.2) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.5)+al_get_bitmap_height(btalemanha01)){
                                  //ADICIONAR LYON COMO PONTO DE CHEGADA
+                                 al_play_sample_instance(inst_button);
                                  viajar = 0;
                             }
                         }
@@ -737,11 +855,13 @@ int main(int argc, char **argv){
                         if(estagio == 1){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
                                 //ADICIONAR ATENAS COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
                                 estagio = 2;
                             }
                         }else if(estagio == 3){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
                                 //ADICIONAR ATENAS COMO PONTO DE CHEGADA
+                                al_play_sample_instance(inst_button);
                                 viajar = 0;
                             }
                         }
@@ -750,11 +870,13 @@ int main(int argc, char **argv){
                         if(estagio == 1){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
                                 //ADICIONAR AMSTERDAN COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
                                 estagio = 2;
                             }
                         }else if(estagio == 3){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
                                 //ADICIONAR AMSTERDAN COMO PONTO DE CHEGADA
+                                al_play_sample_instance(inst_button);
                                 viajar = 0;
                             }
                         }
@@ -763,17 +885,21 @@ int main(int argc, char **argv){
                         if(estagio == 1){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
                                 //ADICIONAR LONDRES COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
                                 estagio = 2;
                             }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.2) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.5)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR LIVERPOLL COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
                                 estagio = 2;
                             }
                         }else if(estagio == 3){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
                                 //ADICIONAR LONDRES COMO PONTO DE CHEGADA
+                                al_play_sample_instance(inst_button);
                                 viajar = 0;
                             }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.2) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.5)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR LIVERPOLL COMO PONTO DE CHEGADA
+                                al_play_sample_instance(inst_button);
                                 viajar = 0;
                             }
                         }
@@ -782,17 +908,21 @@ int main(int argc, char **argv){
                         if(estagio == 1){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
                                 //ADICIONAR MILAO COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
                                 estagio = 2;
                             }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.2) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.5)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR ROMA COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
                                 estagio = 2;
                             }
                         }else if(estagio == 3){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
                                 //ADICIONAR MILAO COMO PONTO DE CHEGADA
+                                al_play_sample_instance(inst_button);
                                 viajar = 0;
                             }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.2) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.5)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR ROMA COMO PONTO DE CHEGADA
+                                al_play_sample_instance(inst_button);
                                 viajar = 0;
                             }
                         }
@@ -801,11 +931,13 @@ int main(int argc, char **argv){
                         if(estagio == 1){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
                                 //ADICIONAR MONACO COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
                                 estagio = 2;
                             }
                         }else if(estagio == 3){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
                                 //ADICIONAR MONACO COMO PONTO DE CHEGADA
+                                al_play_sample_instance(inst_button);
                                 viajar = 0;
                             }
                         }
@@ -813,11 +945,13 @@ int main(int argc, char **argv){
                         if(estagio == 1){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
                                 //ADICIONAR LISBOA COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
                                 estagio = 2;
                             }
                         }else if(estagio == 3){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
                                 //ADICIONAR LISBOA COMO PONTO DE CHEGADA
+                                al_play_sample_instance(inst_button);
                                 viajar = 0;
                             }
                         }
@@ -825,11 +959,13 @@ int main(int argc, char **argv){
                         if(estagio == 1){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
                                 //ADICIONAR BERNA COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
                                 estagio = 2;
                             }
                         }else if(estagio == 3){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
                                 //ADICIONAR BERNA COMO PONTO DE CHEGADA
+                                al_play_sample_instance(inst_button);
                                 viajar = 0;
                             }
                         }
