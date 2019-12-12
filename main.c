@@ -181,67 +181,67 @@ Node* encontrarCaminho(Node* grafo, int indexInicio, int indexFim){
     if(caminho != NULL){
         int index = caminho->index;
         if(index == 1){
-            al_draw_scaled_bitmap();
+            al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-477, centroY+294, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 2){
-            al_draw_scaled_bitmap();
+             al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-400, centroY+370, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 3){
-            al_draw_scaled_bitmap();
+            al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-328 , centroY+255, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 4){
-            al_draw_scaled_bitmap();
+            al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-190, centroY+265, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 5){
-            al_draw_scaled_bitmap();
+            al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-95 , centroY+135, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 6){
-            al_draw_scaled_bitmap();
+             al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-135 , centroY+28, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 7){
-            al_draw_scaled_bitmap();
+            al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-165 , centroY-90, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 8){
-            al_draw_scaled_bitmap();
+            al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-210, centroY-170, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 9){
-            al_draw_scaled_bitmap();
+            al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-73 , centroY-52, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 10){
-            al_draw_scaled_bitmap();
+              al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-5 , centroY+84, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 11){
-            al_draw_scaled_bitmap();
+           al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-40 , centroY+205, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 12){
-            al_draw_scaled_bitmap();
+            al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+35 , centroY+160, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 13){
-            al_draw_scaled_bitmap();
+            al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+106 , centroY+276, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 14){
-            al_draw_scaled_bitmap();
+            al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+10 , centroY-20, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 15){
-            al_draw_scaled_bitmap();
+            al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-37, centroY-120, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 16){
-            al_draw_scaled_bitmap();
+            al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+80 , centroY+50, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 17){
-            al_draw_scaled_bitmap();
+            al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+148 , centroY-3, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 18){
-            al_draw_scaled_bitmap();
+             al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+129, centroY-110, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 19){
-            al_draw_scaled_bitmap();
+            al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+210 , centroY+45, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 20){
-            al_draw_scaled_bitmap();
+            al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+210 , centroY+145, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 21){
-            al_draw_scaled_bitmap();
+            al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+410 , centroY+390, SCREEN_H/20, SCREEN_H/20, 0);
         }
 
         imprimir_pontos(caminho->prox);
@@ -1347,10 +1347,34 @@ int main(int argc, char **argv){
 
 
 
-                // SÓ PRECISA MEXER AQUI{
+                /*SÓ PRECISA MEXER AQUI{
+                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-37, centroY-120, SCREEN_H/20, SCREEN_H/20, 0);
+                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+10 , centroY-20, SCREEN_H/20, SCREEN_H/20, 0);
+                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-40 , centroY+205, SCREEN_H/20, SCREEN_H/20, 0);
+                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-5 , centroY+84, SCREEN_H/20, SCREEN_H/20, 0);
+                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-135 , centroY+28, SCREEN_H/20, SCREEN_H/20, 0);
+                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+210 , centroY+45, SCREEN_H/20, SCREEN_H/20, 0);
+                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-73 , centroY-52, SCREEN_H/20, SCREEN_H/20, 0);
+                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+148 , centroY-3, SCREEN_H/20, SCREEN_H/20, 0);
+                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+210 , centroY+145, SCREEN_H/20, SCREEN_H/20, 0);
+                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-165 , centroY-90, SCREEN_H/20, SCREEN_H/20, 0);
+                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-95 , centroY+135, SCREEN_H/20, SCREEN_H/20, 0);
+                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+35 , centroY+160, SCREEN_H/20, SCREEN_H/20, 0);
+                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+129, centroY-110, SCREEN_H/20, SCREEN_H/20, 0);
+                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+410 , centroY+390, SCREEN_H/20, SCREEN_H/20, 0);
+                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-210, centroY-170, SCREEN_H/20, SCREEN_H/20, 0);
+                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-190, centroY+265, SCREEN_H/20, SCREEN_H/20, 0);
+                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+80 , centroY+50, SCREEN_H/20, SCREEN_H/20, 0);
+                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+106 , centroY+276, SCREEN_H/20, SCREEN_H/20, 0);
+                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-477, centroY+294, SCREEN_H/20, SCREEN_H/20, 0);
+                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-328 , centroY+255, SCREEN_H/20, SCREEN_H/20, 0);
+                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-400, centroY+370, SCREEN_H/20, SCREEN_H/20, 0);
+                */
+
+
                 al_draw_scaled_bitmap(mapa_europa, 0, 0,  al_get_bitmap_width(mapa_europa), al_get_bitmap_height(mapa_europa), (SCREEN_W-SCREEN_H), 0, SCREEN_H, SCREEN_H, 0);
 
-                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-20 , centroY-20, SCREEN_H/20, SCREEN_H/20, 0);
+
                 // }
 
 
