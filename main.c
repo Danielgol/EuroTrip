@@ -537,7 +537,7 @@ int main(int argc, char **argv){
     ALLEGRO_SAMPLE_INSTANCE *inst_menu_sound1;
     menu_sound1 = al_load_sample("sounds/menu.ogg");
     inst_menu_sound1 = al_create_sample_instance(menu_sound1);
-    al_set_sample_instance_gain(inst_menu_sound1, 0.3);
+    al_set_sample_instance_gain(inst_menu_sound1, 0.5);
     al_set_sample_instance_playmode(inst_menu_sound1, ALLEGRO_PLAYMODE_LOOP);
     al_attach_sample_instance_to_mixer(inst_menu_sound1, al_get_default_mixer());
 
