@@ -438,6 +438,9 @@ int main(int argc, char **argv){
     int estagio = 0, cidade = -1;
     int nivel = 0;
     int sobreNos = 0;
+    int partida = 0;
+
+
 
     //SONS
     ALLEGRO_SAMPLE *button;
@@ -1419,11 +1422,7 @@ int main(int argc, char **argv){
 
 
 
-        //Variaveis do clique-----------------------------------------------------
 
-            int partida = 0;
-
-            int nivel = 0;
 
 
         //Clique-------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1451,6 +1450,7 @@ int main(int argc, char **argv){
                         al_play_sample_instance(inst_button);
                         if(nivel == 0){
                             nivel = 1;
+                        }
                     }
                     //clicar na inglaterra
                     if(pos_x>=SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60 && pos_x<= SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60+al_get_bitmap_width(btviagem03) && pos_y>=SCREEN_H/5+(al_get_bitmap_height(btviagem03)*0,9)-90 && pos_y<=SCREEN_H/5+(al_get_bitmap_height(btviagem03)*0,9)-90+al_get_bitmap_height(btviagem03)){
@@ -1743,7 +1743,7 @@ int main(int argc, char **argv){
             }
 
 
-        if(al_is_event_queue_empty(event_queue)){
+            if(al_is_event_queue_empty(event_queue)){
                 if(nivel == 0 ){
                     if(nivel == 0){
                         al_draw_scaled_bitmap(background, 0, 0,  al_get_bitmap_width(background), al_get_bitmap_height(background), 0, 0, SCREEN_W, SCREEN_H, 0);
@@ -2034,8 +2034,8 @@ int main(int argc, char **argv){
             al_flip_display();
         }
 
-        }
     }
+
     //Fim do programa-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     //DESTRUIR
