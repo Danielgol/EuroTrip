@@ -7,13 +7,14 @@
 #include <allegro5/allegro_acodec.h>
 
 
+
 typedef struct{
     //No
     int index;//Id do no
-    int status; //0-Aberto; 1-Fechado;
-    int estimativa; //Custo do no escolhido ate este
+    int status; //0-Aberto; 1-Fechado; (No clique, serve para indicar se eh candidato ao clique)
+    int estimativa; //Custo do no escolhido ate este (No clique, serve para salvar o grau)
     struct Out* saidas; //Nos que saem desse no
-    struct Node* precedente; //No que precede em um caminho
+    struct Node* precedente; //No que precede em um caminho (Serve para unir o clique)
     //Grafo
     struct Node* prox;//Proximo na lista de nos (geral)
 }Node;
@@ -31,36 +32,6 @@ void zerarNodes(Node* grafo){
         grafo->precedente = NULL;
         grafo->status = 0;
         zerarNodes(grafo->prox);
-    }
-}
-
-void imprimirSaidas(Out* atual){
-    if(atual != NULL){
-        Node* node = atual->node;
-        printf("(%i)", node->index);
-        imprimirSaidas(atual->prox);
-    }
-}
-
-void imprimir(Node* atual){
-    if(atual == NULL){
-        printf("NULL");
-    }else{
-        printf("%i(E:%i) ", atual->index, atual->estimativa);
-        if(atual->saidas != NULL){
-            //imprimirSaidas(atual->saidas);
-        }
-        printf(" => ");
-        imprimir(atual->prox);
-    }
-}
-
-void imprimirCaminho(Node* atual){
-    if(atual == NULL){
-        printf("CAMINHO");
-    }else{
-        imprimirCaminho(atual->precedente);
-        printf(" => %i", atual->index);
     }
 }
 
@@ -126,6 +97,122 @@ void ligarNodes(Node* grafo, int index1, int index2, int distancia){
     }
 }
 
+
+
+void fecharNodes(Out* atual){
+    if(atual != NULL){
+        Node* node = atual->node;
+        node->status = 1;
+        fecharNodes(atual->prox);
+    }
+}
+
+int calcularGrau(Out* saida, Node* selecionado, int soma){
+    if(saida != NULL){
+        Node* node = saida->node;
+        if(node->status == 1 && node != selecionado){
+            soma += 1;
+        }
+        return calcularGrau(saida->prox, selecionado, soma);
+    }
+    return soma;
+}
+
+void estimarSubgrafo(Out* atual, Node* selecionado, int tamanho){
+    if(atual != NULL){
+        Node* node = atual->node;
+        Out* saidas = node->saidas;
+        node->estimativa = calcularGrau(node->saidas, selecionado, 0);
+        if(node->estimativa < tamanho-2){
+            node->status = 0;
+            node->estimativa = 0;
+        }
+        estimarSubgrafo(atual->prox, selecionado, tamanho);
+    }
+}
+
+int verificarConexoes(Out* lista_saidas, Out* lista_node){
+
+    int soma = 0;
+    Out* aux_ls = lista_saidas;
+
+    while(lista_node != NULL){
+        Node* atual_node = lista_node->node;
+
+        while(aux_ls != NULL){
+            Node* atual_saidas = aux_ls->node;
+            if(atual_node == atual_saidas && atual_node->status == 1 && atual_saidas->status == 1){
+                soma += 1;
+            }
+            aux_ls = aux_ls->prox;
+        }
+
+        aux_ls = lista_saidas;
+        lista_node = lista_node->prox;
+    }
+
+    return soma;
+}
+
+void separarClique(Out* atual, int tamanho){
+    if(atual != NULL){
+        Node* node = atual->node;
+        Out* saidas = node->saidas;
+
+        if(node->status == 1){
+            int conexoes = 0;
+
+            while(saidas != NULL){
+                Node* saida = saidas->node;
+                if(saida->status == 1){
+                    conexoes += verificarConexoes(node->saidas, saida->saidas);
+                }
+                if(saida == node){
+                    conexoes += 1;
+                }
+                saidas = saidas->prox;
+            }
+
+            conexoes += 2;
+            conexoes /= 2;
+
+            if(conexoes < tamanho-2){
+                node->status = 0;
+                node->estimativa = 0;
+            }else{
+                node->status = 1;
+                node->estimativa = conexoes;
+            }
+        }
+
+        separarClique(atual->prox, tamanho);
+    }
+}
+
+Node* juntarClique(Out* atual){
+    if(atual != NULL){
+        Node* node = atual->node;
+        if(node->status == 1){
+            node->precedente = juntarClique(atual->prox);
+            return node;
+        }else{
+            return juntarClique(atual->prox);
+        }
+    }
+    return NULL;
+}
+
+Node* acharClique(Node* selecionado, int tamanho){
+    fecharNodes(selecionado->saidas);
+    estimarSubgrafo(selecionado->saidas, selecionado, tamanho);
+    selecionado->status = 0;
+    separarClique(selecionado->saidas, tamanho);
+    selecionado->precedente = juntarClique(selecionado->saidas);
+    return selecionado;
+}
+
+
+
 Node* buscarNodeMenorEstimativa(Node* atual, int estimativa){
     if(atual != NULL){
         if(atual->estimativa < estimativa && atual->status == 0){
@@ -176,15 +263,15 @@ Node* encontrarCaminho(Node* grafo, int indexInicio, int indexFim){
     return buscarNode(grafo, indexFim);
 }
 
-//FUNÇÃO PARA DESENHAR AS CORES
 void imprimir_pontos(Node* caminho, int centroX, int centroY, int SCREEN_H, ALLEGRO_BITMAP* red){
     if(caminho != NULL){
+
         int index = caminho->index;
         if(index == 1){
             al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-477, centroY+294, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 2){
-             al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-400, centroY+370, SCREEN_H/20, SCREEN_H/20, 0);
+            al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-400, centroY+370, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 3){
             al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-328 , centroY+255, SCREEN_H/20, SCREEN_H/20, 0);
@@ -196,7 +283,7 @@ void imprimir_pontos(Node* caminho, int centroX, int centroY, int SCREEN_H, ALLE
             al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-95 , centroY+135, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 6){
-             al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-135 , centroY+28, SCREEN_H/20, SCREEN_H/20, 0);
+            al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-135 , centroY+28, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 7){
             al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-165 , centroY-90, SCREEN_H/20, SCREEN_H/20, 0);
@@ -208,10 +295,10 @@ void imprimir_pontos(Node* caminho, int centroX, int centroY, int SCREEN_H, ALLE
             al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-73 , centroY-52, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 10){
-              al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-5 , centroY+84, SCREEN_H/20, SCREEN_H/20, 0);
+            al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-5 , centroY+84, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 11){
-           al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-40 , centroY+205, SCREEN_H/20, SCREEN_H/20, 0);
+            al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-40 , centroY+205, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 12){
             al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+35 , centroY+160, SCREEN_H/20, SCREEN_H/20, 0);
@@ -232,7 +319,7 @@ void imprimir_pontos(Node* caminho, int centroX, int centroY, int SCREEN_H, ALLE
             al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+148 , centroY-3, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 18){
-             al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+129, centroY-110, SCREEN_H/20, SCREEN_H/20, 0);
+            al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+129, centroY-110, SCREEN_H/20, SCREEN_H/20, 0);
         }
         if(index == 19){
             al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+210 , centroY+45, SCREEN_H/20, SCREEN_H/20, 0);
@@ -243,13 +330,15 @@ void imprimir_pontos(Node* caminho, int centroX, int centroY, int SCREEN_H, ALLE
         if(index == 21){
             al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+410 , centroY+390, SCREEN_H/20, SCREEN_H/20, 0);
         }
-
-        imprimir_pontos(caminho->prox, centroX, centroY, SCREEN_H, red);
+        imprimir_pontos(caminho->precedente, centroX, centroY, SCREEN_H, red);
     }
 }
 
 
+
+
 int main(int argc, char **argv){
+
 
     Node* grafo = NULL;
 
@@ -274,7 +363,6 @@ int main(int argc, char **argv){
     grafo = inserir(grafo, 19);
     grafo = inserir(grafo, 20);
     grafo = inserir(grafo, 21);
-
 
     ligarNodes(grafo, 1, 2, 8);
     ligarNodes(grafo, 1, 3, 10);
@@ -303,33 +391,22 @@ int main(int argc, char **argv){
     ligarNodes(grafo, 16, 17, 6);
     ligarNodes(grafo, 16, 18, 10);
     ligarNodes(grafo, 16, 19, 8);
-    ligarNodes(grafo, 16, 20, 8);
+    ligarNodes(grafo, 16, 20, 9);
     ligarNodes(grafo, 17, 18, 6);
     ligarNodes(grafo, 17, 19, 6);
     ligarNodes(grafo, 18, 19, 10);
     ligarNodes(grafo, 19, 20, 8);
     ligarNodes(grafo, 20, 21, 22);
 
+
+    Node* clique = NULL;
     Node* caminho = NULL;
 
-    /*
-    imprimirCaminho(caminho);
-    zerarNodes(grafo);
 
-    printf("\n\n");
-
-    caminho = encontrarCaminho(grafo, 21, 1);
-    imprimirCaminho(caminho);
-    zerarNodes(grafo);
-    */
-
-    //COMANDOS DO ALLEGRO-----------------------------------------------------------------------------------------------------------------------------------------------------------
-    //VARIAVEIS ALLEGRO
     ALLEGRO_DISPLAY *display = NULL;
     ALLEGRO_EVENT_QUEUE *event_queue = NULL;
     ALLEGRO_DISPLAY_MODE disp_data;
 
-    //ADDONS--------------------------------------------------
     al_init();
     al_init_image_addon();
     al_install_mouse();
@@ -337,7 +414,6 @@ int main(int argc, char **argv){
     al_init_acodec_addon();
     al_reserve_samples(20);
 
-    //CRIACAO ALLEGRO-------------------------------------------------------
     al_get_display_mode(al_get_num_display_modes() - 1, &disp_data);
     al_set_new_display_flags(ALLEGRO_FULLSCREEN);
     display = al_create_display(disp_data.width, disp_data.height);
@@ -349,7 +425,6 @@ int main(int argc, char **argv){
     al_register_event_source(event_queue, al_get_mouse_event_source());
     al_flip_display();
 
-    //IMPORTAR IMAGENS---------------------------------------------------------
     //Menu inicial
     ALLEGRO_BITMAP *image = al_load_bitmap("image/MenuInicial/t1.png");
     ALLEGRO_BITMAP *image2 = al_load_bitmap("image/MenuInicial/wallpaperSobreNos.png");
@@ -427,22 +502,7 @@ int main(int argc, char **argv){
     ALLEGRO_BITMAP *red = al_load_bitmap("image/red.png");
     ALLEGRO_BITMAP *white = al_load_bitmap("image/white.png");
 
-
-    //Variaveis do programa-----------------------------------------------------
-    int pos_x = 0, pos_y = 0;//Coordenada do mouse
-    int fechar=0;//fechar programa
-    int viajar=0;//Menu do short path
-    int pacote=0;//Menu do click
-    int ponto_partida = 0;
-    int ponto_chegada = 0;
-    int estagio = 0, cidade = -1;
-    int nivel = 0;
-    int sobreNos = 0;
-    int partida = 0;
-
-
-
-    //SONS
+    //Sons
     ALLEGRO_SAMPLE *button;
     ALLEGRO_SAMPLE_INSTANCE *inst_button;
     button = al_load_sample("sounds/button.ogg");
@@ -472,11 +532,24 @@ int main(int argc, char **argv){
     al_attach_sample_instance_to_mixer(inst_bus_sound,al_get_default_mixer());
     al_set_sample_instance_gain(inst_bus_sound, 1.0);
 
+    //Variaveis do programa
+    int pos_x = 0, pos_y = 0;//Coordenada do mouse
+    int fechar=0;//fechar programa
+    int viajar=0;//Menu do short path
+    int pacote=0;//Menu do click
+    int sobreNos = 0;//tela sobre nos
+    int ponto_partida = 0;
+    int ponto_chegada = 0;
+    int estagio = 0;
+    int cidade = -1;
+    int nivel = 0;
+    //int partida = 0;
 
 
 
-    //Programa------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Programa
     while(1){
+
         while(fechar == 0){
             ALLEGRO_EVENT ev;
             al_wait_for_event(event_queue, &ev);
@@ -484,8 +557,8 @@ int main(int argc, char **argv){
             al_play_sample_instance(inst_menu_sound1);
 
             if(ev.type == ALLEGRO_EVENT_MOUSE_AXES){
-                    pos_x = ev.mouse.x;
-                    pos_y = ev.mouse.y;
+                pos_x = ev.mouse.x;
+                pos_y = ev.mouse.y;
             }else if(ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
                 fechar = 1;
                 break;
@@ -494,7 +567,7 @@ int main(int argc, char **argv){
                     if(pos_x>=SCREEN_W-(al_get_bitmap_width(botaoSair))-60 && pos_x<= SCREEN_W-(al_get_bitmap_width(botaoSair))-60+al_get_bitmap_width(botaoSair) && pos_y>=SCREEN_H-(al_get_bitmap_height(botaoSair))-40 && pos_y<=SCREEN_H-(al_get_bitmap_height(botaoSair))-40+al_get_bitmap_height(botaoSair)){
                         al_play_sample_instance(inst_exit_button);
                         fechar = 1;
-                    break;
+                        break;
                     }else if(pos_x>=SCREEN_W/2-(al_get_bitmap_width(botaoViajeAgora))-43 && pos_x<= SCREEN_W/2-(al_get_bitmap_width(botaoViajeAgora))-43+al_get_bitmap_width(botaoViajeAgora) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(botaoViajeAgora)*0,9)-1 && pos_y <= (SCREEN_H/2-(al_get_bitmap_height(botaoViajeAgora)*0,9)-1)+al_get_bitmap_height(botaoViajeAgora)){
                         al_play_sample_instance(inst_button);
                         viajar=1;
@@ -517,7 +590,7 @@ int main(int argc, char **argv){
 
             if(!pacote && !viajar && al_is_event_queue_empty(event_queue)){
                 if(sobreNos==0){
-                   al_draw_scaled_bitmap(image, 0, 0,  al_get_bitmap_width(image), al_get_bitmap_height(image), 0, 0, SCREEN_W, SCREEN_H, 0);
+                    al_draw_scaled_bitmap(image, 0, 0,  al_get_bitmap_width(image), al_get_bitmap_height(image), 0, 0, SCREEN_W, SCREEN_H, 0);
 
                     if(pos_x>=SCREEN_W-(al_get_bitmap_width(botaoSobreNos))-25 && pos_x<= SCREEN_W-(al_get_bitmap_width(botaoSobreNos))-25+al_get_bitmap_width(botaoSobreNos) && pos_y>=SCREEN_H/15+(al_get_bitmap_height(botaoSobreNos)-80) && pos_y<=SCREEN_H/15+(al_get_bitmap_height(botaoSobreNos)-80)+al_get_bitmap_height(botaoSobreNos)){
                         al_draw_scaled_bitmap(botaoSobreNos2, 0, 0, al_get_bitmap_width(botaoSobreNos2), al_get_bitmap_height(botaoSobreNos2), SCREEN_W-(al_get_bitmap_width(botaoSobreNos2))-25, SCREEN_H/15+(al_get_bitmap_height(botaoSobreNos2))-80, al_get_bitmap_width(botaoSobreNos2), al_get_bitmap_height(botaoSobreNos2), 0);
@@ -557,24 +630,29 @@ int main(int argc, char **argv){
             al_flip_display();
         }
 
+
         if(fechar){
             break;
         }
 
-        //Short path--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        //Short path
         while(viajar){
             //Cidade representa o pais com suas cidades = 0(alemanha), 1(austria), 2(belgica), 3(checa), 4(croacia), 5(espanha), 6(franca), 7(grecia), 8(holanda), 9(inglaterra), 10(italia), 11(monaco), 12(portugal), 13(suica)
             ALLEGRO_EVENT ev2;
             al_wait_for_event(event_queue, &ev2);
 
             if(ev2.type == ALLEGRO_EVENT_MOUSE_AXES){
-                    pos_x = ev2.mouse.x;
-                    pos_y = ev2.mouse.y;
+                pos_x = ev2.mouse.x;
+                pos_y = ev2.mouse.y;
             }else if(ev2.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
                 if(estagio == 0 || estagio == 2){
                     if(pos_x>=SCREEN_W-(al_get_bitmap_width(btvoltar)+60) && pos_x<= SCREEN_W-(al_get_bitmap_width(btvoltar)+60)+al_get_bitmap_width(btvoltar) && pos_y>=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90 && pos_y<=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90+al_get_bitmap_height(btvoltar)){
                         al_play_sample_instance(inst_button);
                         viajar=0;
+                        ponto_partida = 0;
+                        estagio = 0;
+                        cidade = -1;
                         break;
                     }
                     //clicar na alemanha
@@ -881,10 +959,10 @@ int main(int argc, char **argv){
                                 ponto_chegada = 6;
                                 viajar = 0;
                             }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.2) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.5)+al_get_bitmap_height(btalemanha01)){
-                                 //ADICIONAR LYON COMO PONTO DE CHEGADA
-                                 al_play_sample_instance(inst_button);
-                                 ponto_chegada = 5;
-                                 viajar = 0;
+                                //ADICIONAR LYON COMO PONTO DE CHEGADA
+                                al_play_sample_instance(inst_button);
+                                ponto_chegada = 5;
+                                viajar = 0;
                             }
                         }
 
@@ -1215,7 +1293,7 @@ int main(int argc, char **argv){
                     }
                     //espanha
                     else if(cidade==5){
-                         //sevilla
+                        //sevilla
                         if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5)+al_get_bitmap_height(btalemanha01)){
                             al_draw_scaled_bitmap(btespanha01, 0, 0, al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4), SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5), al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), 0);
                         }else{
@@ -1332,15 +1410,16 @@ int main(int argc, char **argv){
         }
 
 
-        //Mapa---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        //Mapa Shortest Path
         while(ponto_chegada != 0 && ponto_partida != 0){
 
             ALLEGRO_EVENT ev3;
             al_wait_for_event(event_queue, &ev3);
 
             if(ev3.type == ALLEGRO_EVENT_MOUSE_AXES){
-                    pos_x = ev3.mouse.x;
-                    pos_y = ev3.mouse.y;
+                pos_x = ev3.mouse.x;
+                pos_y = ev3.mouse.y;
             }else if(ev3.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
                 if(pos_x>=SCREEN_W-(al_get_bitmap_width(btvoltar)+60) && pos_x<= SCREEN_W-(al_get_bitmap_width(btvoltar)+60)+al_get_bitmap_width(btvoltar) && pos_y>=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90 && pos_y<=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90+al_get_bitmap_height(btvoltar)){
                     al_play_sample_instance(inst_button);
@@ -1351,48 +1430,14 @@ int main(int argc, char **argv){
                 }
             }
 
-
             if(al_is_event_queue_empty(event_queue)){
 
-                int centroX = ((SCREEN_W-SCREEN_H)+SCREEN_H/2); //CENTRO DA IMAGEM DO MAPA
-                int centroY = SCREEN_H/2; // CENTRO DA IMAGEM DO MAPA
+                int centroX = ((SCREEN_W-SCREEN_H)+SCREEN_H/2);
+                int centroY = SCREEN_H/2;
 
-
-
-
-                /*SÓ PRECISA MEXER AQUI{
-                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-37, centroY-120, SCREEN_H/20, SCREEN_H/20, 0);
-                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+10 , centroY-20, SCREEN_H/20, SCREEN_H/20, 0);
-                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-40 , centroY+205, SCREEN_H/20, SCREEN_H/20, 0);
-                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-5 , centroY+84, SCREEN_H/20, SCREEN_H/20, 0);
-                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-135 , centroY+28, SCREEN_H/20, SCREEN_H/20, 0);
-                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+210 , centroY+45, SCREEN_H/20, SCREEN_H/20, 0);
-                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-73 , centroY-52, SCREEN_H/20, SCREEN_H/20, 0);
-                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+148 , centroY-3, SCREEN_H/20, SCREEN_H/20, 0);
-                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+210 , centroY+145, SCREEN_H/20, SCREEN_H/20, 0);
-                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-165 , centroY-90, SCREEN_H/20, SCREEN_H/20, 0);
-                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-95 , centroY+135, SCREEN_H/20, SCREEN_H/20, 0);
-                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+35 , centroY+160, SCREEN_H/20, SCREEN_H/20, 0);
-                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+129, centroY-110, SCREEN_H/20, SCREEN_H/20, 0);
-                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+410 , centroY+390, SCREEN_H/20, SCREEN_H/20, 0);
-                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-210, centroY-170, SCREEN_H/20, SCREEN_H/20, 0);
-                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-190, centroY+265, SCREEN_H/20, SCREEN_H/20, 0);
-                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+80 , centroY+50, SCREEN_H/20, SCREEN_H/20, 0);
-                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+106 , centroY+276, SCREEN_H/20, SCREEN_H/20, 0);
-                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-477, centroY+294, SCREEN_H/20, SCREEN_H/20, 0);
-                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-328 , centroY+255, SCREEN_H/20, SCREEN_H/20, 0);
-                al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-400, centroY+370, SCREEN_H/20, SCREEN_H/20, 0);
-                */
-
+                al_draw_scaled_bitmap(white, 0, 0,  al_get_bitmap_width(white), al_get_bitmap_height(white), (SCREEN_W-SCREEN_H), 0, SCREEN_H, SCREEN_H, 0);
                 imprimir_pontos(caminho, centroX, centroY, SCREEN_H, red);
                 al_draw_scaled_bitmap(mapa_europa, 0, 0,  al_get_bitmap_width(mapa_europa), al_get_bitmap_height(mapa_europa), (SCREEN_W-SCREEN_H), 0, SCREEN_H, SCREEN_H, 0);
-
-
-                // }
-
-
-
-
 
                 if(pos_x>=SCREEN_W-(al_get_bitmap_width(btvoltar2)+60) && pos_x<= SCREEN_W-(al_get_bitmap_width(btvoltar2)+60)+al_get_bitmap_width(btvoltar2) && pos_y>=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90 && pos_y<=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90+al_get_bitmap_height(btvoltar2)){
                     al_draw_scaled_bitmap(btvoltar, 0, 0, al_get_bitmap_width(btvoltar), al_get_bitmap_height(btvoltar), SCREEN_W-(al_get_bitmap_width(btvoltar)+60), SCREEN_H/30+(al_get_bitmap_height(btvoltar))-90, al_get_bitmap_width(btvoltar), al_get_bitmap_height(btvoltar), 0);
@@ -1406,26 +1451,7 @@ int main(int argc, char **argv){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //Clique-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        //Clique
         while(pacote){
 
             //Colocoar depois mais condições, botões tipo (voltar) e wallpaper
@@ -1435,8 +1461,8 @@ int main(int argc, char **argv){
             al_wait_for_event(event_queue, &ev4);
 
             if(ev4.type == ALLEGRO_EVENT_MOUSE_AXES){
-                    pos_x = ev4.mouse.x;
-                    pos_y = ev4.mouse.y;
+                pos_x = ev4.mouse.x;
+                pos_y = ev4.mouse.y;
             }else if(ev4.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
                 if(nivel == 0 ){
                     if(pos_x>=SCREEN_W-(al_get_bitmap_width(btvoltar)+60) && pos_x<= SCREEN_W-(al_get_bitmap_width(btvoltar)+60)+al_get_bitmap_width(btvoltar) && pos_y>=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90 && pos_y<=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90+al_get_bitmap_height(btvoltar)){
@@ -1457,7 +1483,7 @@ int main(int argc, char **argv){
                         cidade = 9;
                         al_play_sample_instance(inst_button);
                         if(nivel == 0){
-                           nivel = 1;
+                            nivel = 1;
                         }
 
                     }
@@ -1557,24 +1583,21 @@ int main(int argc, char **argv){
                             nivel = 1;
                         }
                     }
-                 }else if(nivel == 1 ){
+                }else if(nivel == 1 ){
                     if(cidade == 0){
                         if(nivel == 1){
                             if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR BERLIM COMO PONTO DE PARTIDA
                                 al_play_sample_instance(inst_button);
                                 ponto_partida = 18;
-                                pacote=0;
                             }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*0.3) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*0.3)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR FRANKFURT COMO PONTO DE PARTIDA
                                 al_play_sample_instance(inst_button);
                                 ponto_partida = 14;
-                                pacote=0;
                             }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.9) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.9)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR MUNIQUE COMO PONTO DE PARTIDA
                                 al_play_sample_instance(inst_button);
                                 ponto_partida = 16;
-                                pacote=0;
                             }
                         }
 
@@ -1584,7 +1607,6 @@ int main(int argc, char **argv){
                                 //ADICIONAR VIENA COMO PONTO DE PARTIDA
                                 al_play_sample_instance(inst_button);
                                 ponto_partida = 19;
-                               pacote=0;
                             }
                         }
 
@@ -1594,7 +1616,6 @@ int main(int argc, char **argv){
                                 //ADICIONAR BRUXELAS COMO PONTO DE PARTIDA
                                 al_play_sample_instance(inst_button);
                                 ponto_partida = 9;
-                                pacote=0;
                             }
                         }
 
@@ -1604,7 +1625,6 @@ int main(int argc, char **argv){
                                 //ADICIONAR PRAGA COMO PONTO DE PARTIDA
                                 al_play_sample_instance(inst_button);
                                 ponto_partida = 17;
-                                pacote=0;
                             }
                         }
 
@@ -1614,7 +1634,6 @@ int main(int argc, char **argv){
                                 //ADICIONAR ZAGREBE COMO PONTO DE PARTIDA
                                 al_play_sample_instance(inst_button);
                                 ponto_partida = 20;
-                                pacote=0;
                             }
                         }
 
@@ -1624,17 +1643,14 @@ int main(int argc, char **argv){
                                 //ADICIONAR SEVILLA COMO PONTO DE PARTIDA
                                 al_play_sample_instance(inst_button);
                                 ponto_partida = 2;
-                                pacote=0;
                             }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*0.3) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*0.3)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR MADRI COMO PONTO DE PARTIDA
                                 al_play_sample_instance(inst_button);
                                 ponto_partida = 3;
-                                pacote=0;
                             }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.9) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.9)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR BARCELONA COMO PONTO DE PARTIDA
                                 al_play_sample_instance(inst_button);
                                 ponto_partida = 4;
-                                pacote=0;
                             }
                         }
 
@@ -1644,12 +1660,10 @@ int main(int argc, char **argv){
                                 //ADICIONAR PARIS COMO PONTO DE PARTIDA
                                 al_play_sample_instance(inst_button);
                                 ponto_partida = 6;
-                                pacote=0;
                             }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.2) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.5)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR LYON COMO PONTO DE PARTIDA
                                 al_play_sample_instance(inst_button);
                                 ponto_partida = 5;
-                                pacote=0;
                             }
                         }
 
@@ -1659,7 +1673,6 @@ int main(int argc, char **argv){
                                 //ADICIONAR ATENAS COMO PONTO DE PARTIDA
                                 al_play_sample_instance(inst_button);
                                 ponto_partida = 21;
-                                pacote=0;
                             }
                         }
 
@@ -1669,7 +1682,6 @@ int main(int argc, char **argv){
                                 //ADICIONAR AMSTERDAN COMO PONTO DE PARTIDA
                                 al_play_sample_instance(inst_button);
                                 ponto_partida = 15;
-                                pacote=0;
                             }
                         }
 
@@ -1679,12 +1691,10 @@ int main(int argc, char **argv){
                                 //ADICIONAR LONDRES COMO PONTO DE PARTIDA
                                 al_play_sample_instance(inst_button);
                                 ponto_partida = 7;
-                                pacote=0;
                             }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.2) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.5)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR LIVERPOLL COMO PONTO DE PARTIDA
                                 al_play_sample_instance(inst_button);
                                 ponto_partida = 8;
-                                pacote=0;
                             }
                         }
 
@@ -1694,12 +1704,10 @@ int main(int argc, char **argv){
                                 //ADICIONAR MILAO COMO PONTO DE PARTIDA
                                 al_play_sample_instance(inst_button);
                                 ponto_partida = 12;
-                                pacote=0;
                             }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.2) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.5)+al_get_bitmap_height(btalemanha01)){
                                 //ADICIONAR ROMA COMO PONTO DE PARTIDA
                                 al_play_sample_instance(inst_button);
                                 ponto_partida = 13;
-                                pacote=0;
                             }
                         }
 
@@ -1709,7 +1717,6 @@ int main(int argc, char **argv){
                                 //ADICIONAR MONACO COMO PONTO DE PARTIDA
                                 al_play_sample_instance(inst_button);
                                 ponto_partida = 11;
-                                pacote=0;
                             }
                         }
                     }else if(cidade == 12){
@@ -1718,7 +1725,6 @@ int main(int argc, char **argv){
                                 //ADICIONAR LISBOA COMO PONTO DE PARTIDA
                                 al_play_sample_instance(inst_button);
                                 ponto_partida = 1;
-                                pacote=0;
                             }
                         }
                     }else if(cidade == 13){
@@ -1727,16 +1733,14 @@ int main(int argc, char **argv){
                                 //ADICIONAR BERNA COMO PONTO DE PARTIDA
                                 al_play_sample_instance(inst_button);
                                 ponto_partida = 10;
-                                pacote=0;
                             }
                         }
                     }
                 }
             }
 
-            if( ponto_partida != 0){
-                caminho = encontrarCaminho(grafo, ponto_partida, ponto_chegada);
-                pacote = 0;
+            if(ponto_partida != 0){
+                clique = acharClique(buscarNode(grafo, ponto_partida), 3);
                 nivel = 0;
                 cidade = -1;
                 break;
@@ -1918,7 +1922,7 @@ int main(int argc, char **argv){
                     }
                     //espanha
                     else if(cidade==5){
-                         //sevilla
+                        //sevilla
                         if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5)+al_get_bitmap_height(btalemanha01)){
                             al_draw_scaled_bitmap(btespanha01, 0, 0, al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4), SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5), al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), 0);
                         }else{
@@ -2028,7 +2032,46 @@ int main(int argc, char **argv){
                         }
                     }
                 }
+            }
 
+            al_flip_display();
+        }
+
+
+
+        //Mapa Clique
+        while(ponto_partida != 0 && pacote == 1){
+
+            ALLEGRO_EVENT ev3;
+            al_wait_for_event(event_queue, &ev3);
+
+            if(ev3.type == ALLEGRO_EVENT_MOUSE_AXES){
+                pos_x = ev3.mouse.x;
+                pos_y = ev3.mouse.y;
+            }else if(ev3.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
+                if(pos_x>=SCREEN_W-(al_get_bitmap_width(btvoltar)+60) && pos_x<= SCREEN_W-(al_get_bitmap_width(btvoltar)+60)+al_get_bitmap_width(btvoltar) && pos_y>=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90 && pos_y<=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90+al_get_bitmap_height(btvoltar)){
+                    al_play_sample_instance(inst_button);
+                    ponto_partida = 0;
+                    pacote = 0;
+                    zerarNodes(grafo);
+                    break;
+                }
+            }
+
+            if(al_is_event_queue_empty(event_queue)){
+
+                int centroX = ((SCREEN_W-SCREEN_H)+SCREEN_H/2);
+                int centroY = SCREEN_H/2;
+
+                al_draw_scaled_bitmap(white, 0, 0,  al_get_bitmap_width(white), al_get_bitmap_height(white), (SCREEN_W-SCREEN_H), 0, SCREEN_H, SCREEN_H, 0);
+                imprimir_pontos(clique, centroX, centroY, SCREEN_H, red);
+                al_draw_scaled_bitmap(mapa_europa, 0, 0,  al_get_bitmap_width(mapa_europa), al_get_bitmap_height(mapa_europa), (SCREEN_W-SCREEN_H), 0, SCREEN_H, SCREEN_H, 0);
+
+                if(pos_x>=SCREEN_W-(al_get_bitmap_width(btvoltar2)+60) && pos_x<= SCREEN_W-(al_get_bitmap_width(btvoltar2)+60)+al_get_bitmap_width(btvoltar2) && pos_y>=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90 && pos_y<=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90+al_get_bitmap_height(btvoltar2)){
+                    al_draw_scaled_bitmap(btvoltar, 0, 0, al_get_bitmap_width(btvoltar), al_get_bitmap_height(btvoltar), SCREEN_W-(al_get_bitmap_width(btvoltar)+60), SCREEN_H/30+(al_get_bitmap_height(btvoltar))-90, al_get_bitmap_width(btvoltar), al_get_bitmap_height(btvoltar), 0);
+                }else{
+                    al_draw_scaled_bitmap(btvoltar2, 0, 0, al_get_bitmap_width(btvoltar2), al_get_bitmap_height(btvoltar2), SCREEN_W-(al_get_bitmap_width(btvoltar2)+60), SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90, al_get_bitmap_width(btvoltar2), al_get_bitmap_height(btvoltar2), 0);
+                }
             }
 
             al_flip_display();
@@ -2036,9 +2079,7 @@ int main(int argc, char **argv){
 
     }
 
-    //Fim do programa-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    //DESTRUIR
+    //Fim do programa
     al_destroy_bitmap(image);
     al_destroy_bitmap(image2);
     al_destroy_bitmap(botaoViajeAgora);
