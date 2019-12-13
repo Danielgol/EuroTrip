@@ -398,9 +398,9 @@ int main(int argc, char **argv){
     ligarNodes(grafo, 19, 20, 8);
     ligarNodes(grafo, 20, 21, 22);
 
-
     Node* clique = NULL;
     Node* caminho = NULL;
+
 
 
     ALLEGRO_DISPLAY *display = NULL;
@@ -437,7 +437,7 @@ int main(int argc, char **argv){
     ALLEGRO_BITMAP *botaoSair= al_load_bitmap("image/MenuInicial/Botao07.png");
     ALLEGRO_BITMAP *botaoSair2= al_load_bitmap("image/MenuInicial/Botao08.png");
 
-    //MenuViajeAgora
+    //MenuViajeAgora/MenuPacotesTour
     ALLEGRO_BITMAP *wallpaper03= al_load_bitmap("image/MenuViaje/CidadeChegada.png");
     ALLEGRO_BITMAP *wallpaper01= al_load_bitmap("image/MenuViaje/CidadePartida.png");
     ALLEGRO_BITMAP *wallpaper02 = al_load_bitmap("image/MenuViaje/PaisChegada.png");
@@ -517,7 +517,6 @@ int main(int argc, char **argv){
     ALLEGRO_BITMAP *sevilla = al_load_bitmap("image/Cidades/sevilla.png");
     ALLEGRO_BITMAP *viena = al_load_bitmap("image/Cidades/viena.png");
     ALLEGRO_BITMAP *zagrebe = al_load_bitmap("image/Cidades/zagrebe.png");
-    //MenuPacotesTour
 
     //Mapa Europa
     ALLEGRO_BITMAP *mapaShort= al_load_bitmap("image/MenuMapa01.png");
@@ -556,18 +555,21 @@ int main(int argc, char **argv){
     al_attach_sample_instance_to_mixer(inst_bus_sound,al_get_default_mixer());
     al_set_sample_instance_gain(inst_bus_sound, 1.0);
 
+
+
     //Variaveis do programa
     int pos_x = 0, pos_y = 0;//Coordenada do mouse
     int fechar=0;//fechar programa
     int viajar=0;//Menu do short path
     int pacote=0;//Menu do click
     int sobreNos = 0;//tela sobre nos
+
     int ponto_partida = 0;
     int ponto_chegada = 0;
+
+    int nivel = 0;
     int estagio = 0;
     int cidade = -1;
-    int nivel = 0;
-    //int partida = 0;
 
 
 
@@ -662,7 +664,13 @@ int main(int argc, char **argv){
 
         //Short path
         while(viajar){
-            //Cidade representa o pais com suas cidades = 0(alemanha), 1(austria), 2(belgica), 3(checa), 4(croacia), 5(espanha), 6(franca), 7(grecia), 8(holanda), 9(inglaterra), 10(italia), 11(monaco), 12(portugal), 13(suica)
+            
+            //Cidade representa o pais com suas cidades:
+            // 0(alemanha), 1(austria), 2(belgica), 3(checa),
+            //4(croacia), 5(espanha), 6(franca), 7(grecia),
+            //8(holanda), 9(inglaterra), 10(italia), 11(monaco),
+            //12(portugal), 13(suica)
+            
             ALLEGRO_EVENT ev2;
             al_wait_for_event(event_queue, &ev2);
 
@@ -1427,7 +1435,6 @@ int main(int argc, char **argv){
                         }
                     }
                 }
-
             }
 
             al_flip_display();
@@ -1566,9 +1573,6 @@ int main(int argc, char **argv){
 
         //Clique
         while(pacote){
-
-            //Colocoar depois mais condições, botões tipo (voltar) e wallpaper
-            //COLOQUEI PRA ABRIR O MESMO WALLPAPER DE PROPOSITO, AINDA N PREPAREI O NOVO PARA POR AQUI..... PARA N FICAR IGUAL SÓ TIREI OS BOTÕES PRA SABER SE TA PEGANDO OU N.
 
             ALLEGRO_EVENT ev4;
             al_wait_for_event(event_queue, &ev4);
