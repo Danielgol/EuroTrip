@@ -177,7 +177,7 @@ Node* encontrarCaminho(Node* grafo, int indexInicio, int indexFim){
 }
 
 //FUNÇÃO PARA DESENHAR AS CORES
-/*void imprimir_pontos(Node* caminho){
+void imprimir_pontos(Node* caminho, int centroX, int centroY, int SCREEN_H, ALLEGRO_BITMAP* red){
     if(caminho != NULL){
         int index = caminho->index;
         if(index == 1){
@@ -244,10 +244,10 @@ Node* encontrarCaminho(Node* grafo, int indexInicio, int indexFim){
             al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX+410 , centroY+390, SCREEN_H/20, SCREEN_H/20, 0);
         }
 
-        imprimir_pontos(caminho->prox);
+        imprimir_pontos(caminho->prox, centroX, centroY, SCREEN_H, red);
     }
 }
-*/
+
 
 int main(int argc, char **argv){
 
@@ -1381,7 +1381,7 @@ int main(int argc, char **argv){
                 al_draw_scaled_bitmap(red, 0, 0,  al_get_bitmap_width(red), al_get_bitmap_height(red), centroX-400, centroY+370, SCREEN_H/20, SCREEN_H/20, 0);
                 */
 
-
+                imprimir_pontos(caminho, centroX, centroY, SCREEN_H, red);
                 al_draw_scaled_bitmap(mapa_europa, 0, 0,  al_get_bitmap_width(mapa_europa), al_get_bitmap_height(mapa_europa), (SCREEN_W-SCREEN_H), 0, SCREEN_H, SCREEN_H, 0);
 
 
