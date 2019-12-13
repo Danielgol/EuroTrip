@@ -433,10 +433,10 @@ int main(int argc, char **argv){
     int fechar=0;//fechar programa
     int viajar=0;//Menu do short path
     int pacote=0;//Menu do click
-
     int ponto_partida = 0;
     int ponto_chegada = 0;
     int estagio = 0, cidade = -1;
+    int nivel = 0;
     int sobreNos = 0;
 
     //SONS
@@ -1419,7 +1419,11 @@ int main(int argc, char **argv){
 
 
 
+        //Variaveis do clique-----------------------------------------------------
 
+            int partida = 0;
+
+            int nivel = 0;
 
 
         //Clique-------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1435,25 +1439,601 @@ int main(int argc, char **argv){
                     pos_x = ev4.mouse.x;
                     pos_y = ev4.mouse.y;
             }else if(ev4.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
-                if(pos_x>=SCREEN_W-(al_get_bitmap_width(btvoltar)+60) && pos_x<= SCREEN_W-(al_get_bitmap_width(btvoltar)+60)+al_get_bitmap_width(btvoltar) && pos_y>=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90 && pos_y<=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90+al_get_bitmap_height(btvoltar)){
-                    al_play_sample_instance(inst_button);
-                    pacote=0;
-                    break;
-                }
+                if(nivel == 0 ){
+                    if(pos_x>=SCREEN_W-(al_get_bitmap_width(btvoltar)+60) && pos_x<= SCREEN_W-(al_get_bitmap_width(btvoltar)+60)+al_get_bitmap_width(btvoltar) && pos_y>=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90 && pos_y<=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90+al_get_bitmap_height(btvoltar)){
+                        al_play_sample_instance(inst_button);
+                        pacote=0;
+                        break;
+                    }
+                    //clicar na alemanha
+                    if(pos_x>=SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10) && pos_x<= SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10)+al_get_bitmap_width(btviagem01) && pos_y>=SCREEN_H/5+(al_get_bitmap_height(btviagem01)*0,9)-90 && pos_y<=SCREEN_H/5+(al_get_bitmap_height(btviagem01)*0,9)-90+al_get_bitmap_height(btviagem01)){
+                        cidade = 0;
+                        al_play_sample_instance(inst_button);
+                        if(nivel == 0){
+                            nivel = 1;
+                    }
+                    //clicar na inglaterra
+                    if(pos_x>=SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60 && pos_x<= SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60+al_get_bitmap_width(btviagem03) && pos_y>=SCREEN_H/5+(al_get_bitmap_height(btviagem03)*0,9)-90 && pos_y<=SCREEN_H/5+(al_get_bitmap_height(btviagem03)*0,9)-90+al_get_bitmap_height(btviagem03)){
+                        cidade = 9;
+                        al_play_sample_instance(inst_button);
+                        if(nivel == 0){
+                           nivel = 1;
+                        }
 
+                    }
+                    //clicar na franca
+                    if(pos_x>=SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-65 && pos_x<= SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-60+al_get_bitmap_width(btviagem03) && pos_y>=SCREEN_H/5+(al_get_bitmap_height(btviagem03)*0,9)-90 && pos_y<=SCREEN_H/5+(al_get_bitmap_height(btviagem03)*0,9)-90+al_get_bitmap_height(btviagem03)){
+                        cidade = 6;
+                        al_play_sample_instance(inst_button);
+                        if(nivel == 0){
+                            nivel = 1;
+                        }
+                    }
+                    //clicar na suica
+                    if(pos_x>=SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3) && pos_x<= SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3)+al_get_bitmap_width(btviagem07) && pos_y>=SCREEN_H/5+(al_get_bitmap_height(btviagem07)*0,9)-90 && pos_y<=SCREEN_H/5+(al_get_bitmap_height(btviagem07)*0,9)-90+al_get_bitmap_height(btviagem07)){
+                        cidade = 13;
+                        al_play_sample_instance(inst_button);
+                        if(nivel == 0){
+                            nivel = 1;
+                        }
+                    }
+                    //clicar na checa
+                    if(pos_x>=SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10) && pos_x<= SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10)+al_get_bitmap_width(btviagem01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90+al_get_bitmap_height(btviagem01)){
+                        cidade = 3;
+                        al_play_sample_instance(inst_button);
+                        if(nivel == 0){
+                            nivel = 1;
+                        }
+                    }
+                    //clicar italia
+                    if(pos_x>=SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60 && pos_x<= SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60+al_get_bitmap_width(btviagem03) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90+al_get_bitmap_height(btviagem01)){
+                        cidade = 10;
+                        al_play_sample_instance(inst_button);
+                        if(nivel == 0){
+                            nivel = 1;
+                        }
+                    }
+                    //clicar monaco
+                    if(pos_x>=SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-65 && pos_x<= SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-60+al_get_bitmap_width(btviagem03) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90+al_get_bitmap_height(btviagem01)){
+                        cidade = 11;
+                        al_play_sample_instance(inst_button);
+                        if(nivel == 0){
+                            nivel = 1;
+                        }
+                    }
+                    //clicar
+                    if(pos_x>=SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3) && pos_x<= SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3)+al_get_bitmap_width(btviagem07) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90+al_get_bitmap_height(btviagem01)){
+                        cidade = 1;
+                        al_play_sample_instance(inst_button);
+                        if(nivel == 0){
+                            nivel = 1;
+                        }
+                    }
+                    //clicar belgica
+                    if(pos_x>=SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10) && pos_x<= SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10)+al_get_bitmap_width(btviagem01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90+al_get_bitmap_height(btviagem01)){
+                        cidade = 2;
+                        al_play_sample_instance(inst_button);
+                        if(nivel == 0){
+                            nivel = 1;
+                        }
+                    }
+                    //clicar croacia
+                    if(pos_x>=SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60 && pos_x<= SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60+al_get_bitmap_width(btviagem03) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90+al_get_bitmap_height(btviagem01)){
+                        cidade = 4;
+                        al_play_sample_instance(inst_button);
+                        if(nivel == 0){
+                            nivel = 1;
+                        }
+                    }
+                    //clicar grecia
+                    if(pos_x>=SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-65 && pos_x<= SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-60+al_get_bitmap_width(btviagem03) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90+al_get_bitmap_height(btviagem01)){
+                        cidade = 7;
+                        al_play_sample_instance(inst_button);
+                        if(nivel == 0){
+                            nivel = 1;
+                        }
+                    }
+                    //clicar holanda
+                    if(pos_x>=SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3) && pos_x<= SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3)+al_get_bitmap_width(btviagem07) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90+al_get_bitmap_height(btviagem01)){
+                        cidade = 8;
+                        al_play_sample_instance(inst_button);
+                        if(nivel == 0){
+                            nivel = 1;
+                        }
+                    }
+                    //clicar espanha
+                    if(pos_x>=SCREEN_W/2-(al_get_bitmap_width(btviagem07)*3.2) && pos_x<= SCREEN_W/2-(al_get_bitmap_width(btviagem07)*3.2)+al_get_bitmap_width(btviagem10)*0.8 && pos_y>= SCREEN_H/2+(al_get_bitmap_height(btviagem01)) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01))+al_get_bitmap_height(btviagem10)*0.8){
+                        cidade = 5;
+                        al_play_sample_instance(inst_button);
+                        if(nivel == 0){
+                            nivel = 1;
+                        }
+                    }
+                    //clicar portugal
+                    if(pos_x>=SCREEN_W/2-(al_get_bitmap_width(btviagem07)*3.2) && pos_x<= SCREEN_W/2-(al_get_bitmap_width(btviagem07)*3.2)+al_get_bitmap_width(btviagem10)*0.8 && pos_y>= SCREEN_H/2-(al_get_bitmap_height(btviagem01)*1.5) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btviagem01)*1.5)+al_get_bitmap_height(btviagem10)*0.8){
+                        cidade = 12;
+                        al_play_sample_instance(inst_button);
+                        if(nivel == 0){
+                            nivel = 1;
+                        }
+                    }
+                 }else if(nivel == 1 ){
+                    if(cidade == 0){
+                        if(nivel == 1){
+                            if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5)+al_get_bitmap_height(btalemanha01)){
+                                //ADICIONAR BERLIM COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
+                                ponto_partida = 18;
+                                pacote=0;
+                            }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*0.3) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*0.3)+al_get_bitmap_height(btalemanha01)){
+                                //ADICIONAR FRANKFURT COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
+                                ponto_partida = 14;
+                                pacote=0;
+                            }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.9) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.9)+al_get_bitmap_height(btalemanha01)){
+                                //ADICIONAR MUNIQUE COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
+                                ponto_partida = 16;
+                                pacote=0;
+                            }
+                        }
+
+                    }else if(cidade == 1){
+                        if(nivel == 1){
+                            if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
+                                //ADICIONAR VIENA COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
+                                ponto_partida = 19;
+                               pacote=0;
+                            }
+                        }
+
+                    }else if(cidade == 2){
+                        if(nivel == 1){
+                            if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
+                                //ADICIONAR BRUXELAS COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
+                                ponto_partida = 9;
+                                pacote=0;
+                            }
+                        }
+
+                    }else if(cidade == 3){
+                        if(nivel == 1){
+                            if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
+                                //ADICIONAR PRAGA COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
+                                ponto_partida = 17;
+                                pacote=0;
+                            }
+                        }
+
+                    }else if(cidade == 4){
+                        if(nivel == 1){
+                            if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
+                                //ADICIONAR ZAGREBE COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
+                                ponto_partida = 20;
+                                pacote=0;
+                            }
+                        }
+
+                    }else if(cidade == 5){
+                        if(nivel == 1){
+                            if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5)+al_get_bitmap_height(btalemanha01)){
+                                //ADICIONAR SEVILLA COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
+                                ponto_partida = 2;
+                                pacote=0;
+                            }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*0.3) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*0.3)+al_get_bitmap_height(btalemanha01)){
+                                //ADICIONAR MADRI COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
+                                ponto_partida = 3;
+                                pacote=0;
+                            }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.9) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.9)+al_get_bitmap_height(btalemanha01)){
+                                //ADICIONAR BARCELONA COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
+                                ponto_partida = 4;
+                                pacote=0;
+                            }
+                        }
+
+                    }else if(cidade == 6){
+                        if(nivel == 1){
+                            if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
+                                //ADICIONAR PARIS COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
+                                ponto_partida = 6;
+                                pacote=0;
+                            }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.2) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.5)+al_get_bitmap_height(btalemanha01)){
+                                //ADICIONAR LYON COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
+                                ponto_partida = 5;
+                                pacote=0;
+                            }
+                        }
+
+                    }else if(cidade == 7){
+                        if(nivel == 1){
+                            if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
+                                //ADICIONAR ATENAS COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
+                                ponto_partida = 21;
+                                pacote=0;
+                            }
+                        }
+
+                    }else if(cidade == 8){
+                        if(nivel == 1){
+                            if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
+                                //ADICIONAR AMSTERDAN COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
+                                ponto_partida = 15;
+                                pacote=0;
+                            }
+                        }
+
+                    }else if(cidade == 9){
+                        if(nivel == 1){
+                            if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
+                                //ADICIONAR LONDRES COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
+                                ponto_partida = 7;
+                                pacote=0;
+                            }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.2) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.5)+al_get_bitmap_height(btalemanha01)){
+                                //ADICIONAR LIVERPOLL COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
+                                ponto_partida = 8;
+                                pacote=0;
+                            }
+                        }
+
+                    }else if(cidade == 10){
+                        if(nivel == 1){
+                            if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
+                                //ADICIONAR MILAO COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
+                                ponto_partida = 12;
+                                pacote=0;
+                            }else if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.2) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.5)+al_get_bitmap_height(btalemanha01)){
+                                //ADICIONAR ROMA COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
+                                ponto_partida = 13;
+                                pacote=0;
+                            }
+                        }
+
+                    }else if(cidade == 11){
+                        if(nivel == 1){
+                            if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
+                                //ADICIONAR MONACO COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
+                                ponto_partida = 11;
+                                pacote=0;
+                            }
+                        }
+                    }else if(cidade == 12){
+                        if(nivel == 1){
+                            if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
+                                //ADICIONAR LISBOA COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
+                                ponto_partida = 1;
+                                pacote=0;
+                            }
+                        }
+                    }else if(cidade == 13){
+                        if(nivel == 1){
+                            if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
+                                //ADICIONAR BERNA COMO PONTO DE PARTIDA
+                                al_play_sample_instance(inst_button);
+                                ponto_partida = 10;
+                                pacote=0;
+                            }
+                        }
+                    }
+                }
             }
 
-            if(al_is_event_queue_empty(event_queue)){
-                al_draw_scaled_bitmap(image, 0, 0,  al_get_bitmap_width(image), al_get_bitmap_height(image), 0, 0, SCREEN_W, SCREEN_H, 0);
+            if( ponto_partida != 0){
+                caminho = encontrarCaminho(grafo, ponto_partida, ponto_chegada);
+                pacote = 0;
+                nivel = 0;
+                cidade = -1;
+                break;
+            }
 
-                if(pos_x>=SCREEN_W-(al_get_bitmap_width(btvoltar2)+60) && pos_x<= SCREEN_W-(al_get_bitmap_width(btvoltar2)+60)+al_get_bitmap_width(btvoltar2) && pos_y>=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90 && pos_y<=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90+al_get_bitmap_height(btvoltar2)){
-                    al_draw_scaled_bitmap(btvoltar, 0, 0, al_get_bitmap_width(btvoltar), al_get_bitmap_height(btvoltar), SCREEN_W-(al_get_bitmap_width(btvoltar)+60), SCREEN_H/30+(al_get_bitmap_height(btvoltar))-90, al_get_bitmap_width(btvoltar), al_get_bitmap_height(btvoltar), 0);
-                }else{
-                    al_draw_scaled_bitmap(btvoltar2, 0, 0, al_get_bitmap_width(btvoltar2), al_get_bitmap_height(btvoltar2), SCREEN_W-(al_get_bitmap_width(btvoltar2)+60), SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90, al_get_bitmap_width(btvoltar2), al_get_bitmap_height(btvoltar2), 0);
+
+        if(al_is_event_queue_empty(event_queue)){
+                if(nivel == 0 ){
+                    if(nivel == 0){
+                        al_draw_scaled_bitmap(background, 0, 0,  al_get_bitmap_width(background), al_get_bitmap_height(background), 0, 0, SCREEN_W, SCREEN_H, 0);
+                    }
+
+                    if(pos_x>=SCREEN_W-(al_get_bitmap_width(btvoltar2)+60) && pos_x<= SCREEN_W-(al_get_bitmap_width(btvoltar2)+60)+al_get_bitmap_width(btvoltar2) && pos_y>=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90 && pos_y<=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90+al_get_bitmap_height(btvoltar2)){
+                        al_draw_scaled_bitmap(btvoltar, 0, 0, al_get_bitmap_width(btvoltar), al_get_bitmap_height(btvoltar), SCREEN_W-(al_get_bitmap_width(btvoltar)+60), SCREEN_H/30+(al_get_bitmap_height(btvoltar))-90, al_get_bitmap_width(btvoltar), al_get_bitmap_height(btvoltar), 0);
+
+                    }else{
+                        al_draw_scaled_bitmap(btvoltar2, 0, 0, al_get_bitmap_width(btvoltar2), al_get_bitmap_height(btvoltar2), SCREEN_W-(al_get_bitmap_width(btvoltar2)+60), SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90, al_get_bitmap_width(btvoltar2), al_get_bitmap_height(btvoltar2), 0);
+                    }
+
+                    //ALEMANHA------------------
+                    if(pos_x>=SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10) && pos_x<= SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10)+al_get_bitmap_width(btviagem01) && pos_y>=SCREEN_H/5+(al_get_bitmap_height(btviagem01)*0,9)-90 && pos_y<=SCREEN_H/5+(al_get_bitmap_height(btviagem01)*0,9)-90+al_get_bitmap_height(btviagem01)){
+                        al_draw_scaled_bitmap(btviagem02, 0, 0, al_get_bitmap_width(btviagem02), al_get_bitmap_height(btviagem02), SCREEN_W/3-(al_get_bitmap_width(btviagem02)+10), SCREEN_H/5+(al_get_bitmap_height(btviagem02)*0,9)-90, al_get_bitmap_width(btviagem02), al_get_bitmap_height(btviagem02), 0);
+                    }else{
+                        al_draw_scaled_bitmap(btviagem01, 0, 0, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10), SCREEN_H/5+(al_get_bitmap_height(btviagem01)*0,9)-90, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), 0);
+                    }
+
+                    //INGLATERRA-------------------
+                    if(pos_x>=SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60 && pos_x<= SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60+al_get_bitmap_width(btviagem03) && pos_y>=SCREEN_H/5+(al_get_bitmap_height(btviagem03)*0,9)-90 && pos_y<=SCREEN_H/5+(al_get_bitmap_height(btviagem03)*0,9)-90+al_get_bitmap_height(btviagem03)){
+                        al_draw_scaled_bitmap(btviagem04, 0, 0, al_get_bitmap_width(btviagem04), al_get_bitmap_height(btviagem04), SCREEN_W/2-(al_get_bitmap_width(btviagem04))+60, SCREEN_H/5+(al_get_bitmap_height(btviagem04)*0,9)-90, al_get_bitmap_width(btviagem04), al_get_bitmap_height(btviagem04), 0);
+                    }else{
+                        al_draw_scaled_bitmap(btviagem03, 0, 0, al_get_bitmap_width(btviagem03), al_get_bitmap_height(btviagem03), SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60, SCREEN_H/5+(al_get_bitmap_height(btviagem03)*0,9)-90, al_get_bitmap_width(btviagem03), al_get_bitmap_height(btviagem03), 0);
+                    }
+
+                    //FRANÇA-------------------
+                    if(pos_x>=SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-65 && pos_x<= SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-60+al_get_bitmap_width(btviagem03) && pos_y>=SCREEN_H/5+(al_get_bitmap_height(btviagem03)*0,9)-90 && pos_y<=SCREEN_H/5+(al_get_bitmap_height(btviagem03)*0,9)-90+al_get_bitmap_height(btviagem03)){
+                        al_draw_scaled_bitmap(btviagem06, 0, 0, al_get_bitmap_width(btviagem06), al_get_bitmap_height(btviagem06), SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-65, SCREEN_H/5+(al_get_bitmap_height(btviagem06)*0,9)-90, al_get_bitmap_width(btviagem06), al_get_bitmap_height(btviagem06), 0);
+                    }else{
+                        al_draw_scaled_bitmap(btviagem05, 0, 0, al_get_bitmap_width(btviagem05), al_get_bitmap_height(btviagem05), SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-65, SCREEN_H/5+(al_get_bitmap_height(btviagem05)*0,9)-90, al_get_bitmap_width(btviagem05), al_get_bitmap_height(btviagem05), 0);
+                    }
+
+                    //SUIÇA-------------------
+                    if(pos_x>=SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3) && pos_x<= SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3)+al_get_bitmap_width(btviagem07) && pos_y>=SCREEN_H/5+(al_get_bitmap_height(btviagem07)*0,9)-90 && pos_y<=SCREEN_H/5+(al_get_bitmap_height(btviagem07)*0,9)-90+al_get_bitmap_height(btviagem07)){
+                        al_draw_scaled_bitmap(btviagem08, 0, 0, al_get_bitmap_width(btviagem08), al_get_bitmap_height(btviagem08), SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3), SCREEN_H/5+(al_get_bitmap_height(btviagem08)*0,9)-90, al_get_bitmap_width(btviagem08), al_get_bitmap_height(btviagem08), 0);
+                    }else{
+                        al_draw_scaled_bitmap(btviagem07, 0, 0, al_get_bitmap_width(btviagem07), al_get_bitmap_height(btviagem07), SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3), SCREEN_H/5+(al_get_bitmap_height(btviagem07)*0,9)-90, al_get_bitmap_width(btviagem07), al_get_bitmap_height(btviagem07), 0);
+                    }
+
+                    //REPUBLICA CHECA
+                    if(pos_x>=SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10) && pos_x<= SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10)+al_get_bitmap_width(btviagem01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90+al_get_bitmap_height(btviagem01)){
+                        al_draw_scaled_bitmap(btviagem10, 0, 0, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), SCREEN_W/3-(al_get_bitmap_width(btviagem10)+10), SCREEN_H/2+(al_get_bitmap_height(btviagem10)*0,9)-90, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), 0);
+                    }else{
+                        al_draw_scaled_bitmap(btviagem09, 0, 0, al_get_bitmap_width(btviagem09), al_get_bitmap_height(btviagem09), SCREEN_W/3-(al_get_bitmap_width(btviagem09)+10), SCREEN_H/2+(al_get_bitmap_height(btviagem09)*0,9)-90, al_get_bitmap_width(btviagem09), al_get_bitmap_height(btviagem09), 0);
+                    }
+
+                    //ITALIA-------------------
+                    if(pos_x>=SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60 && pos_x<= SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60+al_get_bitmap_width(btviagem03) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90+al_get_bitmap_height(btviagem01)){
+                        al_draw_scaled_bitmap(btviagem12, 0, 0, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), SCREEN_W/2-(al_get_bitmap_width(btviagem04))+60, SCREEN_H/2+(al_get_bitmap_height(btviagem10)*0,9)-90, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), 0);
+                    }else{
+                        al_draw_scaled_bitmap(btviagem11, 0, 0, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), SCREEN_W/2-(al_get_bitmap_width(btviagem04))+60, SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), 0);
+                    }
+
+                    //Monaco-------------------
+                    if(pos_x>=SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-65 && pos_x<= SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-60+al_get_bitmap_width(btviagem03) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90+al_get_bitmap_height(btviagem01)){
+                        al_draw_scaled_bitmap(btviagem14, 0, 0, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-65, SCREEN_H/2+(al_get_bitmap_height(btviagem10)*0,9)-90, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), 0);
+                    }else{
+                        al_draw_scaled_bitmap(btviagem13, 0, 0, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-65, SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), 0);
+                    }
+
+                    //AUSTRIA-------------------
+                    if(pos_x>=SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3) && pos_x<= SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3)+al_get_bitmap_width(btviagem07) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90+al_get_bitmap_height(btviagem01)){
+                        al_draw_scaled_bitmap(btviagem16, 0, 0, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3), SCREEN_H/2+(al_get_bitmap_height(btviagem10)*0,9)-90, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), 0);
+                    }else{
+                        al_draw_scaled_bitmap(btviagem15, 0, 0, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3), SCREEN_H/2+(al_get_bitmap_height(btviagem01)*0,9)-90, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), 0);
+                    }
+
+                    //BELGICA-------------------
+                    if(pos_x>=SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10) && pos_x<= SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10)+al_get_bitmap_width(btviagem01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90+al_get_bitmap_height(btviagem01)){
+                        al_draw_scaled_bitmap(btviagem18, 0, 0, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10), SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), 0);
+                    }else{
+                        al_draw_scaled_bitmap(btviagem17, 0, 0, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), SCREEN_W/3-(al_get_bitmap_width(btviagem01)+10), SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), 0);
+                    }
+
+                    //CROACIA-------------------
+                    if(pos_x>=SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60 && pos_x<= SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60+al_get_bitmap_width(btviagem03) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90+al_get_bitmap_height(btviagem01)){
+                        al_draw_scaled_bitmap(btviagem20, 0, 0, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60, SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), 0);
+                    }else{
+                        al_draw_scaled_bitmap(btviagem19, 0, 0, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), SCREEN_W/2-(al_get_bitmap_width(btviagem03))+60, SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), 0);
+                    }
+
+                    //GRECIA-------------------
+                    if(pos_x>=SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-65 && pos_x<= SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-60+al_get_bitmap_width(btviagem03) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90+al_get_bitmap_height(btviagem01)){
+                        al_draw_scaled_bitmap(btviagem22, 0, 0, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-65, SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), 0);
+                    }else{
+                        al_draw_scaled_bitmap(btviagem21, 0, 0, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), SCREEN_W/2+(al_get_bitmap_width(btviagem05)*0.8)-65, SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), 0);
+                    }
+
+                    //HOLANDA-------------------
+                    if(pos_x>=SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3) && pos_x<= SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3)+al_get_bitmap_width(btviagem07) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90 && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90+al_get_bitmap_height(btviagem01)){
+                        al_draw_scaled_bitmap(btviagem24, 0, 0, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3), SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), 0);
+                    }else{
+                        al_draw_scaled_bitmap(btviagem23, 0, 0, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), SCREEN_W-(al_get_bitmap_width(btviagem07)*1.3), SCREEN_H/2+(al_get_bitmap_height(btviagem01)*1.2)-90, al_get_bitmap_width(btviagem01), al_get_bitmap_height(btviagem01), 0);
+                    }
+
+                    //PORTUGAL------------------
+                    if(pos_x>=SCREEN_W/2-(al_get_bitmap_width(btviagem07)*3.2) && pos_x<= SCREEN_W/2-(al_get_bitmap_width(btviagem07)*3.2)+al_get_bitmap_width(btviagem10)*0.8 && pos_y>= SCREEN_H/2-(al_get_bitmap_height(btviagem01)*1.5) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btviagem01)*1.5)+al_get_bitmap_height(btviagem10)*0.8){
+                        al_draw_scaled_bitmap(btviagem26, 0, 0, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), SCREEN_W/2-(al_get_bitmap_width(btviagem07)*3.2)-10, SCREEN_H/2-(al_get_bitmap_height(btviagem01)*1.5), al_get_bitmap_width(btviagem10)*0.8, al_get_bitmap_height(btviagem10)*0.8, 0);
+                    }else{
+                        al_draw_scaled_bitmap(btviagem25, 0, 0, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), SCREEN_W/2-(al_get_bitmap_width(btviagem07)*3.2)-10, SCREEN_H/2-(al_get_bitmap_height(btviagem01)*1.5), al_get_bitmap_width(btviagem10)*0.8, al_get_bitmap_height(btviagem10)*0.8, 0);
+                    }
+
+                    //ESPANHA-----------------
+                    if(pos_x>=SCREEN_W/2-(al_get_bitmap_width(btviagem07)*3.2) && pos_x<= SCREEN_W/2-(al_get_bitmap_width(btviagem07)*3.2)+al_get_bitmap_width(btviagem10)*0.8 && pos_y>= SCREEN_H/2+(al_get_bitmap_height(btviagem01)) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btviagem01))+al_get_bitmap_height(btviagem10)*0.8){
+                        al_draw_scaled_bitmap(btviagem28, 0, 0, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), SCREEN_W/2-(al_get_bitmap_width(btviagem07)*3.2)-10, SCREEN_H/2+(al_get_bitmap_height(btviagem01)), al_get_bitmap_width(btviagem10)*0.8, al_get_bitmap_height(btviagem10)*0.8, 0);
+                    }else{
+                        al_draw_scaled_bitmap(btviagem27, 0, 0, al_get_bitmap_width(btviagem10), al_get_bitmap_height(btviagem10), SCREEN_W/2-(al_get_bitmap_width(btviagem07)*3.2)-10, SCREEN_H/2+(al_get_bitmap_height(btviagem01)), al_get_bitmap_width(btviagem10)*0.8, al_get_bitmap_height(btviagem10)*0.8, 0);
+                    }
+
+                }else if(nivel == 1 ){
+                    if(nivel == 1){
+                        al_draw_scaled_bitmap(wallpaper01, 0, 0,  al_get_bitmap_width(wallpaper01), al_get_bitmap_height(wallpaper01), 0, 0, SCREEN_W, SCREEN_H, 0);
+                    }
+
+                    //alemanha
+                    if(cidade==0){
+                        //berlim
+                        if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5)+al_get_bitmap_height(btalemanha01)){
+                            al_draw_scaled_bitmap(btalemanha01, 0, 0, al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4), SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5), al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), 0);
+                        }else{
+                            al_draw_scaled_bitmap(btalemanha01, 0, 0, al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4), SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5), al_get_bitmap_width(btalemanha01)*0.99, al_get_bitmap_height(btalemanha01)*0.99, 0);
+                        }
+                        //frankfurt
+                        if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*0.3) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*0.3)+al_get_bitmap_height(btalemanha01)){
+                            al_draw_scaled_bitmap(btalemanha02, 0, 0, al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4), SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*0.3), al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), 0);
+                        }else{
+                            al_draw_scaled_bitmap(btalemanha02, 0, 0, al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4), SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*0.3), al_get_bitmap_width(btalemanha01)*0.99, al_get_bitmap_height(btalemanha01)*0.99, 0);
+                        }
+                        //munique
+                        if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.9) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.9)+al_get_bitmap_height(btalemanha01)){
+                            al_draw_scaled_bitmap(btalemanha03, 0, 0, al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4), SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.9), al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), 0);
+                        }else{
+                            al_draw_scaled_bitmap(btalemanha03, 0, 0, al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4), SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.9), al_get_bitmap_width(btalemanha01)*0.99, al_get_bitmap_height(btalemanha01)*0.99, 0);
+                        }
+                    }
+                    //austria
+                    else if(cidade==1){
+                        //viena
+                        if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
+                            al_draw_scaled_bitmap(btaustria, 0, 0, al_get_bitmap_width(btaustria), al_get_bitmap_height(btaustria), SCREEN_W/2-(al_get_bitmap_width(btaustria)*0.4), SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2), al_get_bitmap_width(btaustria), al_get_bitmap_height(btaustria), 0);
+                        }else{
+                            al_draw_scaled_bitmap(btaustria, 0, 0, al_get_bitmap_width(btaustria), al_get_bitmap_height(btaustria), SCREEN_W/2-(al_get_bitmap_width(btaustria)*0.4), SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2), al_get_bitmap_width(btaustria)*0.99, al_get_bitmap_height(btaustria)*0.99, 0);
+                        }
+                    }
+                    //belgica
+                    else if(cidade==2){
+                        //bruxelas
+                        if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
+                            al_draw_scaled_bitmap(btbelgica, 0, 0, al_get_bitmap_width(btbelgica), al_get_bitmap_height(btbelgica), SCREEN_W/2-(al_get_bitmap_width(btbelgica)*0.4), SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2), al_get_bitmap_width(btaustria), al_get_bitmap_height(btaustria), 0);
+                        }else{
+                            al_draw_scaled_bitmap(btbelgica, 0, 0, al_get_bitmap_width(btbelgica), al_get_bitmap_height(btbelgica), SCREEN_W/2-(al_get_bitmap_width(btbelgica)*0.4), SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2), al_get_bitmap_width(btaustria)*0.99, al_get_bitmap_height(btaustria)*0.99, 0);
+                        }
+                    }
+                    //checa
+                    else if(cidade==3){
+                        //praga
+                        if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
+                            al_draw_scaled_bitmap(btcheca, 0, 0, al_get_bitmap_width(btbelgica), al_get_bitmap_height(btbelgica), SCREEN_W/2-(al_get_bitmap_width(btbelgica)*0.4), SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2), al_get_bitmap_width(btaustria), al_get_bitmap_height(btaustria), 0);
+                        }else{
+                            al_draw_scaled_bitmap(btcheca, 0, 0, al_get_bitmap_width(btbelgica), al_get_bitmap_height(btbelgica), SCREEN_W/2-(al_get_bitmap_width(btbelgica)*0.4), SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2), al_get_bitmap_width(btaustria)*0.99, al_get_bitmap_height(btaustria)*0.99, 0);
+                        }
+                    }
+                    //croacia
+                    else if(cidade==4){
+                        //zagrebe
+                        if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
+                            al_draw_scaled_bitmap(btcroacia, 0, 0, al_get_bitmap_width(btbelgica), al_get_bitmap_height(btbelgica), SCREEN_W/2-(al_get_bitmap_width(btbelgica)*0.4), SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2), al_get_bitmap_width(btaustria), al_get_bitmap_height(btaustria), 0);
+                        }else{
+                            al_draw_scaled_bitmap(btcroacia, 0, 0, al_get_bitmap_width(btbelgica), al_get_bitmap_height(btbelgica), SCREEN_W/2-(al_get_bitmap_width(btbelgica)*0.4), SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2), al_get_bitmap_width(btaustria)*0.99, al_get_bitmap_height(btaustria)*0.99, 0);
+                        }
+                    }
+                    //espanha
+                    else if(cidade==5){
+                         //sevilla
+                        if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5)+al_get_bitmap_height(btalemanha01)){
+                            al_draw_scaled_bitmap(btespanha01, 0, 0, al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4), SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5), al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), 0);
+                        }else{
+                            al_draw_scaled_bitmap(btespanha01, 0, 0, al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4), SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*1.5), al_get_bitmap_width(btalemanha01)*0.99, al_get_bitmap_height(btalemanha01)*0.99, 0);
+                        }
+                        //madri
+                        if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*0.3) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*0.3)+al_get_bitmap_height(btalemanha01)){
+                            al_draw_scaled_bitmap(btespanha02, 0, 0, al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4), SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*0.3), al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), 0);
+                        }else{
+                            al_draw_scaled_bitmap(btespanha02, 0, 0, al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4), SCREEN_H/2-(al_get_bitmap_height(btalemanha01)*0.3), al_get_bitmap_width(btalemanha01)*0.99, al_get_bitmap_height(btalemanha01)*0.99, 0);
+                        }
+                        //barcelona
+                        if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.9) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.9)+al_get_bitmap_height(btalemanha01)){
+                            al_draw_scaled_bitmap(btespanha03, 0, 0, al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4), SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.9), al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), 0);
+                        }else{
+                            al_draw_scaled_bitmap(btespanha03, 0, 0, al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4), SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.9), al_get_bitmap_width(btalemanha01)*0.99, al_get_bitmap_height(btalemanha01)*0.99, 0);
+                        }
+                    }
+                    //franca
+                    else if(cidade==6){
+                        //paris
+                        if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
+                            al_draw_scaled_bitmap(btfranca01, 0, 0, al_get_bitmap_width(btbelgica), al_get_bitmap_height(btbelgica), SCREEN_W/2-(al_get_bitmap_width(btbelgica)*0.4), SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2), al_get_bitmap_width(btaustria), al_get_bitmap_height(btaustria), 0);
+                        }else{
+                            al_draw_scaled_bitmap(btfranca01, 0, 0, al_get_bitmap_width(btbelgica), al_get_bitmap_height(btbelgica), SCREEN_W/2-(al_get_bitmap_width(btbelgica)*0.4), SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2), al_get_bitmap_width(btaustria)*0.99, al_get_bitmap_height(btaustria)*0.99, 0);
+                        }
+                        //lyon
+                        if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.2) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.5)+al_get_bitmap_height(btalemanha01)){
+                            al_draw_scaled_bitmap(btfranca02, 0, 0, al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4), SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.2), al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), 0);
+                        }else{
+                            al_draw_scaled_bitmap(btfranca02, 0, 0, al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4), SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.2), al_get_bitmap_width(btalemanha01)*0.99, al_get_bitmap_height(btalemanha01)*0.99, 0);
+                        }
+                    }
+                    //grecia
+                    else if(cidade==7){
+                        //atenas
+                        if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
+                            al_draw_scaled_bitmap(btgrecia, 0, 0, al_get_bitmap_width(btbelgica), al_get_bitmap_height(btbelgica), SCREEN_W/2-(al_get_bitmap_width(btbelgica)*0.4), SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2), al_get_bitmap_width(btaustria), al_get_bitmap_height(btaustria), 0);
+                        }else{
+                            al_draw_scaled_bitmap(btgrecia, 0, 0, al_get_bitmap_width(btbelgica), al_get_bitmap_height(btbelgica), SCREEN_W/2-(al_get_bitmap_width(btbelgica)*0.4), SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2), al_get_bitmap_width(btaustria)*0.99, al_get_bitmap_height(btaustria)*0.99, 0);
+                        }
+                    }
+                    //holanda
+                    else if(cidade==8){
+                        //amsterdan
+                        if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
+                            al_draw_scaled_bitmap(btholanda, 0, 0, al_get_bitmap_width(btbelgica), al_get_bitmap_height(btbelgica), SCREEN_W/2-(al_get_bitmap_width(btbelgica)*0.4), SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2), al_get_bitmap_width(btaustria), al_get_bitmap_height(btaustria), 0);
+                        }else{
+                            al_draw_scaled_bitmap(btholanda, 0, 0, al_get_bitmap_width(btbelgica), al_get_bitmap_height(btbelgica), SCREEN_W/2-(al_get_bitmap_width(btbelgica)*0.4), SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2), al_get_bitmap_width(btaustria)*0.99, al_get_bitmap_height(btaustria)*0.99, 0);
+                        }
+                    }
+                    //inglaterra
+                    else if(cidade==9){
+                        //londres
+                        if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
+                            al_draw_scaled_bitmap(btinglaterra01, 0, 0, al_get_bitmap_width(btbelgica), al_get_bitmap_height(btbelgica), SCREEN_W/2-(al_get_bitmap_width(btbelgica)*0.4), SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2), al_get_bitmap_width(btaustria), al_get_bitmap_height(btaustria), 0);
+                        }else{
+                            al_draw_scaled_bitmap(btinglaterra01, 0, 0, al_get_bitmap_width(btbelgica), al_get_bitmap_height(btbelgica), SCREEN_W/2-(al_get_bitmap_width(btbelgica)*0.4), SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2), al_get_bitmap_width(btaustria)*0.99, al_get_bitmap_height(btaustria)*0.99, 0);
+                        }
+                        //liverpoll
+                        if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.2) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.5)+al_get_bitmap_height(btalemanha01)){
+                            al_draw_scaled_bitmap(btinglaterra02, 0, 0, al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4), SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.2), al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), 0);
+                        }else{
+                            al_draw_scaled_bitmap(btinglaterra02, 0, 0, al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4), SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.2), al_get_bitmap_width(btalemanha01)*0.99, al_get_bitmap_height(btalemanha01)*0.99, 0);
+                        }
+                    }
+                    //italia
+                    else if(cidade==10){
+                        //milao
+                        if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
+                            al_draw_scaled_bitmap(btitalia01, 0, 0, al_get_bitmap_width(btbelgica), al_get_bitmap_height(btbelgica), SCREEN_W/2-(al_get_bitmap_width(btbelgica)*0.4), SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2), al_get_bitmap_width(btaustria), al_get_bitmap_height(btaustria), 0);
+                        }else{
+                            al_draw_scaled_bitmap(btitalia01, 0, 0, al_get_bitmap_width(btbelgica), al_get_bitmap_height(btbelgica), SCREEN_W/2-(al_get_bitmap_width(btbelgica)*0.4), SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2), al_get_bitmap_width(btaustria)*0.99, al_get_bitmap_height(btaustria)*0.99, 0);
+                        }
+                        //roma
+                        if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.2) && pos_y<=SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.5)+al_get_bitmap_height(btalemanha01)){
+                            al_draw_scaled_bitmap(btitalia02, 0, 0, al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4), SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.2), al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), 0);
+                        }else{
+                            al_draw_scaled_bitmap(btitalia02, 0, 0, al_get_bitmap_width(btalemanha01), al_get_bitmap_height(btalemanha01), SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4), SCREEN_H/2+(al_get_bitmap_height(btalemanha01)*0.2), al_get_bitmap_width(btalemanha01)*0.99, al_get_bitmap_height(btalemanha01)*0.99, 0);
+                        }
+                    }
+                    //monaco
+                    else if(cidade==11){
+                        //monaco
+                        if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
+                            al_draw_scaled_bitmap(btmonaco, 0, 0, al_get_bitmap_width(btbelgica), al_get_bitmap_height(btbelgica), SCREEN_W/2-(al_get_bitmap_width(btbelgica)*0.4), SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2), al_get_bitmap_width(btaustria), al_get_bitmap_height(btaustria), 0);
+                        }else{
+                            al_draw_scaled_bitmap(btmonaco, 0, 0, al_get_bitmap_width(btbelgica), al_get_bitmap_height(btbelgica), SCREEN_W/2-(al_get_bitmap_width(btbelgica)*0.4), SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2), al_get_bitmap_width(btaustria)*0.99, al_get_bitmap_height(btaustria)*0.99, 0);
+                        }
+                    }
+                    //portugal
+                    else if(cidade==12){
+                        //lisboa
+                        if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
+                            al_draw_scaled_bitmap(btportugal, 0, 0, al_get_bitmap_width(btbelgica), al_get_bitmap_height(btbelgica), SCREEN_W/2-(al_get_bitmap_width(btbelgica)*0.4), SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2), al_get_bitmap_width(btaustria), al_get_bitmap_height(btaustria), 0);
+                        }else{
+                            al_draw_scaled_bitmap(btportugal, 0, 0, al_get_bitmap_width(btbelgica), al_get_bitmap_height(btbelgica), SCREEN_W/2-(al_get_bitmap_width(btbelgica)*0.4), SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2), al_get_bitmap_width(btaustria)*0.99, al_get_bitmap_height(btaustria)*0.99, 0);
+                        }
+                    }
+                    //suica
+                    else if(cidade==13){
+                        //berna
+                        if(pos_x>= SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4) && pos_x<=SCREEN_W/2-(al_get_bitmap_width(btalemanha01)*0.4)+al_get_bitmap_width(btalemanha01) && pos_y>=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2) && pos_y<=SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2)+al_get_bitmap_height(btaustria)){
+                            al_draw_scaled_bitmap(btsuica, 0, 0, al_get_bitmap_width(btbelgica), al_get_bitmap_height(btbelgica), SCREEN_W/2-(al_get_bitmap_width(btbelgica)*0.4), SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2), al_get_bitmap_width(btaustria), al_get_bitmap_height(btaustria), 0);
+                        }else{
+                            al_draw_scaled_bitmap(btsuica, 0, 0, al_get_bitmap_width(btbelgica), al_get_bitmap_height(btbelgica), SCREEN_W/2-(al_get_bitmap_width(btbelgica)*0.4), SCREEN_H/2-(al_get_bitmap_height(btaustria)*1.2), al_get_bitmap_width(btaustria)*0.99, al_get_bitmap_height(btaustria)*0.99, 0);
+                        }
+                    }
                 }
+
             }
 
             al_flip_display();
+        }
+
         }
     }
     //Fim do programa-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
