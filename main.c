@@ -495,9 +495,33 @@ int main(int argc, char **argv){
     ALLEGRO_BITMAP *btportugal = al_load_bitmap("image/MenuViaje/portugal.png");
     ALLEGRO_BITMAP *btcheca = al_load_bitmap("image/MenuViaje/checa.png");
     ALLEGRO_BITMAP *btsuica = al_load_bitmap("image/MenuViaje/suica.png");
+
+    ALLEGRO_BITMAP *amsterdan = al_load_bitmap("image/Cidades/amsterdan.png");
+    ALLEGRO_BITMAP *atenas = al_load_bitmap("image/Cidades/atenas.png");
+    ALLEGRO_BITMAP *barcelona = al_load_bitmap("image/Cidades/barcelona.png");
+    ALLEGRO_BITMAP *berlim = al_load_bitmap("image/Cidades/berlim.png");
+    ALLEGRO_BITMAP *berna = al_load_bitmap("image/Cidades/berna.png");
+    ALLEGRO_BITMAP *bruxelas = al_load_bitmap("image/Cidades/bruxelas.png");
+    ALLEGRO_BITMAP *frankfurt = al_load_bitmap("image/Cidades/frankfurt.png");
+    ALLEGRO_BITMAP *lisboa = al_load_bitmap("image/Cidades/lisboa.png");
+    ALLEGRO_BITMAP *liverpool = al_load_bitmap("image/Cidades/liverpool.png");
+    ALLEGRO_BITMAP *londres = al_load_bitmap("image/Cidades/londres.png");
+    ALLEGRO_BITMAP *lyon = al_load_bitmap("image/Cidades/lyon.png");
+    ALLEGRO_BITMAP *madri = al_load_bitmap("image/Cidades/madri.png");
+    ALLEGRO_BITMAP *milao = al_load_bitmap("image/Cidades/milao.png");
+    ALLEGRO_BITMAP *monaco = al_load_bitmap("image/Cidades/monaco.png");
+    ALLEGRO_BITMAP *munique = al_load_bitmap("image/Cidades/munique.png");
+    ALLEGRO_BITMAP *paris = al_load_bitmap("image/Cidades/paris.png");
+    ALLEGRO_BITMAP *praga = al_load_bitmap("image/Cidades/praga.png");
+    ALLEGRO_BITMAP *roma = al_load_bitmap("image/Cidades/roma.png");
+    ALLEGRO_BITMAP *sevilla = al_load_bitmap("image/Cidades/sevilla.png");
+    ALLEGRO_BITMAP *viena = al_load_bitmap("image/Cidades/viena.png");
+    ALLEGRO_BITMAP *zagrebe = al_load_bitmap("image/Cidades/zagrebe.png");
     //MenuPacotesTour
 
     //Mapa Europa
+    ALLEGRO_BITMAP *mapaShort= al_load_bitmap("image/MenuMapa01.png");
+    ALLEGRO_BITMAP *mapaPacote= al_load_bitmap("image/MenuMapa02.png");
     ALLEGRO_BITMAP *mapa_europa = al_load_bitmap("image/MapaEuropa.png");
     ALLEGRO_BITMAP *red = al_load_bitmap("image/red.png");
     ALLEGRO_BITMAP *white = al_load_bitmap("image/white.png");
@@ -1431,6 +1455,7 @@ int main(int argc, char **argv){
             }
 
             if(al_is_event_queue_empty(event_queue)){
+                al_draw_scaled_bitmap(mapaShort, 0, 0,  al_get_bitmap_width(mapaShort), al_get_bitmap_height(mapaShort), 0, 0, SCREEN_W, SCREEN_H, 0);
 
                 int centroX = ((SCREEN_W-SCREEN_H)+SCREEN_H/2);
                 int centroY = SCREEN_H/2;
@@ -1443,6 +1468,94 @@ int main(int argc, char **argv){
                     al_draw_scaled_bitmap(btvoltar, 0, 0, al_get_bitmap_width(btvoltar), al_get_bitmap_height(btvoltar), SCREEN_W-(al_get_bitmap_width(btvoltar)+60), SCREEN_H/30+(al_get_bitmap_height(btvoltar))-90, al_get_bitmap_width(btvoltar), al_get_bitmap_height(btvoltar), 0);
                 }else{
                     al_draw_scaled_bitmap(btvoltar2, 0, 0, al_get_bitmap_width(btvoltar2), al_get_bitmap_height(btvoltar2), SCREEN_W-(al_get_bitmap_width(btvoltar2)+60), SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90, al_get_bitmap_width(btvoltar2), al_get_bitmap_height(btvoltar2), 0);
+                }
+
+                if(ponto_partida == 1){
+                    al_draw_scaled_bitmap(lisboa, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 2){
+                    al_draw_scaled_bitmap(sevilla, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 3){
+                    al_draw_scaled_bitmap(madri, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 4){
+                    al_draw_scaled_bitmap(barcelona, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 5){
+                    al_draw_scaled_bitmap(lyon, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 6){
+                    al_draw_scaled_bitmap(paris, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 7){
+                    al_draw_scaled_bitmap(londres, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 8){
+                    al_draw_scaled_bitmap(liverpool, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 9){
+                    al_draw_scaled_bitmap(bruxelas, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 10){
+                    al_draw_scaled_bitmap(berna, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 11){
+                    al_draw_scaled_bitmap(monaco, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 12){
+                    al_draw_scaled_bitmap(milao, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 13){
+                    al_draw_scaled_bitmap(roma, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 14){
+                    al_draw_scaled_bitmap(frankfurt, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 15){
+                    al_draw_scaled_bitmap(amsterdan, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 16){
+                    al_draw_scaled_bitmap(munique, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 17){
+                    al_draw_scaled_bitmap(praga, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 18){
+                    al_draw_scaled_bitmap(berlim, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 19){
+                    al_draw_scaled_bitmap(viena, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 20){
+                    al_draw_scaled_bitmap(zagrebe, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 21){
+                    al_draw_scaled_bitmap(atenas, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }
+
+                if(ponto_chegada == 1){
+                    al_draw_scaled_bitmap(lisboa, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2+(al_get_bitmap_height(lisboa)*2.5), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_chegada == 2){
+                    al_draw_scaled_bitmap(sevilla, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2+(al_get_bitmap_height(lisboa)*2.5), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_chegada == 3){
+                    al_draw_scaled_bitmap(madri, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2+(al_get_bitmap_height(lisboa)*2.5), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_chegada == 4){
+                    al_draw_scaled_bitmap(barcelona, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2+(al_get_bitmap_height(lisboa)*2.5), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_chegada == 5){
+                    al_draw_scaled_bitmap(lyon, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2+(al_get_bitmap_height(lisboa)*2.5), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_chegada == 6){
+                    al_draw_scaled_bitmap(paris, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2+(al_get_bitmap_height(lisboa)*2.5), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_chegada == 7){
+                    al_draw_scaled_bitmap(londres, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2+(al_get_bitmap_height(lisboa)*2.5), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_chegada == 8){
+                    al_draw_scaled_bitmap(liverpool, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2+(al_get_bitmap_height(lisboa)*2.5), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_chegada == 9){
+                    al_draw_scaled_bitmap(bruxelas, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2+(al_get_bitmap_height(lisboa)*2.5), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_chegada == 10){
+                    al_draw_scaled_bitmap(berna, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2+(al_get_bitmap_height(lisboa)*2.5), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_chegada == 11){
+                    al_draw_scaled_bitmap(monaco, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2+(al_get_bitmap_height(lisboa)*2.5), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_chegada == 12){
+                    al_draw_scaled_bitmap(milao, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2+(al_get_bitmap_height(lisboa)*2.5), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_chegada == 13){
+                    al_draw_scaled_bitmap(roma, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2+(al_get_bitmap_height(lisboa)*2.5), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_chegada == 14){
+                    al_draw_scaled_bitmap(frankfurt, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2+(al_get_bitmap_height(lisboa)*2.5), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_chegada == 15){
+                    al_draw_scaled_bitmap(amsterdan, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2+(al_get_bitmap_height(lisboa)*2.5), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_chegada == 16){
+                    al_draw_scaled_bitmap(munique, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2+(al_get_bitmap_height(lisboa)*2.5), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_chegada == 17){
+                    al_draw_scaled_bitmap(praga, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2+(al_get_bitmap_height(lisboa)*2.5), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_chegada == 18){
+                    al_draw_scaled_bitmap(berlim, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2+(al_get_bitmap_height(lisboa)*2.5), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_chegada == 19){
+                    al_draw_scaled_bitmap(viena, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2+(al_get_bitmap_height(lisboa)*2.5), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_chegada == 20){
+                    al_draw_scaled_bitmap(zagrebe, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2+(al_get_bitmap_height(lisboa)*2.5), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_chegada == 21){
+                    al_draw_scaled_bitmap(atenas, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2+(al_get_bitmap_height(lisboa)*2.5), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
                 }
             }
 
@@ -2059,6 +2172,7 @@ int main(int argc, char **argv){
             }
 
             if(al_is_event_queue_empty(event_queue)){
+                al_draw_scaled_bitmap(mapaPacote, 0, 0,  al_get_bitmap_width(mapaPacote), al_get_bitmap_height(mapaPacote), 0, 0, SCREEN_W, SCREEN_H, 0);
 
                 int centroX = ((SCREEN_W-SCREEN_H)+SCREEN_H/2);
                 int centroY = SCREEN_H/2;
@@ -2071,6 +2185,50 @@ int main(int argc, char **argv){
                     al_draw_scaled_bitmap(btvoltar, 0, 0, al_get_bitmap_width(btvoltar), al_get_bitmap_height(btvoltar), SCREEN_W-(al_get_bitmap_width(btvoltar)+60), SCREEN_H/30+(al_get_bitmap_height(btvoltar))-90, al_get_bitmap_width(btvoltar), al_get_bitmap_height(btvoltar), 0);
                 }else{
                     al_draw_scaled_bitmap(btvoltar2, 0, 0, al_get_bitmap_width(btvoltar2), al_get_bitmap_height(btvoltar2), SCREEN_W-(al_get_bitmap_width(btvoltar2)+60), SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90, al_get_bitmap_width(btvoltar2), al_get_bitmap_height(btvoltar2), 0);
+                }
+
+                if(ponto_partida == 1){
+                    al_draw_scaled_bitmap(lisboa, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 2){
+                    al_draw_scaled_bitmap(sevilla, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 3){
+                    al_draw_scaled_bitmap(madri, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 4){
+                    al_draw_scaled_bitmap(barcelona, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 5){
+                    al_draw_scaled_bitmap(lyon, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 6){
+                    al_draw_scaled_bitmap(paris, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 7){
+                    al_draw_scaled_bitmap(londres, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 8){
+                    al_draw_scaled_bitmap(liverpool, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 9){
+                    al_draw_scaled_bitmap(bruxelas, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 10){
+                    al_draw_scaled_bitmap(berna, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 11){
+                    al_draw_scaled_bitmap(monaco, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 12){
+                    al_draw_scaled_bitmap(milao, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 13){
+                    al_draw_scaled_bitmap(roma, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 14){
+                    al_draw_scaled_bitmap(frankfurt, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 15){
+                    al_draw_scaled_bitmap(amsterdan, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 16){
+                    al_draw_scaled_bitmap(munique, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 17){
+                    al_draw_scaled_bitmap(praga, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 18){
+                    al_draw_scaled_bitmap(berlim, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 19){
+                    al_draw_scaled_bitmap(viena, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 20){
+                    al_draw_scaled_bitmap(zagrebe, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
+                }else if(ponto_partida == 21){
+                    al_draw_scaled_bitmap(atenas, 0, 0, al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), SCREEN_W/3-(al_get_bitmap_width(lisboa)+60), SCREEN_H/2-(al_get_bitmap_height(lisboa)*1.4), al_get_bitmap_width(lisboa), al_get_bitmap_height(lisboa), 0);
                 }
             }
 
@@ -2153,6 +2311,33 @@ int main(int argc, char **argv){
     al_destroy_bitmap(btportugal);
     al_destroy_bitmap(btcheca);
     al_destroy_bitmap(btsuica);
+
+    al_destroy_bitmap(amsterdan);
+    al_destroy_bitmap(atenas);
+    al_destroy_bitmap(barcelona);
+    al_destroy_bitmap(berlim);
+    al_destroy_bitmap(berna);
+    al_destroy_bitmap(bruxelas);
+    al_destroy_bitmap(frankfurt);
+    al_destroy_bitmap(lisboa);
+    al_destroy_bitmap(liverpool);
+    al_destroy_bitmap(londres);
+    al_destroy_bitmap(lyon);
+    al_destroy_bitmap(madri);
+    al_destroy_bitmap(milao);
+    al_destroy_bitmap(monaco);
+    al_destroy_bitmap(munique);
+    al_destroy_bitmap(paris);
+    al_destroy_bitmap(praga);
+    al_destroy_bitmap(roma);
+    al_destroy_bitmap(sevilla);
+    al_destroy_bitmap(viena);
+    al_destroy_bitmap(zagrebe);
+    al_destroy_bitmap(mapaPacote);
+    al_destroy_bitmap(mapaShort);
+    al_destroy_bitmap(mapa_europa);
+    al_destroy_bitmap(red);
+    al_destroy_bitmap(white);
 
     al_destroy_display(display);
     al_destroy_event_queue(event_queue);
