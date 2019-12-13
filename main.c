@@ -352,7 +352,7 @@ int main(int argc, char **argv){
     //IMPORTAR IMAGENS---------------------------------------------------------
     //Menu inicial
     ALLEGRO_BITMAP *image = al_load_bitmap("image/MenuInicial/t1.png");
-    ALLEGRO_BITMAP *image2 = al_load_bitmap("image/MenuInicial/wallpaperSobreNos.jpeg");
+    ALLEGRO_BITMAP *image2 = al_load_bitmap("image/MenuInicial/wallpaperSobreNos.png");
     ALLEGRO_BITMAP *botaoSobreNos = al_load_bitmap("image/MenuInicial/Botao05.png");
     ALLEGRO_BITMAP *botaoSobreNos2 = al_load_bitmap("image/MenuInicial/Botao06.png");
     ALLEGRO_BITMAP *botaoViajeAgora = al_load_bitmap("image/MenuInicial/Botao01.png");
@@ -1428,13 +1428,13 @@ int main(int argc, char **argv){
             //Colocoar depois mais condições, botões tipo (voltar) e wallpaper
             //COLOQUEI PRA ABRIR O MESMO WALLPAPER DE PROPOSITO, AINDA N PREPAREI O NOVO PARA POR AQUI..... PARA N FICAR IGUAL SÓ TIREI OS BOTÕES PRA SABER SE TA PEGANDO OU N.
 
-            ALLEGRO_EVENT ev3;
-            al_wait_for_event(event_queue, &ev3);
+            ALLEGRO_EVENT ev4;
+            al_wait_for_event(event_queue, &ev4);
 
-            if(ev3.type == ALLEGRO_EVENT_MOUSE_AXES){
-                    pos_x = ev3.mouse.x;
-                    pos_y = ev3.mouse.y;
-            }else if(ev3.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
+            if(ev4.type == ALLEGRO_EVENT_MOUSE_AXES){
+                    pos_x = ev4.mouse.x;
+                    pos_y = ev4.mouse.y;
+            }else if(ev4.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
                 if(pos_x>=SCREEN_W-(al_get_bitmap_width(btvoltar)+60) && pos_x<= SCREEN_W-(al_get_bitmap_width(btvoltar)+60)+al_get_bitmap_width(btvoltar) && pos_y>=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90 && pos_y<=SCREEN_H/30+(al_get_bitmap_height(btvoltar2))-90+al_get_bitmap_height(btvoltar)){
                     al_play_sample_instance(inst_button);
                     pacote=0;
@@ -1478,6 +1478,60 @@ int main(int argc, char **argv){
     al_destroy_sample_instance(inst_menu_sound1);
     al_destroy_sample_instance(inst_exit_button);
     al_destroy_sample_instance(inst_bus_sound);
+
+    al_destroy_bitmap(wallpaper03);
+    al_destroy_bitmap(wallpaper01);
+    al_destroy_bitmap(wallpaper02);
+    al_destroy_bitmap(btvoltar);
+    al_destroy_bitmap(btvoltar2);
+    al_destroy_bitmap(btviagem01);
+    al_destroy_bitmap(btviagem02);
+    al_destroy_bitmap(btviagem03);
+    al_destroy_bitmap(btviagem04);
+    al_destroy_bitmap(btviagem05);
+    al_destroy_bitmap(btviagem06);
+    al_destroy_bitmap(btviagem07);
+    al_destroy_bitmap(btviagem08);
+    al_destroy_bitmap(btviagem09);
+    al_destroy_bitmap(btviagem10);
+    al_destroy_bitmap(btviagem11);
+    al_destroy_bitmap(btviagem12);
+    al_destroy_bitmap(btviagem13);
+    al_destroy_bitmap(btviagem14);
+    al_destroy_bitmap(btviagem15);
+    al_destroy_bitmap(btviagem16);
+    al_destroy_bitmap(btviagem17);
+    al_destroy_bitmap(btviagem18);
+    al_destroy_bitmap(btviagem19);
+    al_destroy_bitmap(btviagem20);
+    al_destroy_bitmap(btviagem21);
+    al_destroy_bitmap(btviagem22);
+    al_destroy_bitmap(btviagem23);
+    al_destroy_bitmap(btviagem24);
+    al_destroy_bitmap(btviagem25);
+    al_destroy_bitmap(btviagem26);
+    al_destroy_bitmap(btviagem27);
+    al_destroy_bitmap(btviagem28);
+
+    al_destroy_bitmap(btalemanha01);
+    al_destroy_bitmap(btalemanha02);
+    al_destroy_bitmap(btalemanha03);
+    al_destroy_bitmap(btaustria);
+    al_destroy_bitmap(btbelgica);
+    al_destroy_bitmap(btcroacia);
+    al_destroy_bitmap(btespanha01);
+    al_destroy_bitmap(btespanha02);
+    al_destroy_bitmap(btespanha03);
+    al_destroy_bitmap(btgrecia);
+    al_destroy_bitmap(btholanda);
+    al_destroy_bitmap(btinglaterra01);
+    al_destroy_bitmap(btinglaterra02);
+    al_destroy_bitmap(btitalia01);
+    al_destroy_bitmap(btitalia02);
+    al_destroy_bitmap(btmonaco);
+    al_destroy_bitmap(btportugal);
+    al_destroy_bitmap(btcheca);
+    al_destroy_bitmap(btsuica);
 
     al_destroy_display(display);
     al_destroy_event_queue(event_queue);
